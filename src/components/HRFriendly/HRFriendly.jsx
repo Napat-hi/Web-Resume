@@ -6,7 +6,12 @@ function HRFriendly() {
     {
       icon: '🎓',
       title: 'Education',
-      items: ['Bachelor of Science in Computer Science', 'Advanced Web Development Certification']
+      items: [
+        'Grade 1-12 at Bangkok Christian College (BCC) - Business Track, GPA 3.79',
+        'Bachelor of Computer Engineering at SIIT - GPA 3.2, AI Major',
+        'Core Knowledge: SQL, Microcontroller, Digital & Circuit Analysis, Network Engineering',
+        'Software Engineering, AI, NLP, and Machine Learning specialization'
+      ]
     },
     {
       icon: '🏆',
