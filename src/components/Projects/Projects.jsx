@@ -7,41 +7,41 @@ function Projects() {
   const projects = [
     {
       id: 1,
-      title: 'Portfolio Website',
-      description: 'A modern, fully responsive portfolio website built with React, showcasing projects and skills with smooth animations and interactive UI.',
-      fullDescription: 'This portfolio website features a clean design, smooth scrolling navigation, animated components, and responsive layout that works perfectly on all devices.',
-      technologies: ['React', 'CSS3', 'JavaScript', 'Vite'],
-      image: '🎨',
+      title: 'Database Academic Project',
+      description: 'Developed a functional web application for a database laboratory course as part of a team project.',
+      fullDescription: 'Built with Node.js, React, SQL, and API integration to manage patient records, appointments, and staff operations. Designed normalized MySQL database schema with CRUD functionalities, role-based access control, and full debugging support.',
+      technologies: ['React', 'Node.js', 'SQL', 'MySQL', 'API Integration'],
+      image: '🗄️',
       link: '#',
       status: 'Completed'
     },
     {
       id: 2,
-      title: 'E-Commerce Platform',
-      description: 'A full-featured e-commerce application with product listing, shopping cart, and checkout functionality.',
-      fullDescription: 'Built with React and modern state management, featuring product filters, cart persistence, and a smooth checkout experience.',
-      technologies: ['React', 'Redux', 'CSS', 'JavaScript'],
-      image: '🛍️',
+      title: 'SAP Frontend Development',
+      description: 'Enhanced responsive web interfaces for a financial solutions platform at Humanica Public Company.',
+      fullDescription: 'Built and improved frontend components using HTML, CSS, JavaScript, and React. Collaborated with UX designers and developers to implement new features and ensure smooth frontend-backend integration across multiple devices.',
+      technologies: ['React', 'HTML5', 'CSS3', 'JavaScript', 'Git/GitHub'],
+      image: '💰',
       link: '#',
-      status: 'In Progress'
+      status: 'Completed'
     },
     {
       id: 3,
-      title: 'Task Management App',
-      description: 'A collaborative task management application with real-time updates and team features.',
-      fullDescription: 'A powerful task manager with drag-and-drop functionality, team collaboration, notifications, and cloud synchronization.',
-      technologies: ['React', 'Firebase', 'Tailwind', 'JavaScript'],
-      image: '✅',
+      title: 'This Portfolio Website',
+      description: 'A modern, fully responsive portfolio website with Apple-inspired design and 3D animations.',
+      fullDescription: 'Built with React and Vite featuring smooth animations, interactive components, organized component structure, and modern web best practices. Showcases projects, skills, and professional achievements.',
+      technologies: ['React', 'Vite', 'CSS3', 'Canvas API', 'JavaScript'],
+      image: '🎨',
       link: '#',
       status: 'Completed'
     },
     {
       id: 4,
-      title: 'Weather Dashboard',
-      description: 'A beautiful weather application displaying real-time weather data with interactive maps.',
-      fullDescription: 'Features real-time weather data, interactive maps, forecasts, and a sleek user interface built with React.',
-      technologies: ['React', 'API Integration', 'CSS', 'JavaScript'],
-      image: '🌤️',
+      title: 'Security Analysis & Documentation',
+      description: 'Contributed to IT security operations including vulnerability scanning and security incident response.',
+      fullDescription: 'Assisted in securing internal systems through risk assessments, vulnerability scanning with tools like Wazuh and Cloudflare, and security incident documentation. Improved internal communication and security recommendations.',
+      technologies: ['Cybersecurity', 'Wazuh', 'Cloudflare', 'Risk Assessment', 'Documentation'],
+      image: '🔒',
       link: '#',
       status: 'Completed'
     }

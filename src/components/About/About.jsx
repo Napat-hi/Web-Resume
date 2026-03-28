@@ -13,22 +13,22 @@ function About() {
         <div className="about-content">
           <div className="about-text">
             <p className="intro-text">
-              I'm Napat Hirunsak, a passionate Full Stack Developer and engineering-minded problem solver focused on building reliable and scalable digital systems.
+              I'm Napat Hirunsak, a passionate Full Stack Developer and Computer Engineering student at SIIT with strong interest in web development, cybersecurity, and AI/ML.
             </p>
 
             <p>
-              With over 3 years of experience in web development, I specialize in designing and developing user-centric applications across the full stack.
-              Beyond application development, I have a strong foundation in computer engineering concepts, including networking, system design, and performance optimization.
+              Third-year Computer Engineering student with hands-on experience in React, Django, Node.js, Docker, Git, and Linux. 
+              Passionate about building scalable applications and exploring network technologies with practical experience in real-world projects.
             </p>
 
             <p>
-              I understand how systems work end-to-end — from frontend interfaces to backend services and underlying network communication.
-              I’m familiar with key networking concepts such as TCP/IP, HTTP/HTTPS, DNS, subnetting, and basic network troubleshooting, allowing me to build and debug applications more effectively.
+              Worked on SAP platform development and IT security operations. I understand backend systems, SQL/MySQL database design, microcontroller programming, and digital circuit analysis. 
+              Actively seeking internship opportunities to contribute technical skills and grow with a dynamic team.
             </p>
 
             <p>
-              I’m committed to continuous learning and staying aligned with modern technologies and best practices.
-              I enjoy collaborating with teams, writing clean and maintainable code, and delivering solutions that create real business impact.
+              Quick learner with strong problem-solving skills and the ability to adapt to new technologies. I enjoy collaborating in teams, writing clean code, and creating solutions that deliver real value.
+              Currently exploring AI/Machine Learning and cybersecurity best practices.
             </p>
             <div className="about-features">
               <div className="feature">
