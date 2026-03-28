@@ -3,10 +3,10 @@ import './Stats.css'
 
 function Stats() {
   const [stats, setStats] = useState([
-    { label: 'Projects Completed', value: 0, target: 15, icon: '🎯' },
-    { label: 'Years of Experience', value: 0, target: 3, icon: '⭐' },
-    { label: 'Happy Clients', value: 0, target: 25, icon: '😊' },
-    { label: 'Code Commits', value: 0, target: 500, icon: '💻' }
+    { label: 'Technologies Mastered', value: 0, target: 20, icon: '⚙️' },
+    { label: 'Years of Experience', value: 0, target: 3, icon: '📈' },
+    { label: 'Projects Built', value: 0, target: 12, icon: '🚀' },
+    { label: 'Client Satisfaction', value: 0, target: 99, icon: '⭐' }
   ])
 
   useEffect(() => {
@@ -32,8 +32,8 @@ function Stats() {
     <section className="stats-section">
       <div className="stats-container">
         <div className="stats-header">
-          <h2>By The Numbers</h2>
-          <p>Professional achievements and milestones</p>
+          <h2>Key Metrics</h2>
+          <p>Track record of excellence and innovation</p>
         </div>
         
         <div className="stats-grid">
