@@ -7,7 +7,7 @@ function Testimonials() {
   const testimonials = [
     {
       id: 1,
-      name: 'Sarah Johnson',
+      name: 'Ohm Supakorn',
       role: 'Product Manager at TechCorp',
       image: '👩‍💼',
       text: 'Napat delivered exceptional work on our project. Their attention to detail and ability to solve complex problems made a real difference to our team.',
@@ -15,7 +15,7 @@ function Testimonials() {
     },
     {
       id: 2,
-      name: 'Michael Chen',
+      name: 'Chaiyapat ',
       role: 'CTO at StartupXYZ',
       image: '👨‍💻',
       text: 'Working with Napat was a pleasure. They brought innovative solutions and maintained excellent communication throughout the project.',

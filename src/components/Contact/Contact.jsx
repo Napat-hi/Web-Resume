@@ -40,21 +40,21 @@ function Contact() {
               <div className="info-icon">📧</div>
               <div className="info-content">
                 <h3>Email</h3>
-                <a href="mailto:your.email@example.com">your.email@example.com</a>
+                <a href="mailto:napat6603@gmail.com">napat6603@gmail.com</a>
               </div>
             </div>
             <div className="info-item">
               <div className="info-icon">📍</div>
               <div className="info-content">
                 <h3>Location</h3>
-                <p>Your City, Country</p>
+                <p>Bangkok, Thailand</p>
               </div>
             </div>
             <div className="info-item">
               <div className="info-icon">💼</div>
               <div className="info-content">
-                <h3>Availability</h3>
-                <p>Available for freelance & full-time</p>
+                <h3>Phone</h3>
+                <a href="tel:+66909957854">+66 90-995-7854</a>
               </div>
             </div>
           </div>
