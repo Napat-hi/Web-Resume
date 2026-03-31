@@ -1,6 +1,6 @@
 .testimonials-section {
   padding: 100px 20px;
-  background: linear-gradient(135deg, #f5f5f7 0%, #ffffff 100%);
+  background: linear-gradient(135deg, var(--bg-light), var(--bg-white));
 }
 
 .testimonials-container {
@@ -11,19 +11,24 @@
 .section-header {
   text-align: center;
   margin-bottom: 4rem;
+  animation: fadeInDown 0.6s ease-out;
 }
 
 .section-header h2 {
   font-size: 3rem;
   margin-bottom: 0.5rem;
-  color: #1d1d1f;
+  color: var(--text-primary);
   font-weight: 700;
   letter-spacing: -1px;
+  background: linear-gradient(135deg, var(--text-primary), var(--text-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .section-header p {
   font-size: 1.1rem;
-  color: #555b62;
+  color: var(--text-light);
 }
 
 .testimonials-carousel {
@@ -31,13 +36,20 @@
 }
 
 .testimonial-card {
-  background: #ffffff;
-  border-radius: 18px;
-  border: 1px solid #e5e5e7;
+  background: var(--bg-white);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
   padding: 3rem;
   text-align: center;
   animation: fadeIn 0.5s ease;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-base);
+}
+
+.testimonial-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-color);
 }
 
 .testimonial-card.active {
@@ -54,7 +66,7 @@
 
 .testimonial-text {
   font-size: 1.2rem;
-  color: #555b62;
+  color: var(--text-secondary);
   line-height: 1.8;
   margin-bottom: 2rem;
   font-style: italic;
@@ -73,10 +85,11 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: #e5e5e7;
+  background: linear-gradient(135deg, rgba(81, 203, 206, 0.1), rgba(0, 113, 227, 0.1));
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 2px solid rgba(81, 203, 206, 0.2);
 }
 
 .author-info {

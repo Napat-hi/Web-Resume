@@ -1,6 +1,6 @@
 .skills-section {
   padding: 100px 20px;
-  background: #f5f5f7;
+  background: var(--bg-light);
 }
 
 .skills-container {
@@ -11,19 +11,24 @@
 .section-header {
   text-align: center;
   margin-bottom: 4rem;
+  animation: fadeInDown 0.6s ease-out;
 }
 
 .section-header h2 {
   font-size: 3rem;
   margin-bottom: 0.5rem;
-  color: #1a1a2e;
+  color: var(--text-primary);
   font-weight: 700;
   letter-spacing: -1px;
+  background: linear-gradient(135deg, var(--text-primary), var(--text-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .section-header p {
   font-size: 1.1rem;
-  color: #2d3142;
+  color: var(--text-light);
 }
 
 .skills-grid {
@@ -33,22 +38,23 @@
 }
 
 .skill-category {
-  background: #ffffff;
+  background: var(--bg-white);
   padding: 2rem;
-  border-radius: 18px;
-  border: 1px solid #e5e5e7;
-  transition: all 0.3s ease;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-sm);
 }
 
 .skill-category:hover {
   transform: translateY(-10px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
-  border-color: #d5d5d7;
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-color);
 }
 
 .skill-category h3 {
   font-size: 1.5rem;
-  color: #0071e3;
+  color: var(--primary-dark);
   margin-bottom: 1.5rem;
   font-weight: 600;
 }
@@ -71,29 +77,29 @@
 
 .skill-name {
   font-weight: 600;
-  color: #1d1d1f;
+  color: var(--text-primary);
   font-size: 0.95rem;
 }
 
 .skill-level {
-  color: #0071e3;
+  color: var(--primary-dark);
   font-weight: bold;
   font-size: 0.9rem;
 }
 
 .skill-bar {
   height: 6px;
-  background-color: #e5e5e7;
+  background-color: var(--border-color);
   border-radius: 3px;
   overflow: hidden;
 }
 
 .skill-progress {
   height: 100%;
-  background: linear-gradient(90deg, #0071e3 0%, #00a4ef 100%);
+  background: linear-gradient(90deg, var(--primary-dark), #00a4ef);
   border-radius: 3px;
   animation: fillProgress 1.5s ease-out;
-  transition: width 0.3s ease;
+  transition: all var(--transition-base);
 }
 
 .skill-item:hover .skill-progress {

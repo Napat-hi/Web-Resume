@@ -16,17 +16,22 @@ function HRFriendly() {
     {
       icon: '🏆',
       title: 'Achievements',
-      items: ['Employee of the Month', 'Best Project Award 2024', 'Team Leadership Recognition']
+      items: ['Designed and Developed Full Stack Projects', 'Implemented Responsive UI/UX Designs', 'Applied Problem-Solving in Real-World Coding Tasks', 'Developed Baka UX/UI Design Project']
     },
     {
       icon: '💼',
       title: 'Soft Skills',
-      items: ['Team Leadership', 'Communication', 'Project Management', 'Problem Solving']
+      items: ['Problem Solving', 'Analytical Thinking', 'Self-Learning', 'Adaptability', 'Communication', 'Critical Thinking']
     },
     {
       icon: '🌍',
       title: 'Languages',
-      items: ['English (Fluent)', 'Thai (Native)', 'Japanese (Intermediate)']
+      items: ['English (Fluent, IELTS 6.5, Tu-get 650)', 'Thai (Native)', 'Chinese (Beginner, HSK 3)']
+    },
+    {
+      icon: '🚀',
+      title: 'Current Projects',
+      items: ['Leading AI Conference Planning and Coordination', 'Designing and Improving UX/UI for Baka Company Platform']
     }
   ]
 

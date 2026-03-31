@@ -27,6 +27,14 @@ function Experience() {
       duration: '2023 - Current',
       description: 'Focused on full-stack development, AI, and system design. Actively building projects with modern technologies including React, Node.js, and machine learning.',
       highlights: ['Full-Stack Development', 'AI/ML', 'System Design', 'Database Design', 'Team Projects']
+    },
+    {
+      id: 4,
+      role: 'Current Projects & Continuous Development',
+      company: 'Self-Directed & Open-Source',
+      duration: 'Ongoing',
+      description: 'Building innovative solutions with cutting-edge technologies. Contributing to open-source projects, developing AI/ML applications, and exploring emerging technologies in web development and artificial intelligence.',
+      highlights: ['React', 'Node.js', 'AI/ML', 'Open Source', 'Full-Stack', 'Continuous Learning']
     }
   ]
 
@@ -57,7 +65,7 @@ function Experience() {
                     }}
                   >
                     <Card.Body>
-                      <Card.Title className="mb-2">
+                      <Card.Title className="mb-2 experience-role">
                         {exp.role}
                       </Card.Title>
                       <p className="company mb-2">

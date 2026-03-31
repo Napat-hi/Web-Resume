@@ -1,6 +1,6 @@
 .stats-section {
   padding: 100px 20px;
-  background: #f9f9fb;
+  background: var(--bg-lighter);
 }
 
 .stats-container {
@@ -11,19 +11,24 @@
 .stats-header {
   text-align: center;
   margin-bottom: 4rem;
+  animation: fadeInDown 0.6s ease-out;
 }
 
 .stats-header h2 {
   font-size: 3rem;
   margin-bottom: 0.5rem;
-  color: #1d1d1f;
+  color: var(--text-primary);
   font-weight: 700;
   letter-spacing: -1px;
+  background: linear-gradient(135deg, var(--text-primary), var(--text-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .stats-header p {
   font-size: 1.1rem;
-  color: #555b62;
+  color: var(--text-light);
 }
 
 .stats-grid {
@@ -42,11 +47,22 @@
   cursor: pointer;
 }
 
+.dark-theme .stat-card {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  border: 1px solid #334155;
+}
+
 .stat-card:hover {
   transform: translateY(-10px);
   box-shadow: 0 15px 40px rgba(0, 113, 227, 0.1);
   border-color: #0071e3;
   background: linear-gradient(135deg, #ffffff 0%, #f5f5f7 100%);
+}
+
+.dark-theme .stat-card:hover {
+  background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+  border-color: #51cbce;
+  box-shadow: 0 15px 40px rgba(81, 203, 206, 0.15);
 }
 
 .stat-icon {
@@ -63,6 +79,10 @@
   line-height: 1;
 }
 
+.dark-theme .stat-value {
+  color: #51cbce;
+}
+
 .stat-label {
   font-size: 1rem;
   color: #555b62;
@@ -70,12 +90,17 @@
   font-weight: 500;
 }
 
+.dark-theme .stat-label {
+  color: #cbd5e1;
+}
+
 .stat-bar {
   height: 6px;
-  background: #e5e5e7;
+  background: var(--border-color);
   border-radius: 3px;
   overflow: hidden;
   margin-top: 1rem;
+  background: linear-gradient(90deg, var(--primary-dark), #00a4ef);
 }
 
 .stat-fill {
