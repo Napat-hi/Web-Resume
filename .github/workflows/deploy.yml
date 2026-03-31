@@ -6,8 +6,6 @@ on:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 jobs:
   build-and-deploy:
@@ -31,9 +29,11 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git checkout -b gh-pages || git checkout gh-pages
-          rm -rf *
+          git branch -D gh-pages || true
+          git checkout --orphan gh-pages
+          git rm -rf .
           cp -r dist/* .
+          touch .nojekyll
           git add -A
           git commit -m "Deploy from GitHub Actions" || true
           git push -u origin gh-pages --force
