@@ -1,8 +1,17 @@
 import React, { useState } from 'react'
+import { Card, Badge, Button, Container, Row, Col, Modal } from 'react-bootstrap'
 import './Projects.css'
 
 function Projects() {
   const [selectedProject, setSelectedProject] = useState(null)
+  const [showModal, setShowModal] = useState(false)
+  
+  const handleShowModal = (project) => {
+    setSelectedProject(project)
+    setShowModal(true)
+  }
+  
+  const handleCloseModal = () => setShowModal(false)
 
   const projects = [
     {
@@ -49,59 +58,83 @@ function Projects() {
 
   return (
     <section id="projects" className="projects">
-      <div className="projects-container">
+      <Container className="projects-container">
         <div className="section-header">
-          <h2>My Projects</h2>
+          <h2>Featured Projects</h2>
           <p>Showcasing my recent work and accomplishments</p>
         </div>
         
-        <div className="projects-grid">
+        <Row className="g-4">
           {projects.map((project) => (
-            <div 
-              key={project.id} 
-              className={`project-card ${selectedProject?.id === project.id ? 'active' : ''}`}
-              onClick={() => setSelectedProject(project)}
-            >
-              <div className="project-header">
-                <div className="project-image">{project.image}</div>
-                <span className="project-status">{project.status}</span>
-              </div>
-              <div className="project-content">
-                <h3>{project.title}</h3>
-                <p>{project.description}</p>
-                <div className="tech-tags">
-                  {project.technologies.map((tech, index) => (
-                    <span key={index} className="tech-tag">{tech}</span>
-                  ))}
+            <Col key={project.id} md={6} lg={6} className="mb-4">
+              <Card 
+                className="project-card h-100 shadow-sm border-0 cursor-pointer"
+                style={{ transition: 'all 0.3s ease', cursor: 'pointer' }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-10px)'
+                  e.currentTarget.style.boxShadow = '0 15px 40px rgba(0, 0, 0, 0.1)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)'
+                  e.currentTarget.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.04)'
+                }}
+                onClick={() => handleShowModal(project)}
+              >
+                <div className="project-header">
+                  <div className="project-image">{project.image}</div>
+                  <Badge bg="success" className="position-absolute top-0 end-0 m-3">{project.status}</Badge>
                 </div>
-              </div>
-              <a href={project.link} className="project-link">
-                View Project <span>→</span>
-              </a>
-            </div>
+                <Card.Body className="d-flex flex-column">
+                  <Card.Title className="mb-2">{project.title}</Card.Title>
+                  <Card.Text className="project-description flex-grow-1">
+                    {project.description}
+                  </Card.Text>
+                  <div className="tech-tags mb-3">
+                    {project.technologies.map((tech, index) => (
+                      <Badge key={index} bg="light" text="dark" className="me-2 mb-2">
+                        {tech}
+                      </Badge>
+                    ))}
+                  </div>
+                  <Button variant="outline-primary" size="sm" onClick={() => handleShowModal(project)}>
+                    View Details →
+                  </Button>
+                </Card.Body>
+              </Card>
+            </Col>
           ))}
-        </div>
+        </Row>
 
-        {selectedProject && (
-          <div className="project-modal" onClick={() => setSelectedProject(null)}>
-            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-              <button className="close-btn" onClick={() => setSelectedProject(null)}>✕</button>
-              <div className="modal-image">{selectedProject.image}</div>
-              <h2>{selectedProject.title}</h2>
-              <p className="modal-status">Status: <strong>{selectedProject.status}</strong></p>
-              <p className="modal-description">{selectedProject.fullDescription}</p>
-              <div className="modal-tech">
-                {selectedProject.technologies.map((tech, idx) => (
-                  <span key={idx} className="tech-tag">{tech}</span>
-                ))}
-              </div>
-              <a href={selectedProject.link} className="btn btn-primary">
-                View Live Project
-              </a>
+        <Modal show={showModal} onHide={handleCloseModal} size="lg" centered className="project-modal">
+          <Modal.Header closeButton className="bg-light border-0">
+            <Modal.Title>{selectedProject?.title}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body className="py-4">
+            <div className="modal-image text-center mb-4" style={{ fontSize: '4rem' }}>
+              {selectedProject?.image}
             </div>
-          </div>
-        )}
-      </div>
+            <p className="modal-description mb-4">{selectedProject?.fullDescription}</p>
+            <div className="mb-3">
+              <p className="text-muted mb-2">
+                <strong>Status:</strong> <Badge bg="success">{selectedProject?.status}</Badge>
+              </p>
+            </div>
+            <div className="modal-tech">
+              {selectedProject?.technologies.map((tech, idx) => (
+                <Badge key={idx} bg="primary" className="me-2 mb-2">
+                  {tech}
+                </Badge>
+              ))}
+            </div>
+          </Modal.Body>
+          <Modal.Footer className="bg-light border-0">
+            <Button variant="secondary" onClick={handleCloseModal}>
+              Close
+            </Button>
+            <Button variant="primary">View Live Project</Button>
+          </Modal.Footer>
+        </Modal>
+      </Container>
     </section>
   )
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Card, ProgressBar, Container, Row, Col, Badge } from 'react-bootstrap'
 import './Skills.css'
 
 function Skills() {
@@ -34,33 +35,53 @@ function Skills() {
 
   return (
     <section id="skills" className="skills-section">
-      <div className="skills-container">
+      <Container className="skills-container">
         <div className="section-header">
           <h2>Skills & Expertise</h2>
           <p>Technologies and abilities I've developed</p>
         </div>
         
-        <div className="skills-grid">
+        <Row className="g-4">
           {skillCategories.map((category, idx) => (
-            <div key={idx} className="skill-category">
-              <h3>{category.category}</h3>
-              <div className="skills-list">
-                {category.skills.map((skill, index) => (
-                  <div key={index} className="skill-item">
-                    <div className="skill-header">
-                      <span className="skill-name">{skill.name}</span>
-                      <span className="skill-level">{skill.level}%</span>
-                    </div>
-                    <div className="skill-bar">
-                      <div className="skill-progress" style={{ width: `${skill.level}%` }}></div>
-                    </div>
+            <Col key={idx} md={6} lg={4} className="mb-4">
+              <Card 
+                className="skill-category h-100 shadow-sm border-0"
+                style={{ transition: 'all 0.3s ease' }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-10px)'
+                  e.currentTarget.style.boxShadow = '0 15px 40px rgba(0, 0, 0, 0.1)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)'
+                  e.currentTarget.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.04)'
+                }}
+              >
+                <Card.Body>
+                  <Card.Title className="mb-4 d-flex align-items-center">
+                    <Badge bg="primary" className="me-2">{idx + 1}</Badge>
+                    {category.category}
+                  </Card.Title>
+                  <div className="skills-list">
+                    {category.skills.map((skill, index) => (
+                      <div key={index} className="skill-item mb-4">
+                        <div className="d-flex justify-content-between mb-2">
+                          <span className="skill-name fw-500">{skill.name}</span>
+                          <Badge bg="light" text="dark">{skill.level}%</Badge>
+                        </div>
+                        <ProgressBar 
+                          now={skill.level} 
+                          className="skill-progress-bar"
+                          style={{ height: '8px' }}
+                        />
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-            </div>
+                </Card.Body>
+              </Card>
+            </Col>
           ))}
-        </div>
-      </div>
+        </Row>
+      </Container>
     </section>
   )
 }

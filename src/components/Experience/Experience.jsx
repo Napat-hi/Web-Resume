@@ -1,4 +1,5 @@
 import React from 'react'
+import { Container, Row, Col, Card, Badge, ListGroup } from 'react-bootstrap'
 import './Experience.css'
 
 function Experience() {
@@ -31,30 +32,66 @@ function Experience() {
 
   return (
     <section id="experience" className="experience">
-      <div className="experience-container">
+      <Container className="experience-container">
         <div className="section-header">
-          <h2>Experience</h2>
+          <h2>Professional Experience</h2>
           <p>My professional journey and accomplishments</p>
         </div>
-        <div className="timeline">
+        
+        <Row className="position-relative">
+          <div className="timeline-line"></div>
           {experiences.map((exp, index) => (
-            <div key={exp.id} className={`timeline-item ${index % 2 === 0 ? 'left' : 'right'}`}>
-              <div className="timeline-dot"></div>
-              <div className="timeline-content">
-                <h3>{exp.role}</h3>
-                <p className="company">{exp.company}</p>
-                <p className="duration">{exp.duration}</p>
-                <p className="description">{exp.description}</p>
-                <div className="highlights">
-                  {exp.highlights.map((highlight, idx) => (
-                    <span key={idx} className="highlight-tag">{highlight}</span>
-                  ))}
-                </div>
-              </div>
-            </div>
+            <Col key={exp.id} md={12} className="mb-5">
+              <Row className={`align-items-center ${index % 2 === 0 ? 'flex-row-reverse' : ''}`}>
+                <Col md={6} className={`text-${index % 2 === 0 ? 'end' : 'start'} pe-md-4 ps-md-4`}>
+                  <Card 
+                    className="experience-card shadow-sm border-0 h-100"
+                    style={{ transition: 'all 0.3s ease' }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = 'translateY(-8px)'
+                      e.currentTarget.style.boxShadow = '0 12px 35px rgba(0, 0, 0, 0.1)'
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = 'translateY(0)'
+                      e.currentTarget.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.04)'
+                    }}
+                  >
+                    <Card.Body>
+                      <Card.Title className="mb-2">
+                        {exp.role}
+                      </Card.Title>
+                      <p className="company mb-2">
+                        <strong>{exp.company}</strong>
+                      </p>
+                      <Badge bg="info" text="dark" className="mb-3">
+                        📅 {exp.duration}
+                      </Badge>
+                      <Card.Text className="experience-description mb-3">
+                        {exp.description}
+                      </Card.Text>
+                      <div className="highlights">
+                        {exp.highlights.map((highlight, idx) => (
+                          <Badge key={idx} bg="light" text="dark" className="me-2 mb-2">
+                            {highlight}
+                          </Badge>
+                        ))}
+                      </div>
+                    </Card.Body>
+                  </Card>
+                </Col>
+                <Col md={6} className="text-center">
+                  <div className="timeline-dot-large">
+                    <div className="timeline-dot"></div>
+                  </div>
+                  {index < experiences.length - 1 && (
+                    <div className="timeline-connector"></div>
+                  )}
+                </Col>
+              </Row>
+            </Col>
           ))}
-        </div>
-      </div>
+        </Row>
+      </Container>
     </section>
   )
 }
