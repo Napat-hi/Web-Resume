@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './HRFriendly.css'
 
 function HRFriendly() {
@@ -64,8 +65,15 @@ function HRFriendly() {
           <h3>Ready to Connect?</h3>
           <p>I'm looking for exciting opportunities to contribute my skills and grow with a dynamic team.</p>
           <div className="cta-buttons">
-            <a href="#contact" className="btn btn-primary">Download Resume</a>
-            <a href="#contact" className="btn btn-secondary">Schedule a Call</a>
+            <a
+              href="https://drive.google.com/file/d/YOUR_RESUME_FILE_ID/view"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary"
+            >
+              Download Resume
+            </a>
+            <Link to="/contact" className="btn btn-secondary">Get In Touch</Link>
           </div>
         </div>
       </div>

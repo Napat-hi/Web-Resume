@@ -1,8 +1,10 @@
 import React, { useEffect, useRef } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import './Hero.css'
 
 function Hero() {
   const canvasRef = useRef(null)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -17,7 +19,6 @@ function Hero() {
     const draw = (time) => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-      // Draw 3D spheres
       const sphere1 = {
         x: canvas.width * 0.25,
         y: canvas.height * 0.4,
@@ -39,7 +40,6 @@ function Hero() {
         color: '#555b62'
       }
 
-      // Animate spheres
       const offset = Math.sin(time * 0.0005) * 20
 
       drawSphere(ctx, sphere1.x + offset, sphere1.y + offset, sphere1.radius, sphere1.color)
@@ -50,7 +50,6 @@ function Hero() {
     }
 
     const drawSphere = (ctx, x, y, radius, color) => {
-      // Create gradient for 3D effect
       const gradient = ctx.createRadialGradient(x - 20, y - 20, 0, x, y, radius)
       gradient.addColorStop(0, '#ffffff')
       gradient.addColorStop(0.4, color)
@@ -61,7 +60,6 @@ function Hero() {
       ctx.arc(x, y, radius, 0, Math.PI * 2)
       ctx.fill()
 
-      // Add shine
       ctx.fillStyle = 'rgba(255, 255, 255, 0.3)'
       ctx.beginPath()
       ctx.arc(x - radius * 0.3, y - radius * 0.3, radius * 0.3, 0, Math.PI * 2)
@@ -82,10 +80,6 @@ function Hero() {
     }
   }, [])
 
-  const scrollToProjects = () => {
-    document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })
-  }
-
   return (
     <section id="hero" className="hero">
       <canvas ref={canvasRef} className="hero-canvas"></canvas>
@@ -101,17 +95,17 @@ function Hero() {
             Crafting beautiful, innovative digital experiences with cutting-edge technology
           </p>
           <div className="hero-buttons">
-            <button className="btn btn-primary" onClick={scrollToProjects}>
+            <button className="btn btn-primary" onClick={() => navigate('/projects')}>
               Explore My Work
             </button>
-            <a href="#contact" className="btn btn-secondary">
+            <Link to="/contact" className="btn btn-secondary">
               Get In Touch
-            </a>
+            </Link>
           </div>
         </div>
       </div>
-      <div className="scroll-indicator">
-        <span>Scroll to explore</span>
+      <div className="scroll-indicator" onClick={() => navigate('/about')} style={{ cursor: 'pointer' }}>
+        <span>Learn more about me</span>
       </div>
     </section>
   )

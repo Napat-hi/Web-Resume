@@ -1,32 +1,39 @@
 import React from 'react'
 import './App.css'
+import { HashRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { AnimatePresence } from 'framer-motion'
 import { ThemeProvider } from './context/ThemeContext'
 import Navigation from './components/Navigation'
-import Hero from './components/Hero'
-import About from './components/About'
-import Stats from './components/Stats'
-import Skills from './components/Skills'
-import Experience from './components/Experience'
-import Projects from './components/Projects'
-import HRFriendly from './components/HRFriendly'
-import Testimonials from './components/Testimonials'
-import Contact from './components/Contact'
+import HomePage from './pages/HomePage'
+import AboutPage from './pages/AboutPage'
+import ExperiencePage from './pages/ExperiencePage'
+import ProjectsPage from './pages/ProjectsPage'
+import ContactPage from './pages/ContactPage'
+
+function AnimatedRoutes() {
+  const location = useLocation()
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/experience" element={<ExperiencePage />} />
+        <Route path="/projects" element={<ProjectsPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+      </Routes>
+    </AnimatePresence>
+  )
+}
 
 function App() {
   return (
     <ThemeProvider>
-      <div className="App">
-        <Navigation />
-        <Hero />
-        <About />
-        <Stats />
-        <Skills />
-        <Experience />
-        <Projects />
-        <HRFriendly />
-        <Testimonials />
-        <Contact />
-      </div>
+      <HashRouter>
+        <div className="App">
+          <Navigation />
+          <AnimatedRoutes />
+        </div>
+      </HashRouter>
     </ThemeProvider>
   )
 }
