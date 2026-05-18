@@ -1,6 +1,6 @@
 .experience {
-  padding: 100px 20px;
-  background: linear-gradient(135deg, var(--bg-white) 0%, var(--bg-light) 100%);
+  padding: 80px 24px;
+  background: var(--bg-light);
 }
 
 .experience-container {
@@ -37,7 +37,7 @@
   transform: translateX(-50%);
   width: 2px;
   height: 100%;
-  background: linear-gradient(180deg, var(--primary-dark), #00a4ef);
+  background: linear-gradient(180deg, var(--primary-dark), var(--primary-color));
   z-index: 0;
 }
 
@@ -102,13 +102,13 @@
 }
 
 .dark-theme .company {
-  color: #51cbce;
+  color: var(--primary-color);
 }
 
 .experience-role {
   font-size: 1.3rem !important;
   font-weight: 700 !important;
-  background: linear-gradient(135deg, var(--primary-dark), #00a4ef);
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -118,7 +118,7 @@
 }
 
 .dark-theme .experience-role {
-  background: linear-gradient(135deg, #51cbce, #3b82f6);
+  background: linear-gradient(135deg, var(--primary-color), #3b82f6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -222,7 +222,7 @@
 }
 
 .timeline-content .company {
-  color: #0071e3;
+  color: var(--primary-dark);
   font-weight: 600;
   margin-bottom: 0.3rem;
 }
@@ -254,7 +254,7 @@
   display: inline-block;
   padding: 0.4rem 0.8rem;
   background: #e8f0ff;
-  color: #0071e3;
+  color: var(--primary-dark);
   border-radius: 12px;
   font-size: 0.85rem;
   font-weight: 500;

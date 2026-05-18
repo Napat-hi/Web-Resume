@@ -23,21 +23,21 @@ function Hero() {
         x: canvas.width * 0.25,
         y: canvas.height * 0.4,
         radius: 100,
-        color: '#0071e3'
+        color: '#00c9b1'
       }
 
       const sphere2 = {
         x: canvas.width * 0.75,
         y: canvas.height * 0.5,
         radius: 80,
-        color: '#a2845e'
+        color: '#007a6e'
       }
 
       const sphere3 = {
         x: canvas.width * 0.5,
         y: canvas.height * 0.7,
         radius: 60,
-        color: '#555b62'
+        color: '#00e5d0'
       }
 
       const offset = Math.sin(time * 0.0005) * 20
@@ -89,10 +89,14 @@ function Hero() {
             Hi, I'm <span className="highlight">Napat Hirunsak</span>
           </h1>
           <p className="hero-subtitle">
-            Creative Developer & Digital Creator
+            AI Engineer & Systems Developer
           </p>
+          <div className="hero-status">
+            <span className="status-dot"></span>
+            Joining CP ALL · June 2026 · Open to Year 4 opportunities
+          </div>
           <p className="hero-description">
-            Crafting beautiful, innovative digital experiences with cutting-edge technology
+            Computer Engineering student at SIIT — specializing in AI/ML, full-stack development, and network security
           </p>
           <div className="hero-buttons">
             <button className="btn btn-primary" onClick={() => navigate('/projects')}>

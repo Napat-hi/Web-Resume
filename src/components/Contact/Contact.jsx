@@ -159,6 +159,19 @@ function Contact() {
           </Col>
         </Row>
 
+        <Row className="text-center mb-4">
+          <Col>
+            <a
+              href="https://drive.google.com/drive/u/1/folders/16gKTZ-5SgtQgIdOoqYQV0mwsbtStA-6E"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary"
+            >
+              Download Resume
+            </a>
+          </Col>
+        </Row>
+
         <Row className="text-center">
           <Col>
             <h3 className="mb-4">Connect With Me</h3>

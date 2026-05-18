@@ -32,7 +32,11 @@ function HRFriendly() {
     {
       icon: '🚀',
       title: 'Current Projects',
-      items: ['Leading AI Conference Planning and Coordination', 'Designing and Improving UX/UI for Baka Company Platform']
+      items: [
+        'AI Hallucination Detection System — PyTorch, HuggingFace, LangChain, FAISS (In Progress)',
+        'Quantum Computing Visualization Tool — Qiskit, Streamlit, Matplotlib (Proof of Concept)',
+        'Portfolio Website — React, Vite, Framer Motion (Live)'
+      ]
     }
   ]
 
@@ -66,7 +70,7 @@ function HRFriendly() {
           <p>I'm looking for exciting opportunities to contribute my skills and grow with a dynamic team.</p>
           <div className="cta-buttons">
             <a
-              href="https://drive.google.com/file/d/YOUR_RESUME_FILE_ID/view"
+              href="https://drive.google.com/drive/u/1/folders/16gKTZ-5SgtQgIdOoqYQV0mwsbtStA-6E"
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-primary"

@@ -13,43 +13,41 @@ function About() {
         <div className="about-content">
           <div className="about-text">
             <p className="intro-text">
-              I'm Napat Hirunsak, a passionate Full Stack Developer and Computer Engineering student at SIIT with strong interest in web development, cybersecurity, and AI/ML.
+              I'm Napat Hirunsak — a Computer Engineering student at SIIT finishing Year 3, with hands-on internship experience in frontend development, IT security, and enterprise digital systems.
             </p>
 
             <p>
-              Third-year Computer Engineering student with hands-on experience in React, Django, Node.js, Docker, Git, and Linux. 
-              Passionate about building scalable applications and exploring network technologies with practical experience in real-world projects.
+              My core focus sits at the intersection of AI/ML and systems engineering: building intelligent applications with PyTorch, HuggingFace, and LangChain, while maintaining strong fundamentals in backend infrastructure (Django, Node.js, Docker, Linux) and network security.
             </p>
 
             <p>
-              Worked on SAP platform development and IT security operations. I understand backend systems, SQL/MySQL database design, microcontroller programming, and digital circuit analysis. 
-              Actively seeking internship opportunities to contribute technical skills and grow with a dynamic team.
+              I've completed two internships at Humanica — contributing to SAP frontend development and IT security operations — and will be joining CP ALL's Digital Solution department in June 2026. Each role has sharpened my ability to work across the full stack in real production environments.
             </p>
 
             <p>
-              Quick learner with strong problem-solving skills and the ability to adapt to new technologies. I enjoy collaborating in teams, writing clean code, and creating solutions that deliver real value.
-              Currently exploring AI/Machine Learning and cybersecurity best practices.
+              I write clean, maintainable code and take ownership from design to deployment. Whether I'm building an AI hallucination detection pipeline or configuring a secure network topology, I approach problems the same way: understand the system, then solve it properly.
             </p>
+
             <div className="about-features">
               <div className="feature">
-                <div className="feature-icon">🎨</div>
+                <div className="feature-icon">🤖</div>
                 <div className="feature-content">
-                  <h4>Design Focused</h4>
-                  <p>Creating intuitive and beautiful interfaces</p>
+                  <h4>AI / ML Engineering</h4>
+                  <p>PyTorch, HuggingFace, LangChain, FAISS, NLP pipelines</p>
                 </div>
               </div>
               <div className="feature">
-                <div className="feature-icon">⚡</div>
+                <div className="feature-icon">🌐</div>
                 <div className="feature-content">
-                  <h4>Performance Driven</h4>
-                  <p>Building fast and scalable solutions</p>
+                  <h4>Network & Security</h4>
+                  <p>LAN/WAN, firewall config, vulnerability scanning, Wazuh</p>
                 </div>
               </div>
               <div className="feature">
-                <div className="feature-icon">🤝</div>
+                <div className="feature-icon">⚙️</div>
                 <div className="feature-content">
-                  <h4>Team Player</h4>
-                  <p>Excellent communication and collaboration</p>
+                  <h4>Full-Stack Systems</h4>
+                  <p>React, Django, Node.js, MySQL, Docker, Linux</p>
                 </div>
               </div>
             </div>

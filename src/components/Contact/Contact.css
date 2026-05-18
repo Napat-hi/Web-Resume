@@ -1,74 +1,34 @@
 .contact {
-  padding: 100px 20px;
-  background: linear-gradient(135deg, var(--primary-dark), #00a4ef);
-  color: var(--text-primary);
+  padding: 80px 24px;
+  background: var(--bg-light);
   transition: background 0.3s ease;
 }
 
 .dark-theme .contact {
-  background: linear-gradient(135deg, #1e293b, #0f172a);
-  color: #f1f5f9;
+  background: #0f172a;
 }
 
 .contact-container {
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
 .section-header {
   text-align: center;
-  margin-bottom: 4rem;
-  animation: fadeInDown 0.6s ease;
-  position: relative;
-  padding: 2rem 0;
-}
-
-.section-header::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100px;
-  height: 4px;
-  background: linear-gradient(90deg, transparent, #ffffff, transparent);
-  opacity: 0.6;
-  border-radius: 2px;
+  margin-bottom: 3rem;
 }
 
 .section-header h2 {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  color: #ffffff;
+  font-size: 2.2rem;
   font-weight: 700;
-  letter-spacing: -1px;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-}
-
-.dark-theme .section-header h2 {
-  color: #f1f5f9;
-  background: linear-gradient(135deg, #f1f5f9, #cbd5e1);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  letter-spacing: -0.5px;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
 }
 
 .section-header p {
-  font-size: 1.1rem;
-  color: #555b62;
-  text-shadow: none;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  transition: all 0.3s ease;
-}
-
-.dark-theme .section-header p {
-  color: rgba(241, 245, 249, 0.95);
-}
-
-.dark-theme .section-header p {
-  color: rgba(241, 245, 249, 0.95);
+  font-size: 1rem;
+  color: var(--text-light);
 }
 
 .contact-info-card {
@@ -88,7 +48,7 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, var(--primary-dark), #00a4ef);
+  background: linear-gradient(90deg, var(--primary-dark), var(--primary-color));
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -109,14 +69,14 @@
 }
 
 .dark-theme .contact-info-card:hover {
-  border-color: #51cbce !important;
+  border-color: var(--primary-color) !important;
 }
 
 .contact-info-card .card-title {
   font-size: 1.3rem !important;
   font-weight: 700 !important;
   color: var(--text-primary) !important;
-  background: linear-gradient(135deg, var(--primary-dark), #00a4ef);
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -125,7 +85,7 @@
 }
 
 .dark-theme .contact-info-card .card-title {
-  background: linear-gradient(135deg, #51cbce, #3b82f6);
+  background: linear-gradient(135deg, var(--primary-color), #3b82f6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -152,11 +112,11 @@
 }
 
 .dark-theme .contact-info-card a {
-  color: #51cbce;
+  color: var(--primary-color);
 }
 
 .contact-info-card a:hover {
-  color: #0055b8;
+  color: var(--primary-dark);
   text-decoration: underline;
   transform: scale(1.05);
 }
@@ -189,7 +149,7 @@
 }
 
 .dark-theme .form-control-lg:focus {
-  border-color: #51cbce !important;
+  border-color: var(--primary-color) !important;
   box-shadow: 0 0 0 0.3rem rgba(81, 203, 206, 0.25) !important;
   background: rgba(30, 41, 59, 0.95) !important;
 }
@@ -247,8 +207,8 @@
 }
 
 .dark-theme .social-icon-btn:hover {
-  background: var(--brand-color, #51cbce);
-  border-color: var(--brand-color, #51cbce);
+  background: var(--brand-color, var(--primary-color));
+  border-color: var(--brand-color, var(--primary-color));
   color: white;
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
 }
@@ -401,7 +361,7 @@
 
 .social-icon:hover {
   background: white;
-  color: #0071e3;
+  color: var(--primary-dark);
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
   border-color: white;
@@ -525,14 +485,14 @@
 
 .dark-theme .contact .card:hover {
   box-shadow: 0 12px 32px rgba(81, 203, 206, 0.15) !important;
-  border-color: #51cbce !important;
+  border-color: var(--primary-color) !important;
 }
 
 .contact .card-title {
   font-size: 1.5rem !important;
   font-weight: 700 !important;
   color: var(--text-primary) !important;
-  background: linear-gradient(135deg, var(--primary-dark), #00a4ef);
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -540,7 +500,7 @@
 }
 
 .dark-theme .contact .card-title {
-  background: linear-gradient(135deg, #51cbce, #3b82f6);
+  background: linear-gradient(135deg, var(--primary-color), #3b82f6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -568,14 +528,14 @@
 }
 
 .dark-theme .contact .form-control:focus {
-  border-color: #51cbce !important;
+  border-color: var(--primary-color) !important;
   background: rgba(30, 41, 59, 0.95) !important;
   color: #f1f5f9 !important;
   box-shadow: 0 0 0 0.3rem rgba(81, 203, 206, 0.2) !important;
 }
 
 .contact .btn-primary {
-  background: linear-gradient(135deg, var(--primary-dark), #00a4ef) !important;
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary-color)) !important;
   border: none !important;
   color: white !important;
   font-weight: 700 !important;
@@ -587,7 +547,7 @@
 }
 
 .dark-theme .contact .btn-primary {
-  background: linear-gradient(135deg, #51cbce, #3b82f6) !important;
+  background: linear-gradient(135deg, var(--primary-color), #3b82f6) !important;
   box-shadow: 0 4px 15px rgba(81, 203, 206, 0.3) !important;
 }
 

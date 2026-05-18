@@ -5,36 +5,44 @@ import './Experience.css'
 function Experience() {
   const experiences = [
     {
-      id: 1,
-      role: 'Financial Solutions - SAP Development',
-      company: 'Humanica Public Company Limited',
-      duration: 'June - August 2024',
-      description: 'Developed responsive web interfaces using React, HTML, CSS, and JavaScript. Enhanced platform features with improved accessibility and usability across multiple devices.',
-      highlights: ['React', 'Frontend Development', 'UX/UI Enhancement', 'Git/GitHub', 'Team Collaboration']
-    },
-    {
-      id: 2,
-      role: 'IT Security Intern',
-      company: 'Humanica Public Company Limited',
-      duration: 'June - August 2025',
-      description: 'Assisted in securing internal systems and cloud servers through risk assessments. Performed vulnerability scanning and collaborated on security implementations.',
-      highlights: ['Cloud Security', 'Network Monitoring', 'Cybersecurity', 'Risk Assessment', 'Problem Solving']
-    },
-    {
-      id: 3,
-      role: 'Computer Engineering Student',
-      company: 'SIIT - Sirindhorn International Institute of Technology',
-      duration: '2023 - Current',
-      description: 'Focused on full-stack development, AI, and system design. Actively building projects with modern technologies including React, Node.js, and machine learning.',
-      highlights: ['Full-Stack Development', 'AI/ML', 'System Design', 'Database Design', 'Team Projects']
-    },
-    {
-      id: 4,
+      id: 0,
       role: 'Current Projects & Continuous Development',
       company: 'Self-Directed & Open-Source',
       duration: 'Ongoing',
       description: 'Building innovative solutions with cutting-edge technologies. Contributing to open-source projects, developing AI/ML applications, and exploring emerging technologies in web development and artificial intelligence.',
       highlights: ['React', 'Node.js', 'AI/ML', 'Open Source', 'Full-Stack', 'Continuous Learning']
+    },
+    {
+      id: 1,
+      role: 'Digital Solution Intern',
+      company: 'CP ALL Public Company Limited (7-Eleven Thailand)',
+      duration: 'June – July 2026',
+      description: 'Working within the Digital Solution department, contributing to enterprise digital transformation initiatives. Involved in developing and supporting internal digital tools and platforms that serve operations across CP ALL\'s nationwide network.',
+      highlights: ['Digital Transformation', 'Enterprise Systems', 'Business Analysis', 'Agile / Scrum', 'SQL', 'Problem Solving']
+    },
+    {
+      id: 2,
+      role: 'IT Security Intern',
+      company: 'Humanica Public Company Limited',
+      duration: 'June – August 2025',
+      description: 'Assisted in securing internal systems and cloud servers through risk assessments. Performed vulnerability scanning and collaborated on security implementations.',
+      highlights: ['Cloud Security', 'Network Monitoring', 'Cybersecurity', 'Risk Assessment', 'Problem Solving']
+    },
+    {
+      id: 3,
+      role: 'Financial Solutions - SAP Development',
+      company: 'Humanica Public Company Limited',
+      duration: 'June – August 2024',
+      description: 'Developed responsive web interfaces using React, HTML, CSS, and JavaScript. Enhanced platform features with improved accessibility and usability across multiple devices.',
+      highlights: ['React', 'Frontend Development', 'UX/UI Enhancement', 'Git/GitHub', 'Team Collaboration']
+    },
+    {
+      id: 4,
+      role: 'Computer Engineering Student',
+      company: 'SIIT - Sirindhorn International Institute of Technology',
+      duration: '2023 – Present',
+      description: 'Focused on full-stack development, AI, and system design. Actively building projects with modern technologies including React, Node.js, and machine learning.',
+      highlights: ['Full-Stack Development', 'AI/ML', 'System Design', 'Database Design', 'Team Projects']
     }
   ]
 

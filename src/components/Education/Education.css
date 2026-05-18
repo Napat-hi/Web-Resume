@@ -1,0 +1,127 @@
+.education-section {
+  padding: 80px 24px;
+  background: var(--bg-white);
+}
+
+.education-container {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.education-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.education-card {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 1.5rem;
+  padding: 1.75rem;
+  background: var(--bg-white);
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.education-card:hover {
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+}
+
+.dark-theme .education-card {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+.dark-theme .education-card:hover {
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.edu-meta {
+  padding-top: 0.2rem;
+}
+
+.edu-duration {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--primary-dark);
+  background: color-mix(in srgb, var(--primary-color) 12%, transparent);
+  padding: 0.3rem 0.65rem;
+  border-radius: var(--radius-full);
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.dark-theme .edu-duration {
+  color: var(--primary-color);
+  background: color-mix(in srgb, var(--primary-color) 15%, transparent);
+}
+
+.edu-degree {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.3rem;
+}
+
+.edu-school {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.3rem;
+}
+
+.edu-detail {
+  font-size: 0.88rem;
+  color: var(--primary-dark);
+  font-weight: 600;
+  margin-bottom: 0.9rem;
+}
+
+.dark-theme .edu-detail {
+  color: var(--primary-color);
+}
+
+.coursework-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-light);
+  margin-bottom: 0.5rem;
+}
+
+.coursework-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.coursework-tag {
+  padding: 0.25rem 0.65rem;
+  background: var(--bg-light);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.dark-theme .coursework-tag {
+  background: #0f172a;
+  border-color: #334155;
+  color: #94a3b8;
+}
+
+@media (max-width: 600px) {
+  .education-card {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .education-section {
+    padding: 60px 16px;
+  }
+}

@@ -53,6 +53,26 @@ function Projects() {
       image: '🔒',
       link: '#',
       status: 'Completed'
+    },
+    {
+      id: 5,
+      title: 'AI Hallucination Detection System',
+      description: 'Detects hallucinated or misleading responses from LLMs by comparing outputs against trusted sources using semantic similarity scoring.',
+      fullDescription: 'A research-grade system that identifies AI hallucinations by using FAISS vector search to compare LLM-generated answers against verified knowledge bases. Leverages HuggingFace Transformers for semantic embeddings, LangChain for pipeline orchestration, and PyTorch for model inference. Outputs a confidence-weighted hallucination score per response.',
+      technologies: ['Python', 'PyTorch', 'HuggingFace', 'LangChain', 'FAISS', 'OpenAI API'],
+      image: '🧠',
+      link: '#',
+      status: 'In Progress'
+    },
+    {
+      id: 6,
+      title: 'Quantum Computing Visualization',
+      description: 'Interactive platform that visualizes quantum gates, qubit states, and circuits to help students grasp quantum computing concepts.',
+      fullDescription: 'An educational tool built with Qiskit and Streamlit that renders interactive quantum circuit diagrams in real time. Supports single and multi-qubit gate operations, Bloch sphere state visualization, and measurement probability histograms via Matplotlib. Designed as a learning aid for university-level quantum computing courses.',
+      technologies: ['Python', 'Qiskit', 'Streamlit', 'Matplotlib'],
+      image: '⚛️',
+      link: '#',
+      status: 'Proof of Concept'
     }
   ]
 
@@ -131,7 +151,11 @@ function Projects() {
             <Button variant="secondary" onClick={handleCloseModal}>
               Close
             </Button>
-            <Button variant="primary">View Live Project</Button>
+            {selectedProject?.link && selectedProject.link !== '#' && (
+              <Button variant="primary" as="a" href={selectedProject.link} target="_blank" rel="noopener noreferrer">
+                View Live Project
+              </Button>
+            )}
           </Modal.Footer>
         </Modal>
       </Container>

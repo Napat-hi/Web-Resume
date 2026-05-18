@@ -1,5 +1,5 @@
 .about {
-  padding: 100px 20px;
+  padding: 80px 24px;
   background: var(--bg-light);
 }
 
@@ -15,15 +15,11 @@
 }
 
 .section-header h2 {
-  font-size: 3rem;
+  font-size: 2.2rem;
   margin-bottom: 0.5rem;
   color: var(--text-primary);
   font-weight: 700;
-  letter-spacing: -1px;
-  background: linear-gradient(135deg, var(--text-primary), var(--text-secondary));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  letter-spacing: -0.5px;
 }
 
 .section-header p {

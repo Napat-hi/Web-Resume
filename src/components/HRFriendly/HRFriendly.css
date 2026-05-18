@@ -1,5 +1,5 @@
 .hr-friendly-section {
-  padding: 100px 20px;
+  padding: 80px 24px;
   background: var(--bg-white);
   transition: background 0.3s ease;
 }
@@ -25,7 +25,7 @@
   color: var(--text-primary);
   font-weight: 700;
   letter-spacing: -1px;
-  background: linear-gradient(135deg, var(--primary-dark), #00a4ef);
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -33,7 +33,7 @@
 }
 
 .dark-theme .section-header h2 {
-  background: linear-gradient(135deg, #51cbce, #3b82f6);
+  background: linear-gradient(135deg, var(--primary-color), #3b82f6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -144,14 +144,14 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, var(--primary-dark), #00a4ef);
+  background: linear-gradient(90deg, var(--primary-dark), var(--primary-color));
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
 .hr-card:hover {
-  transform: translateY(-12px);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
   border-color: var(--primary-color);
   background: linear-gradient(135deg, var(--bg-white), var(--bg-lighter));
 }
@@ -166,7 +166,7 @@
 }
 
 .dark-theme .hr-card:hover {
-  border-color: #51cbce;
+  border-color: var(--primary-color);
   background: linear-gradient(135deg, #334155, #1e293b);
 }
 
@@ -186,7 +186,7 @@
   color: var(--text-primary);
   margin-bottom: 1.5rem;
   font-weight: 700;
-  background: linear-gradient(135deg, var(--primary-dark), #00a4ef);
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -194,7 +194,7 @@
 }
 
 .dark-theme .hr-card h3 {
-  background: linear-gradient(135deg, #51cbce, #3b82f6);
+  background: linear-gradient(135deg, var(--primary-color), #3b82f6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -241,7 +241,7 @@
 .dark-theme .checkmark {
   background: linear-gradient(135deg, rgba(81, 203, 206, 0.2), rgba(59, 130, 246, 0.2));
   border-color: rgba(81, 203, 206, 0.4);
-  color: #51cbce;
+  color: var(--primary-color);
 }
 
 .hr-items li:hover .checkmark {
@@ -251,7 +251,7 @@
 
 /* CTA Section */
 .cta-section {
-  background: linear-gradient(135deg, var(--primary-dark), #00a4ef);
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
   color: white;
   padding: 4rem 3rem;
   border-radius: 20px;
@@ -347,7 +347,7 @@
 
 .btn-primary {
   background: white;
-  color: #0071e3;
+  color: var(--primary-dark);
   transition: all 0.3s ease;
   font-weight: 700;
 }
@@ -359,7 +359,7 @@
 
 .dark-theme .btn-primary {
   background: #e0e7ff;
-  color: #0071e3;
+  color: var(--primary-dark);
 }
 
 .btn-secondary {
