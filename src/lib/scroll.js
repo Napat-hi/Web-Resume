@@ -33,4 +33,7 @@ export function useGoToSection() {
   )
 }
 
+// Home scroll position saved before opening a case study, restored on Back.
+export const homeScroll = { y: 0 }
+
 export const isMac = () => typeof navigator !== 'undefined' && /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent)

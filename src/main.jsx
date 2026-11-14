@@ -8,6 +8,9 @@ import './styles/global.css'
 import './styles/print.css'
 import App from './App'
 
+// The app restores scroll itself (see pages/Home.jsx and pages/ProjectCase.jsx).
+if ('scrollRestoration' in window.history) window.history.scrollRestoration = 'manual'
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <App />
