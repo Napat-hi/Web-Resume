@@ -1,19 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Napat Hirunsak — AI Engineer & Systems Developer. Computer Engineering student at SIIT specializing in AI/ML, full-stack development, and network security." />
-    <meta name="keywords" content="Napat Hirunsak, AI Engineer, Machine Learning, Computer Engineering, SIIT, React, Python, PyTorch, Network Security, Full Stack Developer" />
+    <title>Napat Hirunsak · AI & Systems Engineer</title>
+    <meta name="description" content="Napat Hirunsak, Computer Engineering student at SIIT (AI specialization). LLM hallucination research, VLM pipelines, IT security and full-stack work." />
     <meta name="author" content="Napat Hirunsak" />
-    <meta property="og:title" content="Napat Hirunsak — AI Engineer & Systems Developer" />
-    <meta property="og:description" content="Computer Engineering student at SIIT — AI/ML, full-stack development, and network security." />
+    <meta name="theme-color" content="#0a0c0f" />
+    <link rel="canonical" href="https://napat-hi.github.io/Web-Resume/" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
     <meta property="og:type" content="website" />
-    <title>Napat Hirunsak — AI Engineer & Systems Developer</title>
+    <meta property="og:site_name" content="Napat Hirunsak" />
+    <meta property="og:url" content="https://napat-hi.github.io/Web-Resume/" />
+    <meta property="og:title" content="Napat Hirunsak · AI & Systems Engineer" />
+    <meta property="og:description" content="Napat Hirunsak, Computer Engineering student at SIIT (AI specialization). LLM hallucination research, VLM pipelines, IT security and full-stack work." />
+    <meta property="og:image" content="https://napat-hi.github.io/Web-Resume/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Napat Hirunsak · AI & Systems Engineer" />
+    <meta name="twitter:description" content="Napat Hirunsak, Computer Engineering student at SIIT (AI specialization). LLM hallucination research, VLM pipelines, IT security and full-stack work." />
+    <meta name="twitter:image" content="https://napat-hi.github.io/Web-Resume/og-image.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Napat Hirunsak",
+        "alternateName": "Po",
+        "url": "https://napat-hi.github.io/Web-Resume/",
+        "image": "https://napat-hi.github.io/Web-Resume/og-image.png",
+        "jobTitle": "AI & Systems Engineer",
+        "email": "mailto:napat6603@gmail.com",
+        "address": { "@type": "PostalAddress", "addressLocality": "Bangkok", "addressCountry": "TH" },
+        "alumniOf": {
+          "@type": "CollegeOrUniversity",
+          "name": "Sirindhorn International Institute of Technology, Thammasat University"
+        },
+        "knowsLanguage": ["th", "en", "zh"],
+        "sameAs": ["https://github.com/Napat-hi", "https://www.linkedin.com/in/napat-hirunsak-340b9838a/"]
+      }
+    </script>
+
+    <script>
+      // Apply theme before first paint: saved choice > system preference > dark.
+      (function () {
+        var t = null
+        try { t = localStorage.getItem('theme-mode') } catch (e) {}
+        if (t !== 'light' && t !== 'dark') {
+          t = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+        }
+        document.documentElement.dataset.theme = t
+      })()
+    </script>
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <p style="padding:24px;font-family:system-ui">Napat Hirunsak · AI & Systems Engineer · napat6603@gmail.com · github.com/Napat-hi</p>
+    </noscript>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

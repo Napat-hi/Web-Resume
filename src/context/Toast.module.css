@@ -1,0 +1,24 @@
+.region {
+  position: fixed;
+  left: 50%;
+  bottom: var(--s-3);
+  z-index: 900;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: var(--s-1);
+  padding: 10px var(--s-2);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-full);
+  background: var(--surface-2);
+  color: var(--text);
+  font-size: var(--fs-sm);
+  box-shadow: var(--shadow);
+  white-space: nowrap;
+}
+
+.toast svg { color: var(--accent-text); }

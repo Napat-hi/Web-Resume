@@ -1,40 +1,52 @@
-import React, { createContext, useState, useEffect } from 'react'
+import { createContext, useCallback, useContext, useEffect, useState } from 'react'
 
-export const ThemeContext = createContext()
+// The inline script in index.html sets data-theme before first paint (no flash).
+// Order: saved choice > system preference > dark.
+const STORAGE_KEY = 'theme-mode'
+const ThemeContext = createContext(null)
+
+function readInitial() {
+  const attr = document.documentElement.dataset.theme
+  return attr === 'light' ? 'light' : 'dark'
+}
 
 export function ThemeProvider({ children }) {
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    const saved = localStorage.getItem('theme-mode')
-    if (saved) {
-      return saved === 'dark'
-    }
-    return false
-  })
+  const [theme, setTheme] = useState(readInitial)
 
   useEffect(() => {
-    if (isDarkMode) {
-      document.documentElement.classList.add('dark-theme')
-    } else {
-      document.documentElement.classList.remove('dark-theme')
-    }
-    localStorage.setItem('theme-mode', isDarkMode ? 'dark' : 'light')
-  }, [isDarkMode])
+    document.documentElement.dataset.theme = theme
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'light' ? '#f7f8fa' : '#0a0c0f')
+  }, [theme])
 
-  const toggleTheme = () => {
-    setIsDarkMode(prev => !prev)
-  }
+  // Follow system changes until the user picks a theme.
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-color-scheme: light)')
+    const onChange = (e) => {
+      let saved = null
+      try { saved = localStorage.getItem(STORAGE_KEY) } catch { /* storage blocked */ }
+      if (!saved) setTheme(e.matches ? 'light' : 'dark')
+    }
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
+
+  const toggleTheme = useCallback(() => {
+    setTheme((t) => {
+      const next = t === 'dark' ? 'light' : 'dark'
+      try { localStorage.setItem(STORAGE_KEY, next) } catch { /* storage blocked */ }
+      return next
+    })
+  }, [])
 
   return (
-    <ThemeContext.Provider value={{ isDarkMode, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, isDark: theme === 'dark', toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   )
 }
 
 export function useTheme() {
-  const context = React.useContext(ThemeContext)
-  if (!context) {
-    throw new Error('useTheme must be used within ThemeProvider')
-  }
-  return context
+  const ctx = useContext(ThemeContext)
+  if (!ctx) throw new Error('useTheme must be used within ThemeProvider')
+  return ctx
 }

@@ -1,44 +1,48 @@
-import React from 'react'
-import './App.css'
-import { HashRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
-import { AnimatePresence } from 'framer-motion'
+import { lazy, Suspense } from 'react'
+import { HashRouter, Route, Routes } from 'react-router-dom'
+import { MotionConfig } from 'framer-motion'
 import { ThemeProvider } from './context/ThemeContext'
-import Navigation from './components/Navigation'
-import Footer from './components/Footer/Footer'
-import HomePage from './pages/HomePage'
-import AboutPage from './pages/AboutPage'
-import ExperiencePage from './pages/ExperiencePage'
-import ProjectsPage from './pages/ProjectsPage'
-import ContactPage from './pages/ContactPage'
+import { ToastProvider } from './context/ToastContext'
+import { PaletteProvider } from './context/PaletteContext'
+import Nav from './components/layout/Nav'
+import Footer from './components/layout/Footer'
+import Home from './pages/Home'
 
-function AnimatedRoutes() {
-  const location = useLocation()
+const ProjectCase = lazy(() => import('./pages/ProjectCase'))
+const NotFound = lazy(() => import('./pages/NotFound'))
+const CommandPalette = lazy(() => import('./components/CommandPalette/CommandPalette'))
+
+export default function App() {
   return (
-    <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/experience" element={<ExperiencePage />} />
-        <Route path="/projects" element={<ProjectsPage />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </AnimatePresence>
+    <MotionConfig reducedMotion="user">
+      <ThemeProvider>
+        <ToastProvider>
+          <HashRouter>
+            <PaletteProvider>
+              <a className="skip-link" href="#main" onClick={(e) => {
+                e.preventDefault()
+                document.getElementById('main')?.focus()
+              }}>
+                Skip to content
+              </a>
+              <Nav />
+              <main id="main" tabIndex={-1}>
+                <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/projects/:slug" element={<ProjectCase />} />
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </Suspense>
+              </main>
+              <Footer />
+              <Suspense fallback={null}>
+                <CommandPalette />
+              </Suspense>
+            </PaletteProvider>
+          </HashRouter>
+        </ToastProvider>
+      </ThemeProvider>
+    </MotionConfig>
   )
 }
-
-function App() {
-  return (
-    <ThemeProvider>
-      <HashRouter>
-        <div className="App">
-          <Navigation />
-          <AnimatedRoutes />
-          <Footer />
-        </div>
-      </HashRouter>
-    </ThemeProvider>
-  )
-}
-
-export default App

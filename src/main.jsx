@@ -1,11 +1,15 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import 'bootstrap/dist/css/bootstrap.min.css'
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import '@fontsource-variable/inter/wght.css'
+import '@fontsource-variable/space-grotesk/wght.css'
+import '@fontsource-variable/jetbrains-mono/wght.css'
+import './styles/tokens.css'
+import './styles/global.css'
+import './styles/print.css'
 import App from './App'
-import './index.css'
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
     <App />
-  </React.StrictMode>,
+  </StrictMode>,
 )
