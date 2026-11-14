@@ -1,7 +1,7 @@
 export const education = [
   {
     id: 'siit',
-    degree: 'B.Eng. Computer Engineering — AI specialization',
+    degree: 'B.Eng. Computer Engineering, AI specialization',
     school: 'Sirindhorn International Institute of Technology (SIIT), Thammasat University',
     period: '2023 – 2027',
     status: 'Year 4 · graduating 2027',
@@ -23,7 +23,7 @@ export const education = [
   },
   {
     id: 'bcc',
-    degree: 'High School — Business Track',
+    degree: 'High School, Business Track',
     school: 'Bangkok Christian College (BCC)',
     period: '2011 – 2022',
     status: null,

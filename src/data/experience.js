@@ -1,20 +1,21 @@
-// Work experience, newest first. `start` (YYYY-MM) is used for sorting.
+// Work experience. `start` (YYYY-MM) drives sorting, newest first.
 // type: 'internship' entries are counted by the Stats block.
+// Copy rules: stop-slop. Never invent facts; unknowns are TODO(Po).
 
 export const experience = [
   {
     id: 'cpall-2026',
     type: 'internship',
     company: 'CP ALL Public Company Limited (7-Eleven Thailand)',
-    role: 'Digital Solution Intern — Business Analysis & AI Research',
+    role: 'Digital Solution Intern (Business Analysis & AI Research)',
     start: '2026-06',
     period: 'Jun – Aug 2026',
     location: 'Bangkok',
-    summary: 'Business analysis and AI research inside the Digital Solution department.',
+    summary: 'Business analysis and AI research in the Digital Solution department.',
     bullets: [
-      'Business analysis across the delivery lifecycle: FDD, SIS, UAT and QA/QC.',
-      'Automated UAT test-case generation for a store-transfer system with Python and openpyxl.',
-      'AI research: proof of concept for VLM-based shelf auditing of refrigerated and frozen shelves.',
+      'Did business analysis across the delivery lifecycle: FDD, SIS, UAT and QA/QC.',
+      'Built a Python + openpyxl tool that generates UAT test cases for a store-transfer system.',
+      'Built a proof of concept that audits refrigerated and frozen shelves from video with a VLM.',
     ],
     tags: ['Business Analysis', 'UAT / QA', 'Python', 'openpyxl', 'Gemini API', 'VLM'],
     projects: ['shelf-audit', 'uat-generator'],
@@ -29,9 +30,9 @@ export const experience = [
     location: 'Bangkok',
     summary: 'Helped secure internal systems and cloud servers.',
     bullets: [
-      'Assisted in securing internal systems and cloud servers through risk assessments.',
-      'Performed vulnerability scanning and collaborated on security implementations.',
-      'Worked with Wazuh and Cloudflare, and documented security incidents and recommendations.',
+      'Ran risk assessments on internal systems and cloud servers.',
+      'Scanned for vulnerabilities and worked with the team on security implementations.',
+      'Used Wazuh and Cloudflare for monitoring, and documented incidents with recommendations.',
     ],
     tags: ['Risk Assessment', 'Vulnerability Scanning', 'Wazuh', 'Cloudflare', 'Cloud Security'],
     projects: ['security-analysis'],
@@ -40,15 +41,15 @@ export const experience = [
     id: 'humanica-2024',
     type: 'internship',
     company: 'Humanica Public Company Limited',
-    role: 'SAP Development Intern — Financial Solutions',
+    role: 'SAP Development Intern (Financial Solutions)',
     start: '2024-06',
     period: 'Jun – Aug 2024',
     location: 'Bangkok',
     summary: 'Frontend work on a financial solutions platform.',
     bullets: [
-      'Developed responsive web interfaces using React, HTML, CSS and JavaScript.',
-      'Enhanced platform features with improved accessibility and usability across devices.',
-      'Collaborated with UX designers and developers on new features and frontend–backend integration.',
+      'Built responsive web interfaces with React, HTML, CSS and JavaScript.',
+      'Improved accessibility and usability of platform features on desktop and mobile.',
+      'Worked with UX designers and backend developers to ship new features.',
     ],
     tags: ['React', 'JavaScript', 'HTML / CSS', 'SAP', 'Git'],
     projects: ['sap-frontend'],
