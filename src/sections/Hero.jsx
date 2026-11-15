@@ -94,6 +94,7 @@ export default function Hero() {
         </div>
 
         <figure className={styles.photo}>
+          <div className={styles.frame}>
           <img
             src={photo320}
             srcSet={`${photo320} 320w, ${photo640} 640w`}
@@ -104,6 +105,7 @@ export default function Hero() {
             fetchpriority="high"
             decoding="async"
           />
+          </div>
           <figcaption className={styles.caption}>{profile.location}</figcaption>
         </figure>
       </div>

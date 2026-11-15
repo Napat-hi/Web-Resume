@@ -59,15 +59,16 @@
   color: var(--accent-text);
 }
 
+/* Window tall enough for descenders (g, y, p) at any size. */
 .roleWindow {
   display: inline-block;
   position: relative;
-  height: 1.25em;
+  height: 1.4em;
   overflow: hidden;
   vertical-align: bottom;
 }
 
-.roleText { display: inline-block; white-space: nowrap; }
+.roleText { display: inline-block; line-height: 1.4; white-space: nowrap; }
 
 .headline {
   margin-top: var(--s-2);
@@ -94,6 +95,8 @@
   width: 280px;
 }
 
+.frame { position: relative; }
+
 .photo img {
   width: 100%;
   height: auto;
@@ -104,7 +107,8 @@
   background: var(--surface-2);
 }
 
-.photo::before {
+/* Offset accent frame hugs the photo only, so it never reaches the caption. */
+.frame::before {
   content: '';
   position: absolute;
   inset: 12px -12px -12px 12px;
@@ -114,7 +118,7 @@
 }
 
 .caption {
-  margin-top: var(--s-2);
+  margin-top: var(--s-4);
   font-family: var(--font-mono);
   font-size: var(--fs-xs);
   color: var(--text-subtle);
@@ -158,8 +162,11 @@
 @media (max-width: 767px) {
   .hero { padding-top: calc(var(--nav-h) + var(--s-6)); }
   .inner { grid-template-columns: 1fr; gap: var(--s-4); }
-  .photo { order: -1; width: 160px; }
-  .photo::before { inset: 8px -8px -8px 8px; }
+  /* Small avatar on phones keeps name, role and the main CTA above the fold. */
+  .photo { order: -1; width: 80px; }
+  .photo img { border-radius: var(--radius); }
+  .frame::before { inset: 5px -5px -5px 5px; border-radius: var(--radius); }
+  .status { margin-bottom: var(--s-2); }
   .caption { display: none; }
   .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: var(--s-6); }
   .stat:nth-child(3) { border-left: 0; }
