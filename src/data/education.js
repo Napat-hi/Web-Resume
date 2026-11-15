@@ -1,3 +1,8 @@
+// status: 'In progress' | 'Completed'. Add `date` once a certificate is issued.
+export const certifications = [
+  { id: 'aws-academy-de', name: 'AWS Academy Data Engineering', issuer: 'AWS Academy', status: 'In progress' },
+]
+
 export const education = [
   {
     id: 'siit',

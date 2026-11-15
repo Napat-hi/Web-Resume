@@ -142,6 +142,9 @@
   #skills div > div,
   #education li { padding: 0 !important; border: 0 !important; break-inside: avoid; }
   #education ol { gap: 6pt !important; }
+  #education ol > li > div + div { margin-top: 3pt !important; gap: 1pt !important; }
+  #education section > div > div:last-child { margin-top: 6pt !important; gap: 1pt !important; }
+  #education dl { gap: 10pt !important; }
 
   a { color: #000 !important; text-decoration: none !important; }
 }

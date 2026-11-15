@@ -1,4 +1,4 @@
-import { education } from '../data/education'
+import { certifications, education } from '../data/education'
 import { Reveal } from '../components/ui/Reveal'
 import SectionHead from './SectionHead'
 import styles from './Education.module.css'
@@ -58,6 +58,23 @@ export default function Education() {
             </Reveal>
           ))}
         </ol>
+
+        {certifications.length > 0 && (
+          <Reveal className={styles.certs}>
+            <h3 className="eyebrow">Certifications</h3>
+            <ul className={styles.certList}>
+              {certifications.map((c) => (
+                <li key={c.id} className={styles.cert}>
+                  <span className={styles.certName}>{c.name}</span>
+                  <span className={styles.certMeta}>
+                    {c.issuer} · {c.status}
+                    {c.date && ` · ${c.date}`}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+        )}
       </div>
     </section>
   )
