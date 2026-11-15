@@ -65,7 +65,7 @@ function Stat({ value, label }) {
 export default function Hero() {
   const copy = useCopy()
   return (
-    <section id="top" className={styles.hero} aria-labelledby="hero-title">
+    <section id="top" className={styles.hero} aria-labelledby="hero-title" data-print="hide">
       <DotGrid />
       <div className={`container ${styles.inner}`}>
         <div className={styles.text}>

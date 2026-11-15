@@ -104,7 +104,7 @@ const ProjectCover = forwardRef(function ProjectCover({ project, className = '' 
   // Fresh generator per render so the same slug always draws the same picture.
   const rnd = seeded(project.slug)
   return (
-    <div ref={ref} className={`${styles.cover} ${className}`}>
+    <div ref={ref} className={`${styles.cover} ${className}`} data-print="hide">
       <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
         <Art rnd={rnd} />
       </svg>

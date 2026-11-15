@@ -38,15 +38,15 @@ function Entry({ job, open, onToggle }) {
               {open ? 'Hide details' : 'Show details'}
               <ChevronDown size={16} aria-hidden="true" className={styles.chevron} />
             </button>
-            <div id={panelId} className={styles.panel} role="region" aria-label={`${job.company} details`}>
-              <div className={styles.panelInner}>
+            <div id={panelId} className={`${styles.panel} print-expand`}>
+              <div className={`${styles.panelInner} print-expand-inner`}>
                 <ul className={styles.bullets}>
                   {job.bullets.map((b) => (
                     <li key={b}>{b}</li>
                   ))}
                 </ul>
                 {related.length > 0 && (
-                  <p className={styles.related}>
+                  <p className={styles.related} data-print="hide">
                     Related:{' '}
                     {related.map((p, i) => (
                       <span key={p.slug}>
@@ -92,7 +92,7 @@ export default function Experience() {
           {internshipCount} internships in AI research, business analysis, security, frontend and UX.
         </SectionHead>
         <div className={styles.timeline}>
-          <div className={styles.track} aria-hidden="true">
+          <div className={styles.track} aria-hidden="true" data-print="hide">
             <motion.div className={styles.fill} style={{ scaleY }} />
           </div>
           <ol ref={listRef} className={styles.list}>

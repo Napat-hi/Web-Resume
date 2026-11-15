@@ -66,7 +66,7 @@ function ProjectCard({ project }) {
 
   return (
     <motion.div
-      className={styles.card}
+      className={`${styles.card} print-card`}
       style={{ rotateX, rotateY, transformPerspective: 900 }}
       onPointerMove={onMove}
       onPointerLeave={onLeave}
@@ -93,7 +93,7 @@ function ProjectCard({ project }) {
           ))}
           {project.stack.length > 4 && <li className="tag">+{project.stack.length - 4}</li>}
         </ul>
-        <div className={styles.foot}>
+        <div className={styles.foot} data-print="hide">
           {project.confidential && (
             <span className={styles.confidential}>
               <Lock size={12} aria-hidden="true" /> Company work · high-level only
@@ -125,7 +125,7 @@ export default function Projects() {
           Research, internship work and university projects. Open a card for the full case study.
         </SectionHead>
 
-        <div className={styles.chips} role="group" aria-label="Filter projects by category">
+        <div className={styles.chips} data-print="hide" role="group" aria-label="Filter projects by category">
           {chips.map((c) => (
             <button
               key={c.id}

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion, useScroll, useSpring } from 'framer-motion'
-import { Command, Menu, Moon, Sun, X } from 'lucide-react'
+import { Command, Menu, Moon, Search, Sun, X } from 'lucide-react'
 import { sections } from '../../lib/sections'
 import { scrollToId, isMac } from '../../lib/scroll'
 import { useScrollSpy } from '../../hooks/useScrollSpy'
@@ -71,6 +71,7 @@ export default function Nav() {
         <Link
           to="/"
           className={styles.brand}
+          aria-label={`${profile.name}, back to top`}
           onClick={(e) => {
             if (onHome) {
               e.preventDefault()
@@ -98,8 +99,8 @@ export default function Nav() {
             aria-label="Open command palette"
             aria-keyshortcuts={isMac() ? 'Meta+K' : 'Control+K'}
           >
-            <Command size={14} aria-hidden="true" />
-            <span>{isMac() ? '⌘K' : 'Ctrl K'}</span>
+            {isMac() ? <Command size={14} aria-hidden="true" /> : <Search size={14} aria-hidden="true" />}
+            <span>{isMac() ? 'K' : 'Ctrl K'}</span>
           </button>
           <button type="button" className={styles.icon} onClick={toggleTheme} aria-label={themeLabel} title={themeLabel}>
             {isDark ? <Sun size={18} aria-hidden="true" /> : <Moon size={18} aria-hidden="true" />}

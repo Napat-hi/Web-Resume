@@ -11,7 +11,7 @@ export default function About() {
     <section id="about" className="section" aria-labelledby="about-title">
       <div className="container">
         <SectionHead index={1} id="about" title="About" />
-        <div className={styles.grid}>
+        <div className={`${styles.grid} print-about`}>
           <Reveal className={styles.summary}>
             {profile.summary.map((p, i) => (
               <p key={i} className={i === 0 ? styles.lead : undefined}>{p}</p>
@@ -19,7 +19,7 @@ export default function About() {
           </Reveal>
 
           <div className={styles.side}>
-            <RevealGroup as="ul" className={styles.focus}>
+            <RevealGroup as="ul" className={styles.focus} data-print="hide">
               {profile.focus.map((f) => {
                 const Icon = icons[f.icon]
                 return (

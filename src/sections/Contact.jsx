@@ -84,7 +84,7 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="section" aria-labelledby="contact-title">
+    <section id="contact" className="section" aria-labelledby="contact-title" data-print="hide">
       <div className="container">
         <SectionHead index={6} id="contact" title="Contact">
           Email me, or send a message with the form.
