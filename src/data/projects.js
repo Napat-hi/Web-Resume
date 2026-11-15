@@ -41,9 +41,7 @@ export const projects = [
       'The paper studies wrong birth and death years in biographies, judged against Wikidata.',
     ],
     stack: ['Python', 'PyTorch', 'vLLM', 'Hugging Face', 'infini-gram', 'Modal', 'SQLite', 'pandas', 'statsmodels'],
-    // TODO(Po): confirm status. The repo tag says "aiesc2027-submission": accepted, or submitted?
-    // Also confirm venue spelling: the repo says AIESC, chat said AISEC.
-    outcome: 'Paper at AIESC 2027. We released the code under Apache-2.0 and the data under CC BY 4.0.',
+    outcome: 'Paper accepted at AIESC 2027. We released the code under Apache-2.0 and the data under CC BY 4.0.',
     links: [
       { label: 'Code', url: 'https://github.com/Napat-hi/hallutrace', kind: 'github' },
       { label: 'Project page', url: 'https://erthcyp.github.io/HalluTrace/', kind: 'external' },

@@ -59,9 +59,7 @@ function Entry({ job, open, onToggle }) {
               </div>
             </div>
           </>
-        ) : (
-          <Todo value="TODO(Po): bullets for this role" />
-        )}
+        ) : null}
 
         <ul className={`tag-list ${styles.tags}`} aria-label="Skills used">
           {job.tags.map((t) => (

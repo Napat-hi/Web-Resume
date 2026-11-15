@@ -59,12 +59,11 @@ export const experience = [
     type: 'internship',
     company: 'BAKA Thailand (AgriTech)',
     role: 'UX/UI Research & Design Intern',
-    // TODO(Po): dates. Sorted last until known.
+    // Po chose to show no dates or bullets for this role. `start` keeps it last in the list.
     start: '0000-00',
-    period: 'TODO(Po): dates',
+    period: null,
     location: 'Thailand',
     summary: 'UX/UI research and design for an AgriTech product.',
-    // TODO(Po): 2–3 real bullets (what you researched, what you designed, outcome).
     bullets: [],
     tags: ['UX Research', 'UI Design'],
     projects: [],
