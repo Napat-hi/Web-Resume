@@ -1,13 +1,16 @@
 // Projects shown on the home page and as /projects/:slug case studies.
 // Fields:
-//   categories:   any of 'ai' | 'fullstack' | 'security' | 'research' | 'automation'
-//   status:       'published' | 'completed' | 'in-progress'
+//   categories:   any of 'ai' | 'data' | 'fullstack' | 'security' | 'research' | 'automation'
+//   status:       'published' | 'completed' | 'in-progress' | 'design'
 //   links:        real URLs only. Empty array => no link buttons rendered.
 //   confidential: company-internal work. Keep it high-level, no screenshots.
+//   team / role:  null hides the line on the case-study page.
+//   print: false  leaves the card out of the printed resume (still shown on the web).
 // Copy rules: stop-slop. Never invent metrics, links or roles; unknowns are TODO(Po).
 
 export const categories = [
   { id: 'ai', label: 'AI / ML' },
+  { id: 'data', label: 'Data' },
   { id: 'fullstack', label: 'Full-Stack' },
   { id: 'security', label: 'Security' },
   { id: 'research', label: 'Research' },
@@ -18,6 +21,7 @@ export const statusLabel = {
   published: 'Paper',
   completed: 'Completed',
   'in-progress': 'In progress',
+  design: 'System design',
 }
 
 export const projects = [
@@ -30,7 +34,6 @@ export const projects = [
     year: '2026',
     context: 'Senior project · SIIT',
     team: '4 people',
-    // Po: helped shape the research idea and wrote the most code on the team, across all parts.
     role: 'Lead developer. I helped shape the research idea and wrote most of the code, from generation to corpus counting.',
     problem:
       "Hallucination benchmarks score a model's answers and skip its training data, so they can't tell you whether an error came from the corpus or from the model.",
@@ -51,23 +54,23 @@ export const projects = [
   {
     slug: 'shelf-audit',
     title: 'AI Shelf Auditing POC',
-    tagline: 'Audits refrigerated and frozen shelves from store video with a vision-language model.',
+    tagline: 'Tests whether a vision-language model can audit chilled and frozen shelves from in-store video.',
     categories: ['ai'],
     status: 'completed',
     year: '2026',
     context: 'CP ALL internship',
     team: null,
     role: 'AI research intern',
-    // TODO(Po): confirm what is OK to publish, and one line on how shelves get checked today.
-    problem: 'TODO(Po): one line on the problem this POC addresses.',
+    problem:
+      'Staff audit chilled and frozen shelves by hand, which is slow and labour-heavy. I tested whether a vision-language model can do the audit from in-store video.',
     approach: [
-      'I built a proof of concept that sends store video frames to Gemini Flash and asks it to audit each shelf.',
-      'I wrote a frame-selection and deduplication pipeline so the model sees each shelf once.',
-      'I estimated the API cost of running the audit at scale.',
+      'I built a frame-selection and deduplication pipeline so overlapping frames do not count a product twice.',
+      'I tuned prompts on real shelf photos over repeated runs and checked the output against manual counts.',
+      'I measured per-call latency and cost against the API rate limits, then projected both to the full store network.',
+      'I benchmarked 7-Eleven USA audit tools and Virtual Store systems and presented the comparison to the Digital Solution department.',
     ],
-    stack: ['Python', 'Gemini API', 'VLM', 'Prompt engineering'],
-    // TODO(Po): an outcome you can share (e.g. presented to the team, accuracy, decision made).
-    outcome: null,
+    stack: ['Gemini Flash', 'VLM', 'Prompt engineering', 'Cost modelling'],
+    outcome: 'I delivered a feasibility and cost analysis to the Digital Solution department.',
     links: [],
     confidential: true,
     featured: true,
@@ -75,19 +78,20 @@ export const projects = [
   {
     slug: 'uat-generator',
     title: 'UAT Test-Case Generator',
-    tagline: 'Generates UAT test cases for a store-transfer system and writes them to Excel.',
+    tagline: 'Extends an Excel UAT suite from the SRS without breaking its formatting.',
     categories: ['automation'],
     status: 'completed',
     year: '2026',
     context: 'CP ALL internship',
     team: null,
     role: 'Built the tool',
-    // TODO(Po): confirm the team wrote these test cases by hand before.
-    problem: 'TODO(Po): how the team produced UAT test cases before this tool.',
-    approach: ['I wrote a Python tool that generates the UAT test cases and writes them into Excel with openpyxl.'],
+    problem: 'The team wrote UAT test cases by hand in Excel, working from the SRS.',
+    approach: [
+      'I wrote a Python + openpyxl script that reads the existing workbook and keeps its formatting, including fills and merged cells.',
+      'The script appends new cases, maps each one to its SRS section, and updates the summary formulas.',
+    ],
     stack: ['Python', 'openpyxl', 'Excel'],
-    // TODO(Po): outcome (time saved, number of cases, who used it) if shareable.
-    outcome: null,
+    outcome: 'The suite grew from 52 to 111 cases: 59 new cases across 8 new sections, including non-functional requirements.',
     links: [],
     confidential: true,
   },
@@ -98,12 +102,11 @@ export const projects = [
     categories: ['ai', 'security'],
     status: 'completed',
     year: '2026',
-    context: 'Robotics course · SIIT',
-    // TODO(Po): team size.
-    team: 'TODO(Po): team size',
-    // TODO(Po): your exact role on the robot (the deck does not state it).
-    role: 'TODO(Po): my role',
-    problem: 'A security checkpoint needs a person to watch it. This robot patrols, checks people at the gate, and asks a human only when it cannot decide.',
+    context: 'CSS486 Robotics · SIIT',
+    team: '8 people',
+    role: 'Developer on the LiDAR lane: obstacle sensing and avoidance.',
+    problem:
+      'A security checkpoint needs a person to watch it. This robot patrols, checks people at the gate, and asks a human only when it cannot decide.',
     approach: [
       'Drive by gesture: a laptop webcam reads 21 hand landmarks with OpenCV and MediaPipe and sends drive commands at 10 Hz. The robot stops if the signal drops for 0.5 s.',
       'Sense and avoid: a YDLIDAR T-mini stops the robot at 0.40 m, YOLO11n names what is ahead, and the robot turns away using the IMU gyro angle.',
@@ -112,27 +115,131 @@ export const projects = [
       'Runs ROS 2 Humble on a Raspberry Pi 5, with a state-machine node as the only part that drives the wheels.',
     ],
     stack: ['Python', 'ROS 2', 'Raspberry Pi 5', 'YOLO11n', 'NCNN', 'OpenCV', 'MediaPipe', 'Vosk', 'LiDAR'],
-    outcome: 'On the Raspberry Pi 5, YOLO11n runs at 28 ms per frame with NCNN, about 5.3 times faster than PyTorch. The robot drove by gesture, stopped before obstacles and granted passage on a correct spoken password.',
+    outcome:
+      'On the Raspberry Pi 5, YOLO11n runs at 28 ms per frame with NCNN, about 5.3 times faster than PyTorch. The robot drove by gesture, stopped before obstacles and granted passage on a correct spoken password.',
     links: [],
     featured: true,
   },
   {
+    slug: 'sddaas',
+    title: 'SDDaaS',
+    tagline: 'Secure data deduplication as a service: Bloom filters for speed, attribute-based encryption for access.',
+    categories: ['security', 'research'],
+    status: 'completed',
+    year: '2026',
+    context: 'Team project · SIIT',
+    team: null,
+    role: null,
+    problem: 'Deduplicate files across an organisation without breaking per-user access control.',
+    approach: [
+      'We designed hierarchical Bloom-filter deduplication with CP-ABE attribute-based access control.',
+      'Three-level hash routing (department, employee, file type) holds duplicate search at O(1).',
+      'We simulated the scheme on a 500K-file dataset against five published schemes, comparing latency, storage overhead, false-positive rate and dedup ratio.',
+    ],
+    stack: ['Bloom filters', 'CP-ABE', 'Hash routing', 'Simulation'],
+    outcome: 'We released the code as a public GitHub repo.',
+    // TODO(Po): the public repo URL (it is not under github.com/Napat-hi).
+    links: [],
+  },
+  {
+    slug: 'exploit-workbook',
+    title: 'Vulnerability Exploit Workbook',
+    tagline: '17 exploitation exercises in a Kali-against-Windows lab, from Nmap scans to a fully compromised capstone.',
+    categories: ['security'],
+    status: 'completed',
+    year: '2026',
+    context: 'CSS484 Ethical Hacking · SIIT',
+    team: null,
+    role: null,
+    problem: 'CSS484 sets 17 exploitation exercises in EASY, MEDIUM, HARD and CAPSTONE bands, each documented with reproduction steps and evidence.',
+    approach: [
+      'I completed all 17 exercises in a Kali-against-Windows VirtualBox lab and documented each exploit with reproduction steps and evidence.',
+      'I covered Nmap host discovery and version scanning, SMB enumeration with NSE scripts, buffer and integer overflows, AFL++ fuzzing and shellcoding.',
+      'For each stage I explained the mitigation that breaks it: stack canaries, DEP/NX, ASLR and CFG.',
+    ],
+    stack: ['Kali Linux', 'Nmap', 'NSE', 'AFL++', 'VirtualBox', 'Shellcode'],
+    outcome: '17 of 17 exercises done. I fully compromised the capstone target and recovered all three flags.',
+    links: [],
+  },
+  {
+    slug: 'dirty-pipe',
+    title: 'DirtyPipe CVE Reproduction',
+    tagline: 'Recreating the Dirty Pipe Linux kernel privilege escalation (CVE-2022-0847) in an isolated lab.',
+    categories: ['security'],
+    status: 'in-progress',
+    year: '2026',
+    context: 'CSS484 Ethical Hacking · SIIT',
+    team: '2 people',
+    role: 'I run the terminal demo and explain the root cause.',
+    problem:
+      'CVE-2022-0847, Dirty Pipe, lets any local user on Linux kernels 5.8 to 5.16 overwrite read-only files and gain root.',
+    approach: [
+      'Explaining the root cause: an uninitialised pipe-buffer flag lets splice write into the page cache past permission checks.',
+      'Reproducing it on a Debian 11 VM (kernel 5.10.0-8) in VirtualBox, targeting /usr/bin/su from a normal user account.',
+      'Verifying the fix on a patched kernel (5.10.0-32), where the patch resets the flag, and writing up the mitigation.',
+    ],
+    stack: ['Linux kernel', 'C', 'gcc', 'VirtualBox', 'Bash'],
+    outcome: null,
+    links: [],
+  },
+  {
+    slug: 'peak-electricity',
+    title: 'Peak-Hour Electricity Demand Study',
+    tagline: 'Does time-of-use pricing change how London households use electricity?',
+    categories: ['data', 'research'],
+    status: 'in-progress',
+    year: '2026',
+    context: 'DES431 Big Data · SIIT',
+    team: '6 people',
+    role: 'I own the problem framing and background sections of the kick-off report and co-present the findings.',
+    problem: 'Test whether time-of-use pricing changes household electricity use at peak hours.',
+    approach: [
+      'We work from half-hourly smart-meter readings in the Smart Meters in London dataset on Kaggle.',
+      'I wrote the problem framing and background sections of the kick-off report.',
+    ],
+    // TODO(Po): the analysis tools once chosen (e.g. Python, Spark, AWS Athena).
+    stack: ['Smart Meters in London (Kaggle)', 'Time-series data'],
+    outcome: null,
+    links: [],
+  },
+  {
+    slug: 'marathon-clustering',
+    title: 'Marathon GPS Clustering',
+    tagline: 'Groups 136 marathon runners by activity-time pattern from raw GPS records.',
+    categories: ['data', 'ai'],
+    status: 'completed',
+    year: '2026',
+    context: 'DES431 Big Data · SIIT',
+    team: null,
+    role: null,
+    problem: 'Group runners by how they run, starting from raw GPS records.',
+    approach: [
+      'I built a RapidMiner pipeline: Append and Join, Aggregate, derived speed and distance features, then X-Means clustering.',
+      'I ran decision-tree classification on occupation data with and without outlier removal.',
+    ],
+    stack: ['RapidMiner', 'X-Means', 'Decision trees'],
+    outcome: 'X-Means grouped the 136 runners into 2 clusters. I showed why the higher accuracy after outlier removal was misleading.',
+    links: [],
+  },
+  {
     slug: 'dreamseat',
     title: 'DreamSeat',
-    tagline: 'A TCAS study-planning platform designed as microservices.',
+    tagline: 'System design for a TCAS study-planning mobile app.',
     categories: ['fullstack'],
-    status: 'completed',
+    status: 'design',
     year: '2025',
-    context: 'University project',
+    context: 'DES329 · Group 6',
     team: '5 people',
-    role: 'Helped shape the idea and build the application.',
+    role: 'I reviewed and corrected the SDS and built and delivered the design presentation, including the PDPA compliance section.',
     problem: 'Students preparing for TCAS university admission need one place to plan their study.',
     approach: [
-      'Helped shape the product idea with the team.',
-      'Built application features in a team of five, on a microservices architecture.',
+      'The SDS specifies a React Native + Expo mobile app in TypeScript over six microservices: Auth, User, TCAS, Mission, Analytics and Notification.',
+      'Four PostgreSQL databases (User, TCAS, Mission, Analytics) each belong to one service. The design uses Google OAuth, TLS in transit, encryption at rest and offline sync.',
+      'I reviewed the SDS and fixed schema and consistency errors.',
+      'I built and delivered the design presentation, including the PDPA compliance section.',
     ],
-    stack: ['Microservices', 'UML'], // TODO(Po): the actual languages/frameworks used
-    outcome: null,
+    stack: ['React Native', 'Expo', 'TypeScript', 'Microservices', 'PostgreSQL', 'Google OAuth', 'UML'],
+    outcome: 'We delivered the specification and the presentation. The project stops at design, with no build or deployment.',
     links: [],
   },
   {
@@ -153,27 +260,33 @@ export const projects = [
     ],
     stack: ['React', 'Node.js', 'MySQL', 'REST API', 'RBAC'],
     outcome: null,
-    links: [],
+    links: [{ label: 'Code', url: 'https://github.com/Napat-hi/Hospital-management-system', kind: 'github' }],
   },
   {
     slug: 'bluerov2',
     title: 'Anatomy of a Real Robot',
-    tagline: 'A component-by-component analysis of the BlueROV2 underwater robot.',
+    tagline: 'What a commercial underwater robot needs to work, and whether the BlueROV2 can hold position on its own.',
     categories: ['research'],
     status: 'completed',
     year: '2026',
     context: 'Robotics course',
     team: null,
     role: null,
-    // TODO(Po): 2–3 lines on what you analysed and what you found.
-    problem: 'TODO(Po): the question this analysis answers.',
-    approach: ['I analysed the components of the BlueROV2.'],
-    stack: ['Robotics', 'BlueROV2'],
-    outcome: null,
+    problem:
+      'What does a commercial ROV need (sensors, actuators, power and compute) to work, and can the BlueROV2 hold its position without a pilot?',
+    approach: [
+      'I mapped the BlueROV2 sensors, actuators, power system and compute.',
+      'I checked which degrees of freedom its six thrusters can control.',
+      'I ran a power budget at full thrust.',
+    ],
+    stack: ['Robotics', 'BlueROV2', 'Power budgeting'],
+    outcome:
+      'Six thrusters (4 vectored, 2 vertical) control only 4 degrees of freedom, and no sensor measures X/Y position, so the ROV cannot hold station in closed loop without added sensors. At full thrust, 6 × 390 W = 2,340 W drains the 266 Wh battery in about 7 minutes.',
     links: [],
   },
   {
     slug: 'sap-frontend',
+    print: false,
     title: 'SAP Frontend Development',
     tagline: 'Responsive interfaces for a financial solutions platform.',
     categories: ['fullstack'],
@@ -194,6 +307,7 @@ export const projects = [
   },
   {
     slug: 'security-analysis',
+    print: false,
     title: 'Security Analysis & Documentation',
     tagline: 'Risk assessment, vulnerability scanning and incident documentation.',
     categories: ['security'],
@@ -214,27 +328,8 @@ export const projects = [
     confidential: true,
   },
   {
-    slug: 'dirty-pipe',
-    title: 'Dirty Pipe Exploit Demo',
-    tagline: 'A live privilege-escalation demo of the Dirty Pipe Linux kernel vulnerability (CVE-2022-0847).',
-    categories: ['security'],
-    status: 'completed',
-    year: '2026',
-    context: 'Ethical Hacking course (CSS484) · SIIT',
-    team: '3 people',
-    role: 'I ran the live terminal demo and explained the root cause.',
-    problem: 'CVE-2022-0847, Dirty Pipe, lets any local user on Linux kernels 5.8 to 5.16 overwrite read-only files and gain root.',
-    approach: [
-      'Explained the root cause: an uninitialised pipe-buffer flag lets splice write into the page cache past permission checks.',
-      'Reproduced it on a Debian 11 VM (kernel 5.10.0-8): compiled the public proof of concept, overwrote /usr/bin/su, and opened a root shell from a normal user account.',
-      'Showed the fix: on the patched kernel (5.10.0-32) the same exploit fails, because the patch resets the flag.',
-    ],
-    stack: ['Linux kernel', 'C', 'gcc', 'VirtualBox', 'Bash'],
-    outcome: null,
-    links: [],
-  },
-  {
     slug: 'portfolio',
+    print: false,
     title: 'This Portfolio',
     tagline: 'A data-driven portfolio with a command palette, case studies and a print-ready resume.',
     categories: ['fullstack'],
@@ -256,8 +351,7 @@ export const projects = [
       { label: 'Live', url: 'https://napat-hi.github.io/Web-Resume/', kind: 'external' },
     ],
   },
-  // Current-semester projects covered: Robotics (security-robot), Ethical Hacking (dirty-pipe).
-  // TODO(Po): still to add if you want them: Computer Vision, Big Data, Knowledge Representation.
+  // Skipped for now by request: Computer Vision and Knowledge Representation course projects.
 ]
 
 export const getProject = (slug) => projects.find((p) => p.slug === slug)

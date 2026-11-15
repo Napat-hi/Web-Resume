@@ -30,6 +30,7 @@
   font-size: var(--fs-xs);
   opacity: 0.8;
 }
+.chip[aria-pressed='true'] .count { opacity: 1; } /* full contrast on the accent fill */
 
 .grid {
   display: grid;

@@ -97,7 +97,7 @@ function Table({ rnd }) {
   )
 }
 
-const art = { ai: Graph, research: Chart, security: Rings, fullstack: Layers, automation: Table }
+const art = { ai: Graph, data: Chart, research: Chart, security: Rings, fullstack: Layers, automation: Table }
 
 const ProjectCover = forwardRef(function ProjectCover({ project, className = '' }, ref) {
   const Art = art[project.categories[0]] ?? Graph

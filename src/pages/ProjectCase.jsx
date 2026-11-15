@@ -1,12 +1,11 @@
 import { useLayoutEffect, useRef } from 'react'
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
-import { animate } from 'framer-motion'
+import { animate, motion } from 'framer-motion'
 import { ArrowLeft, ArrowRight, ArrowUpRight, Lock } from 'lucide-react'
 import { getProject, projects, statusLabel } from '../data/projects'
 import { known } from '../lib/content'
 import { useSeo } from '../lib/seo'
 import { prefersReducedMotion } from '../lib/scroll'
-import { Reveal } from '../components/ui/Reveal'
 import ProjectCover from '../components/ProjectCover/ProjectCover'
 import BrandIcon from '../components/ui/BrandIcon'
 import Todo from '../components/ui/Todo'
@@ -35,6 +34,19 @@ function useCoverFlip(ref, rect, key) {
     )
     return () => controls.stop()
   }, [ref, rect, key])
+}
+
+// Main content animates on mount; scroll-reveal would hide it until the reader scrolls.
+function Section({ index, children }) {
+  return (
+    <motion.section
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3, delay: 0.15 + index * 0.06, ease: [0.2, 0.7, 0.2, 1] }}
+    >
+      {children}
+    </motion.section>
+  )
 }
 
 function MetaItem({ label, value }) {
@@ -131,25 +143,25 @@ export default function ProjectCase() {
               </p>
             )}
 
-            <Reveal as="section">
+            <Section index={0}>
               <h2>Problem</h2>
               {known(project.problem) ? <p>{project.problem}</p> : <Todo value={project.problem} />}
-            </Reveal>
+            </Section>
 
-            <Reveal as="section">
+            <Section index={1}>
               <h2>What I did</h2>
               <ul className={styles.list}>
                 {project.approach.map((a) => (
                   <li key={a}>{a}</li>
                 ))}
               </ul>
-            </Reveal>
+            </Section>
 
             {known(project.outcome) && (
-              <Reveal as="section">
+              <Section index={2}>
                 <h2>Outcome</h2>
                 <p>{project.outcome}</p>
-              </Reveal>
+              </Section>
             )}
           </div>
         </div>

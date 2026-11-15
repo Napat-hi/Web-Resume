@@ -11,8 +11,8 @@ export const profile = {
   status: 'Open to full-time / graduate roles from 2027',
   location: 'Bangkok, Thailand',
   email: 'napat6603@gmail.com',
-  // TODO(Po): this is a Google Drive folder. A direct PDF link would let "Download resume" download a file.
-  resumeUrl: 'https://drive.google.com/drive/u/1/folders/16gKTZ-5SgtQgIdOoqYQV0mwsbtStA-6E',
+  // File lives at public/Napat_Hirunsak_Resume.pdf -> https://napat-hi.github.io/Web-Resume/Napat_Hirunsak_Resume.pdf
+  resumeUrl: `${import.meta.env.BASE_URL}Napat_Hirunsak_Resume.pdf`,
   formspreeEndpoint: 'https://formspree.io/f/xykvgbdd',
   siteUrl: 'https://napat-hi.github.io/Web-Resume/',
 

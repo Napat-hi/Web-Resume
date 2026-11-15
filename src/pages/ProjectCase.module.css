@@ -18,7 +18,8 @@
   margin-top: var(--s-5);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  max-height: 420px;
+  aspect-ratio: auto;
+  height: clamp(200px, 30vw, 360px);
 }
 
 .layout {

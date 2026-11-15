@@ -148,6 +148,7 @@ export default function Projects() {
             {visible.map((p) => (
               <motion.li
                 key={p.slug}
+                data-print={p.print === false ? 'hide' : undefined}
                 layout
                 initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}

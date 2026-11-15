@@ -49,8 +49,8 @@ Unknown facts carry a `TODO(Po)` marker. The dev server shows them as red dashed
      slug: 'my-project',            // URL: #/projects/my-project
      title: 'My Project',
      tagline: 'One line on what it does.',
-     categories: ['ai'],            // ai | fullstack | security | research | automation
-     status: 'completed',           // published | completed | in-progress
+     categories: ['ai'],            // ai | data | fullstack | security | research | automation
+     status: 'completed',           // published | completed | in-progress | design
      year: '2026',
      context: 'Computer Vision course',
      team: '3 people',

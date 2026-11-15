@@ -3,7 +3,7 @@
 //
 // Removed because nothing in the data backs them yet (TODO(Po): give a source to restore):
 //   Django, Docker, TensorFlow, OpenAI API, NLTK, CNN, Bootstrap, VPN,
-//   Hub & Switch, Network Topology, Firewall Configuration, LangChain, FAISS, Figma.
+//   Hub & Switch, Network Topology, Firewall Configuration, LangChain, FAISS.
 
 export const skillGroups = [
   {
@@ -21,6 +21,7 @@ export const skillGroups = [
       { name: 'YOLO', from: 'Security robot' },
       { name: 'OpenCV / MediaPipe', from: 'Security robot gesture control' },
       { name: 'ROS 2', from: 'Security robot' },
+      { name: 'RapidMiner', from: 'Marathon GPS Clustering' },
       { name: 'pandas', from: 'HalluTrace' },
       { name: 'statsmodels', from: 'HalluTrace' },
     ],
@@ -36,7 +37,7 @@ export const skillGroups = [
       { name: 'SQLite', from: 'HalluTrace' },
       { name: 'Modal', from: 'HalluTrace' },
       { name: 'openpyxl', from: 'UAT generator' },
-      { name: 'Linux', from: 'Dirty Pipe demo, Raspberry Pi robot' },
+      { name: 'Linux', from: 'DirtyPipe reproduction, Raspberry Pi robot' },
       { name: 'Raspberry Pi', from: 'Security robot' },
       { name: 'SAP', from: 'Humanica 2024' },
       { name: 'Git / GitHub', from: 'Humanica 2024, all projects' },
@@ -52,6 +53,7 @@ export const skillGroups = [
       { name: 'Responsive design', from: 'Humanica 2024' },
       { name: 'Vite', from: 'Portfolio' },
       { name: 'Framer Motion', from: 'Portfolio' },
+      { name: 'Figma', from: 'Humanica 2024 (per resume PDF)' },
       { name: 'UX research', from: 'BAKA Thailand' },
       { name: 'UI design', from: 'BAKA Thailand' },
     ],
@@ -78,8 +80,12 @@ export const skillGroups = [
       { name: 'Wazuh', from: 'Humanica 2025' },
       { name: 'Cloudflare', from: 'Humanica 2025' },
       { name: 'Incident documentation', from: 'Humanica 2025' },
-      { name: 'Penetration testing', from: 'Ethical Hacking course' },
-      { name: 'Exploit analysis (CVE)', from: 'Dirty Pipe demo' },
+      { name: 'Penetration testing', from: 'Exploit workbook' },
+      { name: 'Nmap', from: 'Exploit workbook' },
+      { name: 'Kali Linux', from: 'Exploit workbook' },
+      { name: 'AFL++ fuzzing', from: 'Exploit workbook' },
+      { name: 'Exploit analysis (CVE)', from: 'DirtyPipe reproduction' },
+      { name: 'Attribute-based encryption (CP-ABE)', from: 'SDDaaS' },
     ],
   },
   {
