@@ -92,21 +92,46 @@ export const projects = [
     confidential: true,
   },
   {
+    slug: 'security-robot',
+    title: 'Gesture-Controlled Security Robot',
+    tagline: 'A robot you drive by hand gesture that checks people at a gate and calls a human when unsure.',
+    categories: ['ai', 'security'],
+    status: 'completed',
+    year: '2026',
+    context: 'Robotics course · SIIT',
+    // TODO(Po): team size.
+    team: 'TODO(Po): team size',
+    // TODO(Po): your exact role on the robot (the deck does not state it).
+    role: 'TODO(Po): my role',
+    problem: 'A security checkpoint needs a person to watch it. This robot patrols, checks people at the gate, and asks a human only when it cannot decide.',
+    approach: [
+      'Drive by gesture: a laptop webcam reads 21 hand landmarks with OpenCV and MediaPipe and sends drive commands at 10 Hz. The robot stops if the signal drops for 0.5 s.',
+      'Sense and avoid: a YDLIDAR T-mini stops the robot at 0.40 m, YOLO11n names what is ahead, and the robot turns away using the IMU gyro angle.',
+      'Check people: the robot asks a detected person for a spoken password and recognises it offline with Vosk.',
+      'Escalate: after three failed attempts, Telegram sends the operator a photo to Allow or Deny, with a 40-second timeout.',
+      'Runs ROS 2 Humble on a Raspberry Pi 5, with a state-machine node as the only part that drives the wheels.',
+    ],
+    stack: ['Python', 'ROS 2', 'Raspberry Pi 5', 'YOLO11n', 'NCNN', 'OpenCV', 'MediaPipe', 'Vosk', 'LiDAR'],
+    outcome: 'On the Raspberry Pi 5, YOLO11n runs at 28 ms per frame with NCNN, about 5.3 times faster than PyTorch. The robot drove by gesture, stopped before obstacles and granted passage on a correct spoken password.',
+    links: [],
+    featured: true,
+  },
+  {
     slug: 'dreamseat',
     title: 'DreamSeat',
     tagline: 'A TCAS study-planning platform designed as microservices.',
     categories: ['fullstack'],
     status: 'completed',
-    year: null, // TODO(Po): year
+    year: '2025',
     context: 'University project',
-    team: null, // TODO(Po): team size
-    role: 'TODO(Po): exact role (worked on the SDS and presentation)',
+    team: '5 people',
+    role: 'Helped shape the idea and build the application.',
     problem: 'Students preparing for TCAS university admission need one place to plan their study.',
     approach: [
-      'I worked on the software design specification (SDS) for the microservices architecture.',
-      'I prepared and gave the project presentation.',
+      'Helped shape the product idea with the team.',
+      'Built application features in a team of five, on a microservices architecture.',
     ],
-    stack: ['Microservices', 'UML', 'SDS'],
+    stack: ['Microservices', 'UML'], // TODO(Po): the actual languages/frameworks used
     outcome: null,
     links: [],
   },
@@ -116,7 +141,7 @@ export const projects = [
     tagline: 'Patient records, appointments and staff operations with role-based access.',
     categories: ['fullstack'],
     status: 'completed',
-    year: null, // TODO(Po): year
+    year: '2024',
     context: 'Database lab course · team project',
     team: 'Team project',
     role: 'Developer',
@@ -189,6 +214,26 @@ export const projects = [
     confidential: true,
   },
   {
+    slug: 'dirty-pipe',
+    title: 'Dirty Pipe Exploit Demo',
+    tagline: 'A live privilege-escalation demo of the Dirty Pipe Linux kernel vulnerability (CVE-2022-0847).',
+    categories: ['security'],
+    status: 'completed',
+    year: '2026',
+    context: 'Ethical Hacking course (CSS484) · SIIT',
+    team: '3 people',
+    role: 'I ran the live terminal demo and explained the root cause.',
+    problem: 'CVE-2022-0847, Dirty Pipe, lets any local user on Linux kernels 5.8 to 5.16 overwrite read-only files and gain root.',
+    approach: [
+      'Explained the root cause: an uninitialised pipe-buffer flag lets splice write into the page cache past permission checks.',
+      'Reproduced it on a Debian 11 VM (kernel 5.10.0-8): compiled the public proof of concept, overwrote /usr/bin/su, and opened a root shell from a normal user account.',
+      'Showed the fix: on the patched kernel (5.10.0-32) the same exploit fails, because the patch resets the flag.',
+    ],
+    stack: ['Linux kernel', 'C', 'gcc', 'VirtualBox', 'Bash'],
+    outcome: null,
+    links: [],
+  },
+  {
     slug: 'portfolio',
     title: 'This Portfolio',
     tagline: 'A data-driven portfolio with a command palette, case studies and a print-ready resume.',
@@ -211,8 +256,8 @@ export const projects = [
       { label: 'Live', url: 'https://napat-hi.github.io/Web-Resume/', kind: 'external' },
     ],
   },
-  // TODO(Po): current-semester projects (Computer Vision, Big Data, Ethical Hacking,
-  // Knowledge Representation, Robotics). Add one entry per project once details exist.
+  // Current-semester projects covered: Robotics (security-robot), Ethical Hacking (dirty-pipe).
+  // TODO(Po): still to add if you want them: Computer Vision, Big Data, Knowledge Representation.
 ]
 
 export const getProject = (slug) => projects.find((p) => p.slug === slug)

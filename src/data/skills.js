@@ -2,7 +2,7 @@
 // `from` notes the evidence (not rendered; it keeps the list honest).
 //
 // Removed because nothing in the data backs them yet (TODO(Po): give a source to restore):
-//   Django, Docker, Linux, TensorFlow, OpenAI API, NLTK, CNN, Bootstrap, VPN,
+//   Django, Docker, TensorFlow, OpenAI API, NLTK, CNN, Bootstrap, VPN,
 //   Hub & Switch, Network Topology, Firewall Configuration, LangChain, FAISS, Figma.
 
 export const skillGroups = [
@@ -17,6 +17,10 @@ export const skillGroups = [
       { name: 'LLM evaluation', from: 'HalluTrace' },
       { name: 'Gemini API / VLMs', from: 'CP ALL shelf audit' },
       { name: 'Prompt engineering', from: 'CP ALL shelf audit' },
+      { name: 'Computer Vision', from: 'Security robot (YOLO11n)' },
+      { name: 'YOLO', from: 'Security robot' },
+      { name: 'OpenCV / MediaPipe', from: 'Security robot gesture control' },
+      { name: 'ROS 2', from: 'Security robot' },
       { name: 'pandas', from: 'HalluTrace' },
       { name: 'statsmodels', from: 'HalluTrace' },
     ],
@@ -32,6 +36,8 @@ export const skillGroups = [
       { name: 'SQLite', from: 'HalluTrace' },
       { name: 'Modal', from: 'HalluTrace' },
       { name: 'openpyxl', from: 'UAT generator' },
+      { name: 'Linux', from: 'Dirty Pipe demo, Raspberry Pi robot' },
+      { name: 'Raspberry Pi', from: 'Security robot' },
       { name: 'SAP', from: 'Humanica 2024' },
       { name: 'Git / GitHub', from: 'Humanica 2024, all projects' },
     ],
@@ -72,6 +78,8 @@ export const skillGroups = [
       { name: 'Wazuh', from: 'Humanica 2025' },
       { name: 'Cloudflare', from: 'Humanica 2025' },
       { name: 'Incident documentation', from: 'Humanica 2025' },
+      { name: 'Penetration testing', from: 'Ethical Hacking course' },
+      { name: 'Exploit analysis (CVE)', from: 'Dirty Pipe demo' },
     ],
   },
   {
