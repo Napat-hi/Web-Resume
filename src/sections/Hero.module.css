@@ -107,13 +107,13 @@
   background: var(--surface-2);
 }
 
-/* Offset accent frame hugs the photo only, so it never reaches the caption. */
+/* Accent ring an even 8px around the photo on every side. */
 .frame::before {
   content: '';
   position: absolute;
-  inset: 12px -12px -12px 12px;
+  inset: -8px;
   border: 1px solid var(--accent-line);
-  border-radius: var(--radius-lg);
+  border-radius: calc(var(--radius-lg) + 8px);
   z-index: -1;
 }
 
@@ -165,7 +165,7 @@
   /* Small avatar on phones keeps name, role and the main CTA above the fold. */
   .photo { order: -1; width: 80px; }
   .photo img { border-radius: var(--radius); }
-  .frame::before { inset: 5px -5px -5px 5px; border-radius: var(--radius); }
+  .frame::before { inset: -5px; border-radius: calc(var(--radius) + 5px); }
   .status { margin-bottom: var(--s-2); }
   .caption { display: none; }
   .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: var(--s-6); }
