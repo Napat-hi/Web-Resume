@@ -8,7 +8,6 @@ export const profile = {
   headline: 'AI & Systems Engineer · Computer Engineering @ SIIT',
   // Rotating role text in the hero.
   roles: ['AI Engineer', 'Systems Developer', 'Security-minded'],
-  // TODO(Po): confirm wording of the status chip.
   status: 'Open to full-time / graduate roles from 2027',
   location: 'Bangkok, Thailand',
   email: 'napat6603@gmail.com',
