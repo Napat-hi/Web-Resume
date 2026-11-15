@@ -51,29 +51,93 @@ function Chart({ rnd }) {
   )
 }
 
-function Rings() {
+// Security: concentric scan rings around one of three glyphs (shield, lock, terminal),
+// with position, ring count and sweep angle driven by the slug.
+function Rings({ rnd }) {
+  const cx = 110 + Math.round(rnd() * 180)
+  const cy = 90 + Math.round(rnd() * 45)
+  const rings = 2 + Math.floor(rnd() * 3)
+  const sweep = rnd() * Math.PI * 2
+  const R = 26 + rings * 22
+  const glyph = Math.floor(rnd() * 3)
+  const blips = Array.from({ length: 3 + Math.floor(rnd() * 4) }, () => {
+    const a = rnd() * Math.PI * 2
+    const d = 30 + rnd() * (R - 30)
+    return [cx + Math.cos(a) * d, cy + Math.sin(a) * d]
+  })
   return (
     <g>
-      {[22, 44, 66, 88].map((r) => (
-        <circle key={r} cx="200" cy="112" r={r} className={styles.line} fill="none" />
+      {Array.from({ length: rings }, (_, i) => (
+        <circle key={i} cx={cx} cy={cy} r={26 + (i + 1) * 22} className={styles.line} fill="none" />
       ))}
-      <path d="M200 70 l30 12 v24 c0 20 -14 34 -30 40 c-16 -6 -30 -20 -30 -40 v-24 z" className={styles.accentStroke} fill="none" />
-      <rect x="191" y="104" width="18" height="16" rx="3" className={styles.accentFill} />
+      <path
+        d={`M${cx} ${cy} L${cx + Math.cos(sweep) * R} ${cy + Math.sin(sweep) * R} A${R} ${R} 0 0 1 ${cx + Math.cos(sweep + 0.6) * R} ${cy + Math.sin(sweep + 0.6) * R} Z`}
+        className={styles.accentFill}
+        opacity="0.14"
+      />
+      {blips.map(([x, y], i) => (
+        <circle key={i} cx={x} cy={y} r={i === 0 ? 4 : 2.5} className={i === 0 ? styles.accentFill : styles.fill} />
+      ))}
+      <g transform={`translate(${cx - 20} ${cy - 22})`}>
+        {glyph === 0 && (
+          <>
+            <path d="M20 0 l20 8 v16 c0 14 -9 23 -20 28 c-11 -5 -20 -14 -20 -28 v-16 z" className={styles.accentStroke} fill="none" />
+            <rect x="14" y="18" width="12" height="11" rx="2" className={styles.accentFill} />
+          </>
+        )}
+        {glyph === 1 && (
+          <>
+            <path d="M10 20 v-6 a10 10 0 0 1 20 0 v6" className={styles.accentStroke} fill="none" />
+            <rect x="4" y="20" width="32" height="24" rx="4" className={styles.accentStroke} fill="none" />
+            <circle cx="20" cy="31" r="3" className={styles.accentFill} />
+          </>
+        )}
+        {glyph === 2 && (
+          <>
+            <rect x="0" y="6" width="40" height="32" rx="5" className={styles.accentStroke} fill="none" />
+            <path d="M8 17 l6 5 l-6 5 M18 28 h10" className={styles.accentStroke} fill="none" />
+          </>
+        )}
+      </g>
     </g>
   )
 }
 
+// Full-stack: stacked app windows. Panel count, offset direction and the content of the
+// top window (columns, list or chart) vary by slug.
 function Layers({ rnd }) {
+  const count = 2 + Math.floor(rnd() * 2)
+  const dir = rnd() > 0.5 ? 1 : -1
+  const w = 190 + Math.round(rnd() * 50)
+  const h = 110 + Math.round(rnd() * 20)
+  const x0 = 200 - w / 2 - (dir * (count - 1) * 18) / 2
+  const y0 = 112 - h / 2 - ((count - 1) * 18) / 2
+  const top = { x: x0 + dir * (count - 1) * 18, y: y0 + (count - 1) * 18 }
+  const kind = Math.floor(rnd() * 3)
   const cols = 2 + Math.floor(rnd() * 2)
+  const innerW = w - 40
   return (
     <g>
-      {[0, 1, 2].map((i) => (
-        <rect key={i} x={70 + i * 20} y={40 + i * 22} width="220" height="120" rx="8" className={i === 2 ? styles.panelTop : styles.panel} />
+      {Array.from({ length: count }, (_, i) => (
+        <rect key={i} x={x0 + dir * i * 18} y={y0 + i * 18} width={w} height={h} rx="8" className={i === count - 1 ? styles.panelTop : styles.panel} />
       ))}
-      {Array.from({ length: cols }, (_, i) => (
-        <rect key={i} x={126 + i * (176 / cols)} y="112" width={176 / cols - 12} height="40" rx="4" className={styles.fill} opacity="0.5" />
-      ))}
-      <rect x="126" y="96" width="70" height="6" rx="3" className={styles.accentFill} />
+      <circle cx={top.x + 14} cy={top.y + 12} r="3" className={styles.fill} />
+      <circle cx={top.x + 24} cy={top.y + 12} r="3" className={styles.fill} />
+      <rect x={top.x + 20} y={top.y + 28} width={40 + rnd() * 50} height="6" rx="3" className={styles.accentFill} />
+      {kind === 0 &&
+        Array.from({ length: cols }, (_, i) => (
+          <rect key={i} x={top.x + 20 + i * (innerW / cols)} y={top.y + 46} width={innerW / cols - 10} height={h - 66} rx="4" className={styles.fill} opacity="0.45" />
+        ))}
+      {kind === 1 &&
+        Array.from({ length: 4 }, (_, i) => (
+          <rect key={i} x={top.x + 20} y={top.y + 46 + i * 15} width={innerW * (0.45 + rnd() * 0.5)} height="6" rx="3" className={styles.fill} opacity="0.55" />
+        ))}
+      {kind === 2 && (
+        <polyline
+          points={Array.from({ length: 7 }, (_, i) => `${top.x + 20 + (i * innerW) / 6},${top.y + h - 20 - rnd() * (h - 70)}`).join(' ')}
+          className={styles.accentLine}
+        />
+      )}
     </g>
   )
 }

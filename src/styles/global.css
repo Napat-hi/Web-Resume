@@ -177,16 +177,15 @@ kbd {
 .skip-link {
   position: fixed;
   left: var(--s-2);
-  top: var(--s-2);
+  top: -100px;
   z-index: 1000;
   padding: var(--s-1) var(--s-2);
   border-radius: var(--radius);
   background: var(--accent-fill);
   color: var(--accent-ink);
   font-weight: 600;
-  transform: translateY(-200%);
 }
-.skip-link:focus { transform: none; }
+.skip-link:focus { top: var(--s-2); }
 
 .print-only { display: none; }
 

@@ -65,16 +65,19 @@
   padding: var(--s-3);
 }
 
+/* Status pill and context share one line on every card, so titles align across a row. */
 .meta {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
+  min-width: 0;
   gap: var(--s-1);
   font-family: var(--font-mono);
   font-size: var(--fs-xs);
 }
 
 .status {
+  flex: none;
   padding: 1px 8px;
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-full);
@@ -82,7 +85,13 @@
 }
 .statusAccent { border-color: var(--accent-line); color: var(--accent-text); }
 
-.context { color: var(--text-subtle); }
+.context {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text-subtle);
+}
 
 .title { font-size: var(--fs-xl); }
 .title a { color: var(--text); }
@@ -144,3 +153,70 @@
   font-weight: 500;
 }
 .linkBtn:hover { text-decoration: none; border-color: var(--accent); color: var(--accent-text); }
+
+/* Group headings */
+.groupTitle {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-1);
+  margin-bottom: var(--s-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.groupCount { color: var(--text-subtle); }
+
+/* Featured: lead card spans 2 columns and 2 rows, the other two stack beside it */
+.featured {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s-3);
+  margin-bottom: var(--s-8);
+}
+.featured > li { display: flex; }
+.leadItem { grid-column: span 2; grid-row: span 2; }
+
+.lead .body { flex: none; padding: var(--s-4); gap: var(--s-2); } /* cover absorbs the extra height */
+.lead .title { font-size: var(--fs-2xl); }
+.lead .tagline { font-size: var(--fs-lg); max-width: 52ch; }
+.coverLead { aspect-ratio: auto; flex: 1; min-height: 260px; }
+
+.outcome {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-1);
+  padding: 10px var(--s-2);
+  border: 1px solid var(--accent-line);
+  border-radius: var(--radius);
+  background: var(--accent-soft);
+  color: var(--text);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+}
+.outcome svg { flex: none; margin-top: 2px; color: var(--accent-text); }
+
+/* Compact cards: slim cover strip, tighter body */
+.coverStrip { aspect-ratio: auto; height: 72px; }
+.coverStrip > span { display: none; } /* slug label collides with art at this height */
+.compact .body { padding: var(--s-2) var(--s-3) var(--s-3); gap: 10px; }
+.compact .title { font-size: var(--fs-lg); }
+
+.collapsed { display: none !important; }
+.appear { animation: appear 300ms var(--ease) both; }
+@keyframes appear {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+
+.moreRow { display: flex; justify-content: center; margin-top: var(--s-4); }
+.flip { transform: rotate(180deg); }
+
+@media (max-width: 899px) {
+  .featured { grid-template-columns: 1fr; margin-bottom: var(--s-6); }
+  .leadItem { grid-column: auto; grid-row: auto; }
+  .coverLead { flex: none; min-height: 0; aspect-ratio: 16 / 9; }
+  .lead .body { padding: var(--s-3); }
+}

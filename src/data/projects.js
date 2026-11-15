@@ -5,6 +5,7 @@
 //   links:        real URLs only. Empty array => no link buttons rendered.
 //   confidential: company-internal work. Keep it high-level, no screenshots.
 //   team / role:  null hides the line on the case-study page.
+//   featured: 1-3  order in the Featured row (1 = large lead card). Omit for the rest.
 //   print: false  leaves the card out of the printed resume (still shown on the web).
 // Copy rules: stop-slop. Never invent metrics, links or roles; unknowns are TODO(Po).
 
@@ -49,7 +50,7 @@ export const projects = [
       { label: 'Code', url: 'https://github.com/Napat-hi/hallutrace', kind: 'github' },
       { label: 'Project page', url: 'https://erthcyp.github.io/HalluTrace/', kind: 'external' },
     ],
-    featured: true,
+    featured: 1,
   },
   {
     slug: 'shelf-audit',
@@ -73,7 +74,7 @@ export const projects = [
     outcome: 'I delivered a feasibility and cost analysis to the Digital Solution department.',
     links: [],
     confidential: true,
-    featured: true,
+    featured: 3,
   },
   {
     slug: 'uat-generator',
@@ -118,7 +119,7 @@ export const projects = [
     outcome:
       'On the Raspberry Pi 5, YOLO11n runs at 28 ms per frame with NCNN, about 5.3 times faster than PyTorch. The robot drove by gesture, stopped before obstacles and granted passage on a correct spoken password.',
     links: [],
-    featured: true,
+    featured: 2,
   },
   {
     slug: 'sddaas',
