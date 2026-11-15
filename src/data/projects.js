@@ -30,8 +30,8 @@ export const projects = [
     year: '2026',
     context: 'Senior project · SIIT',
     team: '4 people',
-    // TODO(Po): your exact role (attribution / citation verifier / code verifier / infra?).
-    role: 'TODO(Po): my role',
+    // Po: helped shape the research idea and wrote the most code on the team, across all parts.
+    role: 'Lead developer. I helped shape the research idea and wrote most of the code, from generation to corpus counting.',
     problem:
       "Hallucination benchmarks score a model's answers and skip its training data, so they can't tell you whether an error came from the corpus or from the model.",
     approach: [
