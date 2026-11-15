@@ -10,7 +10,7 @@ export const profile = {
   roles: ['AI Engineer', 'Systems Developer', 'Security-minded'],
   status: 'Open to full-time / graduate roles from 2027',
   location: 'Bangkok, Thailand',
-  email: 'napat6603@gmail.com',
+  email: 'napat.hi.work@gmail.com',
   // File lives at public/Napat_Hirunsak_Resume.pdf -> https://napat-hi.github.io/Web-Resume/Napat_Hirunsak_Resume.pdf
   resumeUrl: `${import.meta.env.BASE_URL}Napat_Hirunsak_Resume.pdf`,
   formspreeEndpoint: 'https://formspree.io/f/xykvgbdd',
