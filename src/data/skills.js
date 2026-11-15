@@ -3,7 +3,7 @@
 //
 // Removed because nothing in the data backs them yet (TODO(Po): give a source to restore):
 //   Django, Docker, TensorFlow, OpenAI API, NLTK, CNN, Bootstrap, VPN,
-//   Hub & Switch, Network Topology, Firewall Configuration, LangChain, FAISS.
+//   Hub & Switch, Network Topology, Firewall Configuration, LangChain, FAISS, Figma.
 
 export const skillGroups = [
   {
@@ -53,7 +53,6 @@ export const skillGroups = [
       { name: 'Responsive design', from: 'Humanica 2024' },
       { name: 'Vite', from: 'Portfolio' },
       { name: 'Framer Motion', from: 'Portfolio' },
-      { name: 'Figma', from: 'Humanica 2024 (per resume PDF)' },
       { name: 'UX research', from: 'BAKA Thailand' },
       { name: 'UI design', from: 'BAKA Thailand' },
     ],
