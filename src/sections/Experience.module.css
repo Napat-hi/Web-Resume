@@ -44,6 +44,14 @@
   background: var(--bg);
 }
 .item[data-open] .node { background: var(--accent); }
+.item[data-undated] .node { border-color: var(--text-subtle); }
+
+.undated {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--text-subtle);
+  font-style: italic;
+}
 
 .meta { padding-top: 2px; text-align: right; }
 

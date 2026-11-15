@@ -1,17 +1,58 @@
+/* 6-column track: the primary group spans the full row, the next three take 2 columns each,
+   the last two take 3 each. Six groups fill three rows with no orphan. */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: var(--s-3);
 }
 
 .group {
+  grid-column: span 2;
   padding: var(--s-3);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   background: var(--surface);
 }
+.group:nth-child(n + 5) { grid-column: span 3; }
+
+.primary {
+  grid-column: 1 / -1;
+  padding: var(--s-4);
+  border-color: var(--accent-line);
+  background: color-mix(in srgb, var(--accent) 5%, var(--surface));
+}
+.primary .title { font-size: var(--fs-xl); }
+.primary :global(.tag) {
+  font-size: var(--fs-sm);
+  padding: 4px 12px;
+  color: var(--text);
+  border-color: var(--border-strong);
+  background: var(--surface);
+}
 
 .title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-1);
   margin-bottom: var(--s-2);
   font-size: var(--fs-md);
+}
+
+.count {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  color: var(--text-subtle);
+}
+
+@media (max-width: 899px) {
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .group, .group:nth-child(n + 5) { grid-column: span 1; }
+  .primary, .group:last-child { grid-column: 1 / -1; }
+}
+
+@media (max-width: 599px) {
+  .grid { grid-template-columns: 1fr; }
+  .primary { padding: var(--s-3); }
 }

@@ -1,25 +1,25 @@
 .grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
   gap: var(--s-8);
 }
 
 .summary { display: grid; gap: var(--s-2); align-content: start; }
 .summary p { max-width: 62ch; font-size: var(--fs-lg); }
-.lead { color: var(--text) !important; font-size: var(--fs-xl) !important; line-height: 1.5; }
+.lead { color: var(--text) !important; font-size: clamp(1.25rem, 1rem + 0.9vw, 1.625rem) !important; line-height: 1.45; letter-spacing: -0.01em; }
 
 .side { display: grid; gap: var(--s-4); align-content: start; }
 
-.focus { display: grid; gap: var(--s-1); }
+/* Focus areas as a quiet list: the summary leads, this column supports it. */
+.focus { display: grid; }
 
 .card {
   display: flex;
   gap: var(--s-2);
-  padding: var(--s-2) var(--s-3);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: var(--surface);
+  padding: var(--s-2) 0;
+  border-bottom: 1px solid var(--border);
 }
+.card:first-child { border-top: 1px solid var(--border); }
 .card h3 { font-size: var(--fs-md); margin-bottom: 2px; }
 .card p { font-size: var(--fs-sm); }
 .icon { flex: none; margin-top: 2px; color: var(--accent-text); }

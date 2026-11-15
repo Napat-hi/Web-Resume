@@ -11,9 +11,12 @@ export default function Skills() {
           Each skill here comes from a job, a project or a course listed on this page.
         </SectionHead>
         <RevealGroup className={styles.grid}>
-          {skillGroups.map((g) => (
-            <RevealItem key={g.id} className={styles.group}>
-              <h3 className={styles.title}>{g.title}</h3>
+          {skillGroups.map((g, i) => (
+            <RevealItem key={g.id} className={`${styles.group} ${i === 0 ? styles.primary : ''}`}>
+              <h3 className={styles.title}>
+                {g.title}
+                <span className={styles.count}>{g.skills.length}</span>
+              </h3>
               <ul className="tag-list">
                 {g.skills.map((s) => (
                   <li key={s.name} className="tag" title={s.from}>

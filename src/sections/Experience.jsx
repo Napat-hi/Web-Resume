@@ -6,7 +6,6 @@ import { sortedExperience, internshipCount } from '../data/experience'
 import { getProject } from '../data/projects'
 import { known } from '../lib/content'
 import { Reveal } from '../components/ui/Reveal'
-import Todo from '../components/ui/Todo'
 import SectionHead from './SectionHead'
 import styles from './Experience.module.css'
 
@@ -16,10 +15,15 @@ function Entry({ job, open, onToggle }) {
   const hasDetails = job.bullets.length > 0 || related.length > 0
 
   return (
-    <Reveal as="li" className={styles.item} data-open={open || undefined}>
+    <Reveal as="li" className={styles.item} data-open={open || undefined} data-undated={!known(job.period) || undefined}>
       <span className={styles.node} aria-hidden="true" />
       <div className={styles.meta}>
-        {known(job.period) ? <span className={styles.period}>{job.period}</span> : <Todo value={job.period} />}
+        {known(job.period) ? (
+          <span className={styles.period}>{job.period}</span>
+        ) : (
+          // Undated by choice: show the entry type so the rail column is not empty.
+          <span className={styles.undated}>{job.type === 'internship' ? 'Internship' : ''}</span>
+        )}
       </div>
       <div className={styles.body}>
         <h3 className={styles.role}>{job.role}</h3>
