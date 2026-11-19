@@ -20,5 +20,10 @@ export function useSeo({ title, description } = {}) {
     setMeta('meta[property="og:description"]', 'content', desc)
     setMeta('meta[name="twitter:title"]', 'content', fullTitle)
     setMeta('meta[name="twitter:description"]', 'content', desc)
+    // Each route is a real URL now, so canonical and og:url follow the page.
+    const { origin, pathname } = window.location
+    const url = origin + pathname + (pathname.endsWith('/') ? '' : '/') // GitHub Pages serves /x/ (index.html)
+    setMeta('link[rel="canonical"]', 'href', url)
+    setMeta('meta[property="og:url"]', 'content', url)
   }, [title, description])
 }

@@ -205,7 +205,7 @@
   .intro { min-height: calc(4 * 1.6em); }
   .inner { grid-template-columns: 1fr; gap: var(--s-4); }
   /* Small avatar on phones keeps name, role and the main CTA above the fold. */
-  .photo { order: -1; width: 80px; }
+  .photo { order: -1; width: 112px; }
   .photo img { border-radius: var(--radius); }
   .frame::before { inset: -5px; border-radius: calc(var(--radius) + 5px); }
   .status { margin-bottom: var(--s-2); }

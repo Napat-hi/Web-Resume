@@ -5,7 +5,7 @@ Source for [napat-hi.github.io/Web-Resume](https://napat-hi.github.io/Web-Resume
 ## Stack
 
 - React 19 + Vite 5
-- React Router (`HashRouter`, so GitHub Pages serves every route from one `index.html`)
+- React Router (`BrowserRouter`, real paths like `/projects/hallutrace/`). `scripts/prerender.mjs` runs after `vite build` and writes one HTML file per route with its own title, description and Open Graph tags, plus `404.html` and `sitemap.xml`
 - Framer Motion for scroll reveals, layout animation and the case-study transition
 - CSS Modules + design tokens in `src/styles/tokens.css`. The site uses no UI framework.
 - lucide-react icons, self-hosted fonts via Fontsource (Space Grotesk, Inter, JetBrains Mono)
@@ -31,7 +31,7 @@ src/
   context/     theme, toast and command-palette state
   hooks/ lib/  scroll-spy, focus trap, copy, count-up, SEO helpers
   styles/      tokens.css, global.css, print.css
-public/        favicon, OG image, sitemap.xml, robots.txt
+public/        favicon, OG image, robots.txt (sitemap.xml is generated at build)
 ```
 
 ## Edit content
@@ -46,7 +46,7 @@ Unknown facts carry a `TODO(Po)` marker. The dev server shows them as red dashed
 
    ```js
    {
-     slug: 'my-project',            // URL: #/projects/my-project
+     slug: 'my-project',            // URL: /projects/my-project
      title: 'My Project',
      tagline: 'One line on what it does.',
      categories: ['ai'],            // ai | data | fullstack | security | research | automation

@@ -45,6 +45,8 @@
     </script>
 
     <script>
+      // Old hash links (/Web-Resume/#/projects/x) from before real paths: rewrite to /Web-Resume/projects/x.
+      if (location.hash.indexOf('#/') === 0) history.replaceState(null, '', '/Web-Resume/' + location.hash.slice(2));
       // Apply theme before first paint: saved choice > light (default look).
       (function () {
         var t = null

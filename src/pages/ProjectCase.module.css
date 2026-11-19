@@ -4,6 +4,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  min-height: 40px; /* comfortable tap target */
   color: var(--text-muted);
   font-size: var(--fs-sm);
   font-weight: 500;

@@ -201,7 +201,6 @@
 
 /* Compact cards: slim cover strip, tighter body */
 .coverStrip { aspect-ratio: auto; height: 72px; }
-.coverStrip > span { display: none; } /* slug label collides with art at this height */
 .compact .body { padding: var(--s-2) var(--s-3) var(--s-3); gap: 10px; }
 .compact .title { font-size: var(--fs-lg); }
 

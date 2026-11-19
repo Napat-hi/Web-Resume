@@ -250,6 +250,27 @@ export default function Drive() {
     window.scrollTo({ top: top + p * L.travel, behavior: smooth ? 'smooth' : 'auto' })
   }
 
+  // Keyboard driving: → / ← jump to the next / previous stop, H honks. Ignored while typing
+  // or when a modifier is held (so Ctrl+K and browser shortcuts still work).
+  const jumpRef = useRef(jumpTo)
+  jumpRef.current = jumpTo
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.ctrlKey || e.metaKey || e.altKey || e.target.closest?.('input, textarea, [contenteditable]')) return
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        e.preventDefault()
+        const next = e.key === 'ArrowRight' ? active + 1 : active - 1
+        jumpRef.current(Math.min(journey.length - 1, Math.max(0, next)))
+      } else if (e.key === 'h' || e.key === 'H') {
+        onHonk()
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => {
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [active, onHonk])
+
   const [skyTop, skyLow] = SKY[band]
   const night = band >= 6
   const current = journey[active]
@@ -335,6 +356,7 @@ export default function Drive() {
         <div className={styles.intro} data-hide={started || undefined} aria-hidden="true">
           <p className={styles.introTitle}>PO&apos;S JOURNEY</p>
           <p className={styles.introHint}>SCROLL TO DRIVE ▼</p>
+          <p className={styles.introKeys}>or press → · H to honk</p>
         </div>
 
         <div className={styles.end} data-show={done || undefined}>

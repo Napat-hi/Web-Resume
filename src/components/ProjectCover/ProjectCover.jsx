@@ -1,4 +1,5 @@
 import { forwardRef } from 'react'
+import { HalluCover } from '../HalluChart/HalluChart'
 import styles from './ProjectCover.module.css'
 
 // Generated, theme-aware cover art. No screenshots exist yet, and company work must not
@@ -164,6 +165,13 @@ function Table({ rnd }) {
 const art = { ai: Graph, data: Chart, research: Chart, security: Rings, fullstack: Layers, automation: Table }
 
 const ProjectCover = forwardRef(function ProjectCover({ project, className = '', fit = 'slice' }, ref) {
+  if (project.chart === 'hallutrace') {
+    return (
+      <div ref={ref} className={`${styles.cover} ${styles.chart} ${className}`} data-print="hide">
+        <HalluCover />
+      </div>
+    )
+  }
   if (project.image) {
     return (
       <div ref={ref} className={`${styles.cover} ${styles.photo} ${className}`} data-print="hide">
@@ -185,7 +193,6 @@ const ProjectCover = forwardRef(function ProjectCover({ project, className = '',
       <svg viewBox="0 0 400 225" preserveAspectRatio={`xMidYMid ${fit}`} aria-hidden="true" focusable="false">
         <Art rnd={rnd} />
       </svg>
-      <span className={styles.label}>{project.slug}</span>
     </div>
   )
 })

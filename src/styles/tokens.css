@@ -26,6 +26,9 @@
   --accent-ink: #082f49;
   --accent-soft: rgba(56, 189, 248, 0.12);
   --accent-line: rgba(14, 165, 233, 0.38);
+  /* Chart ramp: one hue, two steps (strong = counted, soft = possible). Validated as an ordinal ramp. */
+  --chart-strong: #0369a1;
+  --chart-soft: #56b4ea;
 
   /* Soft glows behind the hero and card spotlights */
   --glow-1: rgba(125, 211, 252, 0.55);
@@ -97,6 +100,8 @@
   --accent-ink: #062033;
   --accent-soft: rgba(56, 189, 248, 0.14);
   --accent-line: rgba(56, 189, 248, 0.38);
+  --chart-strong: #38bdf8;
+  --chart-soft: #1d6a99;
 
   --glow-1: rgba(56, 189, 248, 0.22);
   --glow-2: rgba(14, 116, 144, 0.3);

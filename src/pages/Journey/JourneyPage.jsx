@@ -5,7 +5,7 @@ import '@fontsource/pixelify-sans/400.css'
 import '@fontsource/pixelify-sans/600.css'
 import { useSeo } from '../../lib/seo'
 import { useMotionPref } from '../../context/MotionContext'
-import { journey } from '../../data/journey'
+import { journey, journeySeo } from '../../data/journey'
 import Drive, { StopCard } from './Drive'
 import styles from './Journey.module.css'
 
@@ -43,10 +43,7 @@ export default function JourneyPage() {
   useLayoutEffect(() => {
     window.scrollTo(0, 0)
   }, [])
-  useSeo({
-    title: 'Journey',
-    description: 'Napat Hirunsak from high school in 2011 to graduation in 2027, told as a pixel-art drive.',
-  })
+  useSeo(journeySeo)
   return (
     <div className={styles.page}>
       <h1 className="sr-only">Po&apos;s journey, 2011 to 2027</h1>

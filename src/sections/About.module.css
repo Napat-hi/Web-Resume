@@ -44,3 +44,17 @@
 @media (max-width: 899px) {
   .grid { grid-template-columns: 1fr; gap: var(--s-5); }
 }
+
+/* "Now": what Po is doing this term. Dated so a stale box is obvious. */
+.now {
+  display: grid;
+  gap: var(--s-1);
+  padding: var(--s-2) var(--s-3);
+  border: 1px solid var(--accent-line);
+  border-radius: var(--radius);
+  background: var(--accent-soft);
+}
+.nowDate { text-transform: none; letter-spacing: 0; color: var(--text-subtle); font-weight: 400; }
+.now ul { display: grid; gap: 6px; padding-left: 1.1em; list-style: disc; }
+.now li { font-size: var(--fs-sm); color: var(--text); line-height: 1.5; }
+.now li::marker { color: var(--accent-text); }

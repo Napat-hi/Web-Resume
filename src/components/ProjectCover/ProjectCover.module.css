@@ -12,16 +12,11 @@
 
 /* Real picture instead of generated art */
 .photo { background: #ffffff; }
+/* Data cover (HalluTrace): plain surface so the chart reads in both themes */
+.chart { background: var(--surface); }
+
 .photo img { width: 100%; height: 100%; padding: 0; object-position: center top; }
 
-.label {
-  position: absolute;
-  left: 12px;
-  bottom: 10px;
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  color: var(--text-subtle);
-}
 
 .line { stroke: color-mix(in srgb, var(--accent) 22%, var(--border-strong)); stroke-width: 1.2; }
 .grid { stroke: var(--border); stroke-width: 1; }

@@ -9,7 +9,7 @@ import styles from './JourneyTeaser.module.css'
 
 const Scene = lazy(() => import('./JourneyTeaserScene'))
 
-// Home-page doorway to the full-screen pixel drive at #/journey.
+// Home-page doorway to the full-screen pixel drive at /journey.
 // Text and button render right away; the pixel picture loads when the reader gets close.
 export default function JourneyTeaser() {
   const sceneRef = useRef(null)

@@ -1,4 +1,4 @@
-// Stops on the pixel-art drive (route #/journey), in driving order.
+// Stops on the pixel-art drive (route /journey), in driving order.
 // Every line comes from facts Po confirmed (see experience.js / education.js / projects.js).
 // Copy rules: stop-slop. `year: null` renders a sign with no year (BAKA, by Po's choice).
 // `scene` picks the pixel scenery that rolls past near the stop: city | campus | field | tokyo.
@@ -28,6 +28,12 @@ import bccPhoto from '../assets/photos/bcc-campus.webp'
 import siitPhoto from '../assets/photos/siit-campus.webp'
 
 export const journeyIntro = 'Scroll to drive!'
+
+// Page title and description; also used by scripts/prerender.mjs for the static HTML.
+export const journeySeo = {
+  title: 'Journey',
+  description: 'Napat Hirunsak from high school in 2011 to graduation in 2027, told as a pixel-art drive.',
+}
 
 export const journey = [
   {

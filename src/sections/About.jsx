@@ -41,6 +41,17 @@ export default function About() {
           </div>
 
           <div className={styles.side}>
+            <Reveal className={styles.now} data-print="hide">
+              <h3 className="eyebrow">
+                Now <span className={styles.nowDate}>· updated {profile.now.updated}</span>
+              </h3>
+              <ul>
+                {profile.now.items.map((t) => (
+                  <li key={t}>{t}</li>
+                ))}
+              </ul>
+            </Reveal>
+
             <RevealGroup as="ul" className={styles.focus} data-print="hide">
               {profile.focus.map((f) => {
                 const Icon = icons[f.icon]

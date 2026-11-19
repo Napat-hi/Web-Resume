@@ -9,6 +9,7 @@ import { prefersReducedMotion } from '../lib/scroll'
 import ProjectCover from '../components/ProjectCover/ProjectCover'
 import BrandIcon from '../components/ui/BrandIcon'
 import Todo from '../components/ui/Todo'
+import HalluChart from '../components/HalluChart/HalluChart'
 import NotFound from './NotFound'
 import styles from './ProjectCase.module.css'
 
@@ -107,7 +108,7 @@ export default function ProjectCase() {
         <ProjectCover ref={coverRef} project={project} className={styles.cover} />
 
         <div className={styles.layout}>
-          <aside className={styles.aside}>
+          <div className={styles.aside}>
             <dl className={styles.meta}>
               <MetaItem label="Status" value={statusLabel[project.status]} />
               <MetaItem label="Role" value={project.role} />
@@ -133,7 +134,7 @@ export default function ProjectCase() {
                 ))}
               </ul>
             )}
-          </aside>
+          </div>
 
           <div className={styles.content}>
             {project.confidential && (
@@ -157,8 +158,15 @@ export default function ProjectCase() {
               </ul>
             </Section>
 
-            {known(project.outcome) && (
+            {project.chart === 'hallutrace' && (
               <Section index={2}>
+                <h2>Result</h2>
+                <HalluChart />
+              </Section>
+            )}
+
+            {known(project.outcome) && (
+              <Section index={3}>
                 <h2>Outcome</h2>
                 <p>{project.outcome}</p>
               </Section>

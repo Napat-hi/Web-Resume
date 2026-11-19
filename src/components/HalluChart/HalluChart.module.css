@@ -1,0 +1,90 @@
+/* ---------- Card cover (SVG) ---------- */
+.coverSvg { width: 100%; height: 100%; }
+.coverTitle { font-family: var(--font-display); font-size: 17px; font-weight: 600; fill: var(--text); }
+.coverSub { font-family: var(--font-mono); font-size: 10.5px; fill: var(--text-subtle); }
+.coverLabel { font-family: var(--font-body); font-size: 12.5px; fill: var(--text-muted); }
+.coverValue { font-family: var(--font-mono); font-size: 11.5px; fill: var(--text); font-variant-numeric: tabular-nums; }
+.track { fill: var(--border); }
+.soft { fill: var(--chart-soft); }
+.strong { fill: var(--chart-strong); }
+
+/* ---------- Case-study chart ---------- */
+.chart {
+  display: grid;
+  gap: var(--s-2);
+  padding: var(--s-3);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.head { display: grid; gap: 4px; }
+.title { font-family: var(--font-display); font-size: var(--fs-lg); font-weight: 600; color: var(--text); }
+.sub { font-size: var(--fs-sm); color: var(--text-muted); }
+
+.filters { display: flex; flex-wrap: wrap; gap: var(--s-1); }
+.filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 4px 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-full);
+  background: var(--surface);
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+  cursor: pointer;
+}
+.filter:hover { border-color: var(--accent-line); color: var(--text); }
+.filter[aria-pressed='true'] { background: var(--accent-fill); border-color: var(--accent-fill); color: var(--accent-ink); }
+.n { font-family: var(--font-mono); font-size: var(--fs-xs); }
+
+.rows { display: grid; gap: 2px; list-style: none; margin: 0; padding: 0; }
+.row {
+  display: grid;
+  grid-template-columns: minmax(150px, 13rem) 1fr 4.5rem;
+  align-items: center;
+  gap: var(--s-2);
+  min-height: 40px;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  cursor: default;
+}
+.row[data-active] { background: var(--surface-2); }
+.row:focus-visible { outline: 2px solid var(--accent-text); outline-offset: 1px; }
+.label { font-size: var(--fs-sm); color: var(--text); }
+.bar { position: relative; height: 12px; border-radius: 3px; background: var(--border); overflow: hidden; }
+.barSoft,
+.barStrong { position: absolute; inset: 0 auto 0 0; border-radius: 3px; transition: width 300ms cubic-bezier(0.2, 0.7, 0.2, 1); }
+.barSoft { background: var(--chart-soft); }
+.barStrong { background: var(--chart-strong); }
+:root[data-motion='reduce'] .barSoft,
+:root[data-motion='reduce'] .barStrong { transition: none; }
+.value { font-family: var(--font-mono); font-size: var(--fs-sm); color: var(--text); text-align: right; font-variant-numeric: tabular-nums; }
+
+.chart .detail { min-height: 3em; font-size: var(--fs-sm); color: var(--text-muted); }
+.chart .detail strong { color: var(--text); font-weight: 600; }
+
+.foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--s-1) var(--s-3); font-size: var(--fs-xs); color: var(--text-subtle); }
+.legend { display: flex; flex-wrap: wrap; gap: var(--s-1) var(--s-2); }
+.key { display: inline-flex; align-items: center; gap: 6px; }
+.swatchStrong,
+.swatchSoft { width: 14px; height: 10px; border-radius: 2px; }
+.swatchStrong { background: var(--chart-strong); }
+.swatchSoft { background: var(--chart-soft); }
+.source { display: inline-flex; align-items: center; min-height: 24px; color: var(--accent-text); }
+
+.tableWrap summary { cursor: pointer; font-size: var(--fs-sm); color: var(--accent-text); min-height: 24px; }
+.scroll { overflow-x: auto; margin-top: var(--s-1); }
+.table { width: 100%; border-collapse: collapse; font-size: var(--fs-xs); }
+.table th,
+.table td { padding: 6px 8px; border-bottom: 1px solid var(--border); text-align: right; white-space: nowrap; }
+.table th[scope='row'],
+.table thead th:first-child { text-align: left; }
+.table td { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+@media (max-width: 559px) {
+  .chart { padding: var(--s-2); }
+  .row { grid-template-columns: 1fr 4rem; row-gap: 4px; }
+  .label { grid-column: 1 / -1; }
+}

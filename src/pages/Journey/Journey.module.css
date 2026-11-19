@@ -278,6 +278,9 @@
   animation: blink 1s steps(2) infinite;
 }
 @keyframes blink { 50% { opacity: 0; } }
+.introKeys { margin-top: 6px; font-size: 14px; color: var(--ink); opacity: 0.75; }
+/* Touch screens have no arrow keys */
+@media (hover: none) { .introKeys { display: none; } }
 
 .end {
   position: absolute;

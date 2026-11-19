@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react'
-import { HashRouter, Route, Routes, useLocation } from 'react-router-dom'
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import { ThemeProvider } from './context/ThemeContext'
 import { MotionPrefProvider } from './context/MotionContext'
 import { ToastProvider } from './context/ToastContext'
@@ -49,11 +49,13 @@ export default function App() {
     <MotionPrefProvider>
       <ThemeProvider>
         <ToastProvider>
-          <HashRouter>
+          {/* Real paths (/projects/<slug>) so each page has its own URL and preview.
+              scripts/prerender.mjs writes an HTML file per route; index.html redirects old #/ links. */}
+          <BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, '')}>
             <PaletteProvider>
               <Shell />
             </PaletteProvider>
-          </HashRouter>
+          </BrowserRouter>
         </ToastProvider>
       </ThemeProvider>
     </MotionPrefProvider>

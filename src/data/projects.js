@@ -10,7 +10,6 @@
 //   print: false  leaves the card out of the printed resume (still shown on the web).
 // Copy rules: stop-slop. Never invent metrics, links or roles; unknowns are TODO(Po).
 
-import hallutraceFigure from '../assets/projects/hallutrace-f1.webp'
 import portfolioShot from '../assets/projects/portfolio.webp'
 
 export const categories = [
@@ -55,10 +54,8 @@ export const projects = [
       { label: 'Project page', url: 'https://erthcyp.github.io/HalluTrace/', kind: 'external' },
     ],
     featured: 1,
-    // Figure 1 of the paper's supplementary material (github.com/Napat-hi/hallutrace, data CC BY 4.0).
-    image: hallutraceFigure,
-    imageAlt: 'Heatmap from the HalluTrace paper: share of hallucinated samples per task and model',
-    imageFit: 'contain',
+    // Cover and case-study chart draw the paper's main result (data/hallutrace.js, from the public repo).
+    chart: 'hallutrace',
   },
   {
     slug: 'shelf-audit',

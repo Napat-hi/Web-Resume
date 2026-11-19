@@ -41,4 +41,16 @@ export const profile = {
     { icon: 'shield', title: 'Security', text: 'Risk assessment, vulnerability scanning, Wazuh, Cloudflare' },
     { icon: 'layers', title: 'Systems & delivery', text: 'React, Node.js, MySQL, business analysis, UAT / QA' },
   ],
+
+  // "Now" box in About. Every line restates a fact from education.js / projects.js.
+  // Update `updated` (and the lines) whenever something changes, or the box goes stale.
+  now: {
+    updated: 'November 2026',
+    items: [
+      'Final year of Computer Engineering at SIIT. This term: Computer Vision, Big Data, Ethical Hacking, Knowledge Representation and Robotics.',
+      'AIESC 2027 accepted our HalluTrace paper.',
+      'I am working through AWS Academy Data Engineering.',
+      'Next: an exchange semester at Institute of Science Tokyo, April to August 2027.',
+    ],
+  },
 }
