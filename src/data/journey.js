@@ -15,7 +15,7 @@
 //     "Unauthorized use of the Science Tokyo logo is an infringement of trademark rights"; non-members
 //     must go through the naming-rights process. The stop uses a drawn Japan-flag badge instead.
 //     Revisit once Po is enrolled (Apr 2027) and can check the Science Tokyo design system rules.
-// Photos: Po's own, from D:/Photos (exported to WebP, EXIF/GPS stripped).
+// Photos: from Po's D:/Photos, no people (bcc-campus, siit-campus) (exported to WebP, EXIF/GPS stripped).
 // TODO(Po): send the CP ALL logo file if you want it instead of the 7-Eleven mark.
 
 import bcc from '../assets/logos/bcc.webp'
@@ -24,7 +24,7 @@ import humanica from '../assets/logos/humanica.webp'
 import sevenEleven from '../assets/logos/seven-eleven.webp'
 import baka from '../assets/logos/baka.webp'
 import thammasat from '../assets/logos/thammasat.webp'
-import bccPhoto from '../assets/photos/bcc-graduation.webp'
+import bccPhoto from '../assets/photos/bcc-campus.webp'
 import siitPhoto from '../assets/photos/siit-campus.webp'
 
 export const journeyIntro = 'Scroll to drive!'
@@ -39,7 +39,7 @@ export const journey = [
     logo: bcc,
     logoAlt: 'Bangkok Christian College emblem',
     photo: bccPhoto,
-    photoAlt: 'Po holding a bouquet in front of a BCC building',
+    photoAlt: 'Tall white pillars at Bangkok Christian College against a blue sky',
     scene: 'city',
   },
   {

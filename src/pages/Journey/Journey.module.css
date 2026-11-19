@@ -361,7 +361,7 @@
 .staticList .card { position: relative; bottom: auto; left: auto; width: auto; height: 100%; transform: none; }
 /* No sky above the cards here, so the photo sits inside the card as a wide strip. */
 .staticList .card .polaroid { display: block; position: static; width: auto; margin: 0 0 12px; padding: 0; box-shadow: 0 0 0 2px var(--ink); transform: none; }
-.staticList .polaroid img { width: 100%; height: 220px; object-position: center 75%; }
+.staticList .polaroid img { width: 100%; height: 220px; object-position: center 15%; }
 .staticList .logo { filter: none; opacity: 1; }
 
 @media (max-width: 639px) {
