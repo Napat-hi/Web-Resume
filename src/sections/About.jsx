@@ -1,7 +1,26 @@
+import { lazy, Suspense, useRef } from 'react'
 import { Brain, Layers, Shield } from 'lucide-react'
 import { profile } from '../data/profile'
 import { Reveal, RevealGroup, RevealItem } from '../components/ui/Reveal'
 import SectionHead from './SectionHead'
+import { useNear } from '../hooks/useNear'
+
+// The photo pile (and its four images) loads only when the reader scrolls near it.
+const PhotoStack = lazy(() => import('../components/PhotoStack/PhotoStack'))
+
+function DeferredPhotoStack() {
+  const ref = useRef(null)
+  const near = useNear(ref)
+  return (
+    <div ref={ref} className={styles.photoSlot} data-print="hide">
+      {near && (
+        <Suspense fallback={null}>
+          <PhotoStack />
+        </Suspense>
+      )}
+    </div>
+  )
+}
 import styles from './About.module.css'
 
 const icons = { brain: Brain, shield: Shield, layers: Layers }
@@ -12,11 +31,14 @@ export default function About() {
       <div className="container">
         <SectionHead index={1} id="about" title="About" />
         <div className={`${styles.grid} print-about`}>
-          <Reveal className={styles.summary}>
-            {profile.summary.map((p, i) => (
-              <p key={i} className={i === 0 ? styles.lead : undefined}>{p}</p>
-            ))}
-          </Reveal>
+          <div>
+            <Reveal className={styles.summary}>
+              {profile.summary.map((p, i) => (
+                <p key={i} className={i === 0 ? styles.lead : undefined}>{p}</p>
+              ))}
+            </Reveal>
+            <DeferredPhotoStack />
+          </div>
 
           <div className={styles.side}>
             <RevealGroup as="ul" className={styles.focus} data-print="hide">

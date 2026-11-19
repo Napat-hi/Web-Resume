@@ -53,6 +53,12 @@
         document.documentElement.dataset.theme = t
         var m = document.querySelector('meta[name="theme-color"]')
         if (m) m.setAttribute('content', t === 'dark' ? '#07111f' : '#f6f9fe')
+        // Motion: reader's choice ('on' / 'off') wins; otherwise follow prefers-reduced-motion.
+        var mp = null
+        try { mp = localStorage.getItem('motion-pref') } catch (e) {}
+        var sysReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        var reduce = mp === 'on' ? false : mp === 'off' ? true : sysReduce
+        document.documentElement.dataset.motion = reduce ? 'reduce' : 'full'
       })()
     </script>
   </head>

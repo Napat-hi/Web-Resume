@@ -8,6 +8,10 @@
 .summary p { max-width: 62ch; font-size: var(--fs-lg); }
 .lead { color: var(--text) !important; font-size: clamp(1.25rem, 1rem + 0.9vw, 1.625rem) !important; line-height: 1.45; letter-spacing: -0.01em; }
 
+/* Reserves the photo pile's height (table + bar) before it loads, so nothing shifts. */
+.photoSlot { margin-top: var(--s-4); min-height: 340px; } /* table 300 + bar 40 */
+@media (max-width: 479px) { .photoSlot { min-height: 300px; } } /* table 260 + bar 40 */
+
 .side { display: grid; gap: var(--s-4); align-content: start; }
 
 /* Focus areas as a quiet list: the summary leads, this column supports it. */

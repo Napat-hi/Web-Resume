@@ -1,0 +1,74 @@
+.wrap { margin-top: 0; } /* spacing lives on the reserving slot in About */
+
+.table {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 300px;
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(circle at 1px 1px, var(--border) 1px, transparent 0) 0 0 / 18px 18px,
+    color-mix(in srgb, var(--accent) 4%, var(--surface));
+  overflow: hidden;
+  touch-action: pan-y;
+}
+
+.polaroid {
+  position: absolute;
+  width: 150px;
+  padding: 8px 8px 26px;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 10px 24px rgba(11, 27, 48, 0.18);
+  cursor: grab;
+  user-select: none;
+  touch-action: none; /* let a finger drag the photo instead of scrolling */
+  transition: transform 260ms cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 200ms ease;
+}
+.polaroid:hover { box-shadow: 0 16px 32px rgba(11, 27, 48, 0.22); }
+.polaroid[data-dragging] {
+  cursor: grabbing;
+  transition: box-shadow 200ms ease;
+  box-shadow: 0 24px 48px rgba(11, 27, 48, 0.28);
+}
+.polaroid img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-2);
+  margin-top: var(--s-1);
+}
+.hint {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--text-subtle);
+}
+.shuffle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 0 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-full);
+  background: var(--surface);
+  color: var(--text);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+}
+.shuffle:hover { border-color: var(--accent); color: var(--accent-text); }
+
+@media (max-width: 479px) {
+  .table { height: 260px; }
+  .polaroid { width: 124px; }
+}

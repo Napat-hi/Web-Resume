@@ -1,0 +1,378 @@
+/* Pixel-art journey page. The art has its own fixed palette (it is an illustration), so it looks
+   the same in light and dark theme. --px = css pixels per art pixel (3 on phones, 4 on desktop). */
+
+.page {
+  --ink: #14213d;
+  --paper: #ffffff;
+  --pixel-font: 'Pixelify Sans', var(--font-mono);
+  font-family: var(--pixel-font);
+  color: var(--ink);
+}
+
+.ride {
+  --stage-h: max(560px, 100svh);
+  position: relative;
+}
+
+.stage {
+  position: sticky;
+  top: 0;
+  height: var(--stage-h);
+  overflow: hidden;
+  isolation: isolate;
+  image-rendering: pixelated;
+}
+
+.sky { position: absolute; inset: 0; z-index: 0; }
+
+.stars {
+  position: absolute;
+  inset: 0 0 45% 0;
+  z-index: 1;
+  opacity: 0;
+  background-image:
+    linear-gradient(#fff, #fff), linear-gradient(#fff, #fff), linear-gradient(#fff, #fff),
+    linear-gradient(#fff, #fff), linear-gradient(#fff, #fff), linear-gradient(#fff, #fff),
+    linear-gradient(#fde68a, #fde68a), linear-gradient(#fff, #fff);
+  background-size: var(--px) var(--px);
+  background-repeat: no-repeat;
+  background-position: 9% 22%, 24% 48%, 38% 14%, 55% 36%, 67% 18%, 83% 42%, 92% 12%, 46% 60%;
+}
+.stars[data-on] { opacity: 1; animation: twinkle 1.2s steps(2) infinite; }
+@keyframes twinkle { 50% { opacity: 0.6; } }
+
+.sun, .moon { position: absolute; top: 0; left: 0; z-index: 1; margin: -30px; }
+.sun[data-hide] { display: none; }
+.moon { display: none; margin: -22px; }
+.moon[data-show] { display: block; }
+
+.layer { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.layer svg { position: absolute; left: 0; max-width: none; }
+.clouds { top: 8%; }
+.far { bottom: calc(var(--road-h) + 4px); }
+.mid { bottom: var(--road-h); }
+
+.track { position: absolute; top: 0; bottom: 0; left: 0; z-index: 3; }
+
+/* Road: curb, asphalt with blocky lane dashes, darker edge. */
+.road {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--road-h);
+  background:
+    linear-gradient(#94a3b8 0 calc(var(--px) * 2), #64748b calc(var(--px) * 2) calc(var(--px) * 3), #475569 calc(var(--px) * 3) calc(100% - var(--px) * 3), #334155 calc(100% - var(--px) * 3));
+}
+.lane {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: calc(var(--px) * 2);
+  background: repeating-linear-gradient(90deg, #fde047 0 calc(var(--px) * 8), transparent calc(var(--px) * 8) calc(var(--px) * 16));
+}
+
+.stops { position: absolute; inset: 0; list-style: none; }
+.stop { position: absolute; bottom: var(--road-h); width: 0; height: 100%; }
+
+/* Signpost */
+.post {
+  position: absolute;
+  left: calc(var(--px) * -1);
+  bottom: 0;
+  width: calc(var(--px) * 2);
+  height: calc(var(--car-h) + 56px);
+  background: #475569;
+  box-shadow: inset calc(var(--px) * -1) 0 0 #334155;
+}
+.flag {
+  position: absolute;
+  bottom: 40px;
+  left: calc(var(--px) * 2);
+  padding: 2px 8px;
+  background: #fde047;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 0 0 var(--px) var(--ink), var(--px) var(--px) 0 var(--px) var(--ink);
+}
+
+/* Billboard card */
+.card {
+  position: absolute;
+  bottom: calc(var(--car-h) + 56px);
+  left: -20px;
+  width: 260px;
+  padding: 12px 14px 14px;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow:
+    0 0 0 var(--px) var(--ink),
+    calc(var(--px) * 2) calc(var(--px) * 2) 0 var(--px) var(--ink);
+  transform: scale(0.9);
+  transform-origin: bottom left;
+  transition: transform 300ms steps(4);
+}
+.card[data-active] { transform: scale(1); }
+.cardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 44px;
+  margin-bottom: 6px;
+}
+.logo {
+  height: 44px;
+  width: auto;
+  max-width: 150px;
+  object-fit: contain;
+  object-position: left center;
+  image-rendering: auto; /* logos stay sharp; only scenery and the car are pixel art */
+  filter: grayscale(1);
+  opacity: 0.6;
+}
+.card[data-active] .logo { filter: none; opacity: 1; }
+.year {
+  padding: 2px 8px;
+  background: #bae6fd;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 0 0 2px var(--ink);
+}
+.cardTitle { font-family: var(--pixel-font); font-size: 18px; font-weight: 600; letter-spacing: 0; line-height: 1.2; color: var(--ink); }
+.cardLine { margin-top: 4px; font-size: 15px; line-height: 1.35; color: #334155; }
+
+.polaroid {
+  position: absolute;
+  top: -150px;
+  right: 14px;
+  width: 102px;
+  padding: 6px 6px 16px;
+  background: #fff;
+  box-shadow: 0 0 0 3px var(--ink), 6px 6px 0 0 rgba(20, 33, 61, 0.35);
+  transform: rotate(6deg);
+}
+.polaroid img { display: block; width: 90px; height: 120px; object-fit: cover; image-rendering: auto; }
+.card[data-active] .polaroid { transform: rotate(-3deg); }
+
+/* Buttons */
+.pixelBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 0 12px;
+  background: #fde047;
+  color: var(--ink);
+  font-family: var(--pixel-font);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 0 0 3px var(--ink), 3px 3px 0 3px var(--ink);
+  transition: transform 80ms steps(1);
+}
+.pixelBtn:hover { text-decoration: none; background: #fef08a; }
+.pixelBtn:active { transform: translate(3px, 3px); box-shadow: 0 0 0 3px var(--ink); }
+.pixelBtn:focus-visible { outline: 3px solid #38bdf8; outline-offset: 6px; border-radius: 0; }
+.pixelBtnAlt { background: #7dd3fc; }
+.pixelBtnAlt:hover { background: #bae6fd; }
+.card .pixelBtn { margin-top: 10px; }
+
+/* Car */
+.car { position: absolute; bottom: calc(var(--road-h) - var(--px) * 10); z-index: 4; }
+.carBody { position: relative; }
+.carBody svg { display: block; }
+
+.bubble {
+  position: absolute;
+  bottom: calc(100% + 18px);
+  left: 24%;
+  width: max-content;
+  max-width: 230px;
+  padding: 8px 12px;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.3;
+  box-shadow: 0 0 0 3px var(--ink), 4px 4px 0 3px rgba(20, 33, 61, 0.35);
+}
+.bubble::after {
+  content: '';
+  position: absolute;
+  left: 18px;
+  bottom: -12px;
+  width: 12px;
+  height: 12px;
+  background:
+    linear-gradient(var(--ink), var(--ink)) 0 0 / 3px 12px no-repeat,
+    linear-gradient(var(--paper), var(--paper)) 3px 0 / 6px 6px no-repeat,
+    linear-gradient(var(--ink), var(--ink)) 3px 6px / 6px 3px no-repeat;
+}
+
+.horn {
+  position: absolute;
+  right: -6px;
+  top: -14px;
+  padding: 2px 6px;
+  background: #f43f5e;
+  color: #fff;
+  font-family: var(--pixel-font);
+  font-size: 12px;
+  font-weight: 600;
+  box-shadow: 0 0 0 2px var(--ink), 2px 2px 0 2px var(--ink);
+}
+.horn:hover { background: #fb7185; }
+.horn:active { transform: translate(2px, 2px); }
+
+/* Exhaust: three square puffs drifting back while the car moves. */
+.puffs { position: absolute; left: 0; bottom: calc(var(--px) * 8); opacity: 0; transition: opacity 120ms steps(1); }
+.puffs[data-on] { opacity: 1; }
+.puffs i {
+  position: absolute;
+  left: calc(var(--px) * -2);
+  width: calc(var(--px) * 2);
+  height: calc(var(--px) * 2);
+  background: #e2e8f0;
+  animation: puff 600ms steps(4) infinite;
+}
+.puffs i:nth-child(2) { animation-delay: 200ms; }
+.puffs i:nth-child(3) { animation-delay: 400ms; }
+@keyframes puff {
+  from { transform: translate(0, 0) scale(1); opacity: 1; }
+  to { transform: translate(calc(var(--px) * -10), calc(var(--px) * -4)) scale(2); opacity: 0; }
+}
+
+.confetti { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 5; pointer-events: none; }
+
+/* Title card at the start, end card at the finish */
+.intro {
+  position: absolute;
+  top: 22%;
+  left: 0;
+  right: 0;
+  z-index: 6;
+  text-align: center;
+  pointer-events: none;
+  transition: opacity 240ms steps(3);
+}
+.intro[data-hide] { opacity: 0; }
+.introTitle {
+  font-family: var(--pixel-font);
+  font-size: clamp(36px, 7vw, 76px);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  color: #fff;
+  text-shadow: 4px 4px 0 var(--ink), -2px -2px 0 var(--ink), 2px -2px 0 var(--ink), -2px 2px 0 var(--ink);
+}
+.introHint {
+  margin-top: 18px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ink);
+  animation: blink 1s steps(2) infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+.end {
+  position: absolute;
+  top: 18%;
+  left: 0;
+  right: 0;
+  z-index: 6;
+  display: grid;
+  justify-items: center;
+  gap: 16px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms steps(3);
+}
+.end[data-show] { opacity: 1; pointer-events: auto; }
+.endTitle {
+  font-size: clamp(26px, 4.5vw, 46px);
+  font-weight: 600;
+  color: #fff;
+  text-shadow: 3px 3px 0 var(--ink), -2px -2px 0 var(--ink), 2px -2px 0 var(--ink), -2px 2px 0 var(--ink);
+}
+.endActions { display: flex; gap: 18px; }
+
+.topbar {
+  position: absolute;
+  top: 14px;
+  left: 0;
+  right: 0;
+  z-index: 7;
+  display: flex;
+  justify-content: space-between;
+  padding-inline: 18px;
+}
+
+.dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(var(--px) * 3);
+  z-index: 7;
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+}
+.dot { display: grid; place-items: center; width: 26px; height: 26px; }
+.dot::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  background: #cbd5e1;
+  box-shadow: 0 0 0 2px var(--ink);
+}
+.dot[data-on]::after { background: #fde047; }
+.dot[aria-current='step']::after { background: #f43f5e; transform: scale(1.3); }
+
+/* Reduced motion: plain list */
+.static {
+  min-height: 100vh;
+  padding: 24px 18px 80px;
+  background: linear-gradient(#8fd3ff 0 60%, #d9f1ff 60%);
+}
+.staticHead { display: grid; justify-items: start; gap: 20px; max-width: 1120px; margin: 0 auto 40px; }
+.staticNote {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  background: var(--paper);
+  box-shadow: 0 0 0 3px var(--ink);
+}
+.staticNote p { color: var(--ink); font-size: 16px; }
+.staticList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+  gap: 28px;
+  max-width: 1120px;
+  margin: 0 auto;
+  list-style: none;
+}
+.staticList .card { position: relative; bottom: auto; left: auto; width: auto; height: 100%; transform: none; }
+/* No sky above the cards here, so the photo sits inside the card as a wide strip. */
+.staticList .card .polaroid { display: block; position: static; width: auto; margin: 0 0 12px; padding: 0; box-shadow: 0 0 0 2px var(--ink); transform: none; }
+.staticList .polaroid img { width: 100%; height: 220px; object-position: center 75%; }
+.staticList .logo { filter: none; opacity: 1; }
+
+@media (max-width: 639px) {
+  .card { width: 220px; left: -12px; }
+  .polaroid { top: -124px; right: 10px; width: 84px; padding: 5px 5px 12px; }
+  .polaroid img { width: 74px; height: 98px; }
+  .bubble { left: 4%; max-width: 190px; font-size: 15px; }
+  .topbar { padding-inline: 10px; }
+  .topbar .pixelBtn { font-size: 13px; padding: 0 8px; }
+}
+@media (max-height: 700px) {
+  .polaroid { display: none; }
+  .intro { top: 16%; }
+}

@@ -8,6 +8,7 @@ import { scrollToId, prefersReducedMotion } from '../lib/scroll'
 import { useCopy } from '../hooks/useCopy'
 import { useCountUp } from '../hooks/useCountUp'
 import DotGrid from '../components/DotGrid/DotGrid'
+import { useMotionPref } from '../context/MotionContext'
 import photo320 from '../assets/profile-320.webp'
 import photo640 from '../assets/profile-640.webp'
 import styles from './Hero.module.css'
@@ -64,6 +65,7 @@ function Stat({ value, label }) {
 
 export default function Hero() {
   const copy = useCopy()
+  const { reduce } = useMotionPref()
   return (
     <section id="top" className={styles.hero} aria-labelledby="hero-title" data-print="hide">
       <div className={styles.aurora} aria-hidden="true">
@@ -71,7 +73,7 @@ export default function Hero() {
         <span />
         <span />
       </div>
-      <DotGrid />
+      <DotGrid key={reduce ? 'still' : 'live'} />
       <div className={`container ${styles.inner}`}>
         <div className={styles.text}>
           <p className={styles.status}>
@@ -79,7 +81,7 @@ export default function Hero() {
             {profile.status}
           </p>
           <h1 id="hero-title" className={styles.title}>{profile.name}</h1>
-          <RotatingRole />
+          <RotatingRole key={reduce ? 'still' : 'live'} />
           <p className={styles.headline}>{profile.headline}</p>
           <p className={styles.intro}>
             I research LLM hallucinations at SIIT and build vision-language pipelines. Before that, I worked in IT
@@ -107,7 +109,7 @@ export default function Hero() {
             width="320"
             height="320"
             alt={`Portrait of ${profile.name}`}
-            fetchpriority="high"
+            fetchPriority="high"
             decoding="async"
           />
           </div>

@@ -1,8 +1,9 @@
 import { useCallback } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
+// Resolved site preference (system setting, or the reader's override). See context/MotionContext.jsx.
 export const prefersReducedMotion = () =>
-  typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  typeof document !== 'undefined' && document.documentElement.dataset.motion === 'reduce'
 
 // Scrolls to a home-page section and moves focus there for keyboard/screen-reader users.
 export function scrollToId(id) {

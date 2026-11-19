@@ -7,11 +7,15 @@
 }
 
 /* Aurora: three soft sky-blue blobs drifting behind the hero. Static under reduced motion. */
+/* Sized in viewport units, not % of the hero, so the hero growing when fonts load
+   does not resize it (that registered as a layout shift). */
 .aurora {
   position: absolute;
-  inset: -20% -10% 10% -10%;
+  top: -20vh;
+  left: -10vw;
+  width: 120vw;
+  height: 120vh;
   pointer-events: none;
-  filter: blur(60px);
   opacity: 0.9;
 }
 .aurora span {
@@ -19,9 +23,10 @@
   border-radius: 50%;
   animation: drift 22s ease-in-out infinite alternate;
 }
-.aurora span:nth-child(1) { width: 46vw; height: 46vw; max-width: 640px; max-height: 640px; left: 52%; top: 6%; background: var(--glow-1); }
-.aurora span:nth-child(2) { width: 38vw; height: 38vw; max-width: 520px; max-height: 520px; left: 70%; top: 34%; background: var(--glow-2); animation-duration: 28s; animation-delay: -6s; }
-.aurora span:nth-child(3) { width: 34vw; height: 34vw; max-width: 460px; max-height: 460px; left: 8%; top: -10%; background: var(--glow-3); animation-duration: 32s; animation-delay: -12s; }
+/* Soft edges come from the gradient itself, not a blur filter: far cheaper to paint on phones. */
+.aurora span:nth-child(1) { width: 60vw; height: 60vw; max-width: 820px; max-height: 820px; left: 46%; top: 2%; background: radial-gradient(closest-side, var(--glow-1), transparent); }
+.aurora span:nth-child(2) { width: 50vw; height: 50vw; max-width: 680px; max-height: 680px; left: 64%; top: 30%; background: radial-gradient(closest-side, var(--glow-2), transparent); animation-duration: 28s; animation-delay: -6s; }
+.aurora span:nth-child(3) { width: 46vw; height: 46vw; max-width: 600px; max-height: 600px; left: 2%; top: -14%; background: radial-gradient(closest-side, var(--glow-3), transparent); animation-duration: 32s; animation-delay: -12s; }
 
 @keyframes drift {
   0% { transform: translate(0, 0) scale(1); }
@@ -29,9 +34,7 @@
   100% { transform: translate(5%, -4%) scale(0.96); }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .aurora span { animation: none; }
-}
+:root[data-motion='reduce'] .aurora span { animation: none; }
 
 .inner {
   position: relative;
@@ -197,6 +200,9 @@
 
 @media (max-width: 767px) {
   .hero { padding-top: calc(var(--nav-h) + var(--s-6)); }
+  /* Inter wraps this to 4 lines on phones; the fallback font wraps to 3. Reserving 4 lines
+     stops the buttons and stats jumping down when the web font arrives. */
+  .intro { min-height: calc(4 * 1.6em); }
   .inner { grid-template-columns: 1fr; gap: var(--s-4); }
   /* Small avatar on phones keeps name, role and the main CTA above the fold. */
   .photo { order: -1; width: 80px; }

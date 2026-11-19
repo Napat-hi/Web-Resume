@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ArrowRight, Copy, CornerDownLeft, FileText, FolderOpen, Hash, Moon, Search, Sun } from 'lucide-react'
+import { ArrowRight, Copy, CornerDownLeft, FileText, FolderOpen, Hash, Moon, Pause, Play, Search, Sun } from 'lucide-react'
+import { useMotionPref } from '../../context/MotionContext'
 import { usePalette } from '../../context/PaletteContext'
 import { useTheme } from '../../context/ThemeContext'
 import { useFocusTrap } from '../../hooks/useFocusTrap'
@@ -25,6 +26,7 @@ function matches(item, q) {
 export default function CommandPalette() {
   const { open, setOpen } = usePalette()
   const { isDark, toggleTheme } = useTheme()
+  const { reduce, setMotion } = useMotionPref()
   const navigate = useNavigate()
   const goTo = useGoToSection()
   const copy = useCopy()
@@ -71,6 +73,22 @@ export default function CommandPalette() {
         run: toggleTheme,
       },
       {
+        id: 'a-journey',
+        group: 'Actions',
+        label: 'Take the pixel drive (Journey)',
+        keywords: 'journey story timeline car drive pixel',
+        icon: <Play size={16} aria-hidden="true" />,
+        run: () => navigate('/journey'),
+      },
+      {
+        id: 'a-motion',
+        group: 'Actions',
+        label: reduce ? 'Turn on animations' : 'Turn off animations',
+        keywords: 'motion animation reduce bike ride',
+        icon: reduce ? <Play size={16} aria-hidden="true" /> : <Pause size={16} aria-hidden="true" />,
+        run: () => setMotion(reduce),
+      },
+      {
         id: 'a-resume',
         group: 'Actions',
         label: 'Open resume',
@@ -87,7 +105,7 @@ export default function CommandPalette() {
         run: () => window.open(l.url, '_blank', 'noopener'),
       })),
     ],
-    [goTo, navigate, copy, isDark, toggleTheme],
+    [goTo, navigate, copy, isDark, toggleTheme, reduce, setMotion],
   )
 
   const results = useMemo(() => items.filter((i) => matches(i, query.trim())), [items, query])

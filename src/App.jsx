@@ -1,7 +1,7 @@
 import { lazy, Suspense } from 'react'
-import { HashRouter, Route, Routes } from 'react-router-dom'
-import { MotionConfig } from 'framer-motion'
+import { HashRouter, Route, Routes, useLocation } from 'react-router-dom'
 import { ThemeProvider } from './context/ThemeContext'
+import { MotionPrefProvider } from './context/MotionContext'
 import { ToastProvider } from './context/ToastContext'
 import { PaletteProvider } from './context/PaletteContext'
 import Nav from './components/layout/Nav'
@@ -10,39 +10,52 @@ import Home from './pages/Home'
 
 const ProjectCase = lazy(() => import('./pages/ProjectCase'))
 const NotFound = lazy(() => import('./pages/NotFound'))
+const JourneyPage = lazy(() => import('./pages/Journey/JourneyPage'))
 const CommandPalette = lazy(() => import('./components/CommandPalette/CommandPalette'))
+
+// The journey is a full-screen story: no site nav or footer around it.
+function Shell() {
+  const { pathname } = useLocation()
+  const immersive = pathname === '/journey'
+  return (
+    <>
+      <a className="skip-link" href="#main" onClick={(e) => {
+        e.preventDefault()
+        document.getElementById('main')?.focus()
+      }}>
+        Skip to content
+      </a>
+      {!immersive && <Nav />}
+      <main id="main" tabIndex={-1}>
+        <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/journey" element={<JourneyPage />} />
+            <Route path="/projects/:slug" element={<ProjectCase />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
+      </main>
+      {!immersive && <Footer />}
+      <Suspense fallback={null}>
+        <CommandPalette />
+      </Suspense>
+    </>
+  )
+}
 
 export default function App() {
   return (
-    <MotionConfig reducedMotion="user">
+    <MotionPrefProvider>
       <ThemeProvider>
         <ToastProvider>
           <HashRouter>
             <PaletteProvider>
-              <a className="skip-link" href="#main" onClick={(e) => {
-                e.preventDefault()
-                document.getElementById('main')?.focus()
-              }}>
-                Skip to content
-              </a>
-              <Nav />
-              <main id="main" tabIndex={-1}>
-                <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
-                  <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/projects/:slug" element={<ProjectCase />} />
-                    <Route path="*" element={<NotFound />} />
-                  </Routes>
-                </Suspense>
-              </main>
-              <Footer />
-              <Suspense fallback={null}>
-                <CommandPalette />
-              </Suspense>
+              <Shell />
             </PaletteProvider>
           </HashRouter>
         </ToastProvider>
       </ThemeProvider>
-    </MotionConfig>
+    </MotionPrefProvider>
   )
 }

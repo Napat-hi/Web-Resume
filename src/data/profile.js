@@ -30,7 +30,7 @@ export const profile = {
 
   // About section paragraphs.
   summary: [
-    "I'm Napat Hirunsak, Po for short. I study Computer Engineering with an AI specialization at SIIT, Thammasat University, and I graduate in 2027.",
+    "I'm Napat Hirunsak, Po for short. I study Computer Engineering with an AI specialization at SIIT, Thammasat University, and I graduate in 2027. From April to August 2027 I join an exchange semester at Institute of Science Tokyo.",
     'I test language and vision models, then build the software a team needs to use them. In my senior project, my team and I trace LLM hallucinations back to the pretraining data that produced them.',
     "I've done four internships: business analysis and AI research at CP ALL (7-Eleven Thailand), IT security and SAP frontend work at Humanica, and UX/UI research at BAKA Thailand.",
   ],

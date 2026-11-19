@@ -5,6 +5,7 @@ import { homeScroll, scrollToId } from '../lib/scroll'
 import { profile } from '../data/profile'
 import Hero from '../sections/Hero'
 import About from '../sections/About'
+import JourneyTeaser from '../sections/JourneyTeaser'
 import Experience from '../sections/Experience'
 import Projects from '../sections/Projects'
 import Skills from '../sections/Skills'
@@ -35,6 +36,8 @@ export default function Home() {
   useLayoutEffect(() => {
     if (navType === 'POP' && homeScroll.y > 0 && !location.state?.section) {
       window.scrollTo(0, homeScroll.y)
+    } else if (navType === 'PUSH' && !location.state?.section) {
+      window.scrollTo(0, 0) // e.g. coming back from the journey page
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -52,6 +55,7 @@ export default function Home() {
       <PrintHeader />
       <Hero />
       <About />
+      <JourneyTeaser />
       <Experience />
       <Projects />
       <Skills />

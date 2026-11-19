@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 
 const ease = [0.2, 0.7, 0.2, 1]
 
-// Fades and lifts content into view once. MotionConfig reducedMotion="user" disables the movement.
+// Fades and lifts content into view once. MotionPrefProvider disables the movement when motion is reduced.
 export function Reveal({ children, delay = 0, as = 'div', className, ...rest }) {
   const Tag = motion[as]
   return (
