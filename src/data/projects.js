@@ -349,8 +349,10 @@ export const projects = [
       'I keep all content in plain data files, and each section renders from them.',
       'I built it with React, Vite, Framer Motion and CSS Modules, with no UI framework.',
       'You can press Ctrl/Cmd+K for the command palette, open a case study per project, or print the page as a resume.',
+      'A build script gives every project its own URL, page title and link-preview image, so a shared link shows that project.',
+      'I drew my story as a pixel-art drive you scroll or steer with the arrow keys.',
     ],
-    stack: ['React', 'Vite', 'Framer Motion', 'CSS Modules', 'GitHub Actions'],
+    stack: ['React', 'Vite', 'Framer Motion', 'CSS Modules', 'satori', 'GitHub Actions'],
     outcome: null,
     links: [
       { label: 'Code', url: 'https://github.com/Napat-hi/Web-Resume', kind: 'github' },
