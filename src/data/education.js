@@ -5,6 +5,16 @@ export const certifications = [
 
 export const education = [
   {
+    id: 'science-tokyo',
+    degree: 'Exchange semester',
+    school: 'Institute of Science Tokyo',
+    period: 'Apr – Aug 2027',
+    status: 'Accepted',
+    gpa: null,
+    coursework: [],
+    currentCourses: [],
+  },
+  {
     id: 'siit',
     degree: 'B.Eng. Computer Engineering, AI specialization',
     school: 'Sirindhorn International Institute of Technology (SIIT), Thammasat University',

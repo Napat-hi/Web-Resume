@@ -6,8 +6,12 @@
 //   confidential: company-internal work. Keep it high-level, no screenshots.
 //   team / role:  null hides the line on the case-study page.
 //   featured: 1-3  order in the Featured row (1 = large lead card). Omit for the rest.
+//   image:        real picture for the cover (no company screenshots). imageFit 'contain' for charts.
 //   print: false  leaves the card out of the printed resume (still shown on the web).
 // Copy rules: stop-slop. Never invent metrics, links or roles; unknowns are TODO(Po).
+
+import hallutraceFigure from '../assets/projects/hallutrace-f1.webp'
+import portfolioShot from '../assets/projects/portfolio.webp'
 
 export const categories = [
   { id: 'ai', label: 'AI / ML' },
@@ -51,6 +55,10 @@ export const projects = [
       { label: 'Project page', url: 'https://erthcyp.github.io/HalluTrace/', kind: 'external' },
     ],
     featured: 1,
+    // Figure 1 of the paper's supplementary material (github.com/Napat-hi/hallutrace, data CC BY 4.0).
+    image: hallutraceFigure,
+    imageAlt: 'Heatmap from the HalluTrace paper: share of hallucinated samples per task and model',
+    imageFit: 'contain',
   },
   {
     slug: 'shelf-audit',
@@ -351,6 +359,8 @@ export const projects = [
       { label: 'Code', url: 'https://github.com/Napat-hi/Web-Resume', kind: 'github' },
       { label: 'Live', url: 'https://napat-hi.github.io/Web-Resume/', kind: 'external' },
     ],
+    image: portfolioShot,
+    imageAlt: "Screenshot of this portfolio's hero section",
   },
   // Skipped for now by request: Computer Vision and Knowledge Representation course projects.
 ]

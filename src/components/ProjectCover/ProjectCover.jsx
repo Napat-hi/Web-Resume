@@ -164,6 +164,19 @@ function Table({ rnd }) {
 const art = { ai: Graph, data: Chart, research: Chart, security: Rings, fullstack: Layers, automation: Table }
 
 const ProjectCover = forwardRef(function ProjectCover({ project, className = '', fit = 'slice' }, ref) {
+  if (project.image) {
+    return (
+      <div ref={ref} className={`${styles.cover} ${styles.photo} ${className}`} data-print="hide">
+        <img
+          src={project.image}
+          alt={project.imageAlt || ''}
+          loading="lazy"
+          decoding="async"
+          style={{ objectFit: project.imageFit || 'cover' }}
+        />
+      </div>
+    )
+  }
   const Art = art[project.categories[0]] ?? Graph
   // Fresh generator per render so the same slug always draws the same picture.
   const rnd = seeded(project.slug)
