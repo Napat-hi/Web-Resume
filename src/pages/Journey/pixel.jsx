@@ -1,7 +1,7 @@
 // Pixel-art building blocks. Everything is drawn on an integer grid (1 unit = 1 art pixel) and
 // rendered as SVG rects with crisp edges, then scaled up by PX css pixels per art pixel.
 import { memo } from 'react'
-import face from '../../assets/pixel/face.png'
+import face from '../../assets/driver-face.webp'
 
 export const INK = '#14213d'
 
@@ -81,8 +81,8 @@ export const CarBody = memo(function CarBody() {
   return (
     <g>
       {px}
-      {/* Driver: 16px face photo squeezed into an 8x8 window patch, pixelated. */}
-      <image href={face} x={24} y={1} width={8} height={8} style={{ imageRendering: 'pixelated' }} preserveAspectRatio="none" />
+      {/* Driver: a normal, sharp face photo in the 8x8 window patch (only the car itself is pixel art). */}
+      <image href={face} x={24} y={1} width={8} height={8} style={{ imageRendering: 'auto' }} preserveAspectRatio="xMidYMid slice" />
       {/* Cabin outline drawn over the glass and face */}
       {Array.from({ length: 8 }, (_, i) => {
         const r = i + 1
