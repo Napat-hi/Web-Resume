@@ -163,13 +163,13 @@ function Table({ rnd }) {
 
 const art = { ai: Graph, data: Chart, research: Chart, security: Rings, fullstack: Layers, automation: Table }
 
-const ProjectCover = forwardRef(function ProjectCover({ project, className = '' }, ref) {
+const ProjectCover = forwardRef(function ProjectCover({ project, className = '', fit = 'slice' }, ref) {
   const Art = art[project.categories[0]] ?? Graph
   // Fresh generator per render so the same slug always draws the same picture.
   const rnd = seeded(project.slug)
   return (
     <div ref={ref} className={`${styles.cover} ${className}`} data-print="hide">
-      <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+      <svg viewBox="0 0 400 225" preserveAspectRatio={`xMidYMid ${fit}`} aria-hidden="true" focusable="false">
         <Art rnd={rnd} />
       </svg>
       <span className={styles.label}>{project.slug}</span>

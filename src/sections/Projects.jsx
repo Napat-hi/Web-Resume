@@ -5,6 +5,7 @@ import { ArrowUpRight, Award, ChevronDown, Lock } from 'lucide-react'
 import { categories, projects, statusLabel } from '../data/projects'
 import { homeScroll, prefersReducedMotion } from '../lib/scroll'
 import { known } from '../lib/content'
+import { spotlightMove } from '../hooks/useSpotlight'
 import ProjectCover from '../components/ProjectCover/ProjectCover'
 import BrandIcon from '../components/ui/BrandIcon'
 import SectionHead from './SectionHead'
@@ -50,6 +51,7 @@ function ProjectCard({ project, variant = 'compact' }) {
   }, [])
 
   const onMove = (e) => {
+    spotlightMove(e)
     if (!canTilt) return
     const r = e.currentTarget.getBoundingClientRect()
     ry.set(((e.clientX - r.left) / r.width - 0.5) * tilt * 2)
@@ -75,14 +77,14 @@ function ProjectCard({ project, variant = 'compact' }) {
 
   return (
     <motion.div
-      className={`${styles.card} ${styles[variant]} print-card`}
+      className={`${styles.card} ${styles[variant]} spotlight print-card`}
       style={{ rotateX, rotateY, transformPerspective: 1000 }}
       onPointerMove={onMove}
       onPointerLeave={onLeave}
       onPointerEnter={preloadCase}
       onFocus={preloadCase}
     >
-      <ProjectCover ref={coverRef} project={project} className={coverClass} />
+      <ProjectCover ref={coverRef} project={project} className={coverClass} fit={isLead ? 'meet' : 'slice'} />
       <div className={styles.body}>
         <div className={styles.meta}>
           <span className={`${styles.status} ${project.status === 'published' ? styles.statusAccent : ''}`}>

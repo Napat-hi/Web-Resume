@@ -19,9 +19,10 @@
   color: var(--text-subtle);
 }
 
-.line { stroke: var(--border-strong); stroke-width: 1.2; }
+.line { stroke: color-mix(in srgb, var(--accent) 22%, var(--border-strong)); stroke-width: 1.2; }
 .grid { stroke: var(--border); stroke-width: 1; }
-.fill { fill: var(--text-subtle); }
+/* Nodes and bars: a soft blue-gray so covers stay light. */
+.fill { fill: color-mix(in srgb, var(--text-subtle) 55%, var(--surface-2)); }
 .accentFill { fill: var(--accent); }
 .accentLine { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
 .accentStroke { stroke: var(--accent); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }

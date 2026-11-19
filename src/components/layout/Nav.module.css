@@ -1,32 +1,38 @@
+/* Floating pill nav: transparent at the top, a frosted pill once you scroll. */
 .header {
   position: sticky;
   top: 0;
   z-index: 100;
   height: var(--nav-h);
-  background: transparent;
-  border-bottom: 1px solid transparent;
-  transition: background-color var(--dur) var(--ease), border-color var(--dur) var(--ease);
-}
-
-.scrolled {
-  background: color-mix(in srgb, var(--bg) 88%, transparent);
-  border-bottom-color: var(--border);
-  backdrop-filter: saturate(140%) blur(10px);
+  padding-top: 8px;
 }
 
 .progress {
-  position: absolute;
-  inset: auto 0 -1px 0;
+  position: fixed;
+  inset: 0 0 auto 0;
   height: 2px;
-  background: var(--accent);
+  background: linear-gradient(90deg, var(--accent), var(--accent-text));
   transform-origin: 0 50%;
+  z-index: 101;
 }
 
 .bar {
   display: flex;
   align-items: center;
   gap: var(--s-3);
-  height: 100%;
+  height: calc(var(--nav-h) - 16px);
+  border: 1px solid transparent;
+  border-radius: var(--radius-full);
+  transition: background-color var(--dur) var(--ease), border-color var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease), max-width 400ms var(--ease);
+}
+
+.scrolled .bar {
+  max-width: calc(var(--content) + 2 * var(--gutter) - 32px);
+  background: color-mix(in srgb, var(--surface) 78%, transparent);
+  border-color: var(--border);
+  box-shadow: var(--shadow);
+  backdrop-filter: saturate(160%) blur(14px);
 }
 
 .brand {
@@ -45,7 +51,8 @@
   width: 32px;
   height: 32px;
   border: 1px solid var(--accent-line);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-full);
+  background: var(--accent-soft);
   color: var(--accent-text);
   font-family: var(--font-mono);
   font-size: 0.75rem;
@@ -68,17 +75,8 @@
   border-radius: var(--radius-sm);
 }
 .link:hover { color: var(--text); text-decoration: none; }
-.link[aria-current='true'] { color: var(--text); }
-.link[aria-current='true']::after {
-  content: '';
-  position: absolute;
-  left: 12px;
-  right: 12px;
-  bottom: 2px;
-  height: 2px;
-  border-radius: 2px;
-  background: var(--accent);
-}
+.link { border-radius: var(--radius-full); }
+.link[aria-current='true'] { color: var(--accent-text); background: var(--accent-soft); }
 
 .actions {
   display: flex;
@@ -91,9 +89,10 @@
   align-items: center;
   gap: 6px;
   height: 32px;
-  padding: 0 10px;
+  padding: 0 12px;
   border: 1px solid var(--border-strong);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-full);
+  background: var(--surface);
   color: var(--text-muted);
   font-family: var(--font-mono);
   font-size: var(--fs-xs);
@@ -105,7 +104,7 @@
   place-items: center;
   width: 40px;
   height: 40px;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-full);
   color: var(--text-muted);
 }
 .icon:hover { color: var(--text); background: var(--surface-2); }

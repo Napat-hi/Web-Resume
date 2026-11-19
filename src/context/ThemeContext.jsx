@@ -1,13 +1,13 @@
 import { createContext, useCallback, useContext, useEffect, useState } from 'react'
 
 // The inline script in index.html sets data-theme before first paint (no flash).
-// Order: saved choice > system preference > dark.
+// Order: saved choice > light (the site's default look is sky blue on white).
 const STORAGE_KEY = 'theme-mode'
+const THEME_COLOR = { light: '#f6f9fe', dark: '#07111f' }
 const ThemeContext = createContext(null)
 
 function readInitial() {
-  const attr = document.documentElement.dataset.theme
-  return attr === 'light' ? 'light' : 'dark'
+  return document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light'
 }
 
 export function ThemeProvider({ children }) {
@@ -15,20 +15,8 @@ export function ThemeProvider({ children }) {
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'light' ? '#f7f8fa' : '#0a0c0f')
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', THEME_COLOR[theme])
   }, [theme])
-
-  // Follow system changes until the user picks a theme.
-  useEffect(() => {
-    const mq = window.matchMedia('(prefers-color-scheme: light)')
-    const onChange = (e) => {
-      let saved = null
-      try { saved = localStorage.getItem(STORAGE_KEY) } catch { /* storage blocked */ }
-      if (!saved) setTheme(e.matches ? 'light' : 'dark')
-    }
-    mq.addEventListener('change', onChange)
-    return () => mq.removeEventListener('change', onChange)
-  }, [])
 
   const toggleTheme = useCallback(() => {
     setTheme((t) => {

@@ -1,6 +1,7 @@
 import { skillGroups } from '../data/skills'
 import { RevealGroup, RevealItem } from '../components/ui/Reveal'
 import SectionHead from './SectionHead'
+import { spotlightMove } from '../hooks/useSpotlight'
 import styles from './Skills.module.css'
 
 export default function Skills() {
@@ -12,7 +13,7 @@ export default function Skills() {
         </SectionHead>
         <RevealGroup className={styles.grid}>
           {skillGroups.map((g, i) => (
-            <RevealItem key={g.id} className={`${styles.group} ${i === 0 ? styles.primary : ''}`}>
+            <RevealItem key={g.id} className={`${styles.group} ${i === 0 ? styles.primary : ''} spotlight`} onPointerMove={spotlightMove}>
               <h3 className={styles.title}>
                 {g.title}
                 <span className={styles.count}>{g.skills.length}</span>

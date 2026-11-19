@@ -66,6 +66,11 @@ export default function Hero() {
   const copy = useCopy()
   return (
     <section id="top" className={styles.hero} aria-labelledby="hero-title" data-print="hide">
+      <div className={styles.aurora} aria-hidden="true">
+        <span />
+        <span />
+        <span />
+      </div>
       <DotGrid />
       <div className={`container ${styles.inner}`}>
         <div className={styles.text}>

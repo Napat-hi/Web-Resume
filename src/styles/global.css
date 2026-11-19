@@ -96,13 +96,22 @@ ul, ol { list-style: none; }
   gap: var(--s-2);
   font-size: var(--fs-2xl);
 }
+/* Section number as a small pill badge beside the h2. */
 .section-index {
+  display: inline-grid;
+  place-items: center;
+  min-width: 2.6em;
+  padding: 2px 10px;
+  border: 1px solid var(--accent-line);
+  border-radius: var(--radius-full);
+  background: var(--accent-soft);
   font-family: var(--font-mono);
-  font-size: var(--fs-sm);
-  font-weight: 500;
+  font-size: var(--fs-xs);
+  font-weight: 600;
   letter-spacing: 0.04em;
+  line-height: 1.6;
   color: var(--accent-text);
-  transform: translateY(-0.35em);
+  transform: translateY(-0.45em);
 }
 .section-head p { max-width: 60ch; }
 
@@ -139,16 +148,37 @@ ul, ol { list-style: none; }
 .btn-primary {
   background: var(--accent-fill);
   color: var(--accent-ink);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset, 0 6px 16px -6px var(--accent-line);
 }
-.btn-primary:hover { filter: brightness(1.08); }
+.btn-primary:hover { background: var(--accent-fill-hover); box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset, 0 10px 24px -8px var(--accent-line); }
 
 .btn-ghost {
   border-color: var(--border-strong);
+  background: var(--surface);
   color: var(--text);
 }
 .btn-ghost:hover { border-color: var(--accent); color: var(--accent-text); }
 
 .btn-sm { min-height: 36px; padding: 0 var(--s-2); font-size: var(--fs-xs); }
+
+/* Spotlight: a soft light that follows the cursor inside a card.
+   useSpotlight() writes --mx / --my; the glow stays off for touch and reduced motion. */
+.spotlight { position: relative; isolation: isolate; }
+.spotlight::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), var(--spotlight), transparent 60%);
+  opacity: 0;
+  transition: opacity 300ms var(--ease);
+  pointer-events: none;
+}
+.spotlight:hover::before { opacity: 1; }
+@media (hover: none), (prefers-reduced-motion: reduce) {
+  .spotlight::before { display: none; }
+}
 
 /* Tags */
 .tag {

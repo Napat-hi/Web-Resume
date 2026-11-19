@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Napat Hirunsak · AI & Systems Engineer</title>
     <meta name="description" content="Napat Hirunsak, Computer Engineering student at SIIT (AI specialization). LLM hallucination research, VLM pipelines, IT security and full-stack work." />
     <meta name="author" content="Napat Hirunsak" />
-    <meta name="theme-color" content="#0a0c0f" />
+    <meta name="theme-color" content="#f6f9fe" />
     <link rel="canonical" href="https://napat-hi.github.io/Web-Resume/" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -45,14 +45,14 @@
     </script>
 
     <script>
-      // Apply theme before first paint: saved choice > system preference > dark.
+      // Apply theme before first paint: saved choice > light (default look).
       (function () {
         var t = null
         try { t = localStorage.getItem('theme-mode') } catch (e) {}
-        if (t !== 'light' && t !== 'dark') {
-          t = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
-        }
+        if (t !== 'dark') t = 'light'
         document.documentElement.dataset.theme = t
+        var m = document.querySelector('meta[name="theme-color"]')
+        if (m) m.setAttribute('content', t === 'dark' ? '#07111f' : '#f6f9fe')
       })()
     </script>
   </head>

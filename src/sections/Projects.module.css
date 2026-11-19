@@ -48,13 +48,14 @@
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   background: var(--surface);
+  box-shadow: var(--shadow);
   transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
   will-change: transform;
 }
 .card:hover,
 .card:focus-within {
   border-color: var(--accent-line);
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-lg);
 }
 
 .body {
@@ -190,7 +191,7 @@
   gap: var(--s-1);
   padding: 10px var(--s-2);
   border: 1px solid var(--accent-line);
-  border-radius: var(--radius);
+  border-radius: var(--radius-full);
   background: var(--accent-soft);
   color: var(--text);
   font-size: var(--fs-sm);

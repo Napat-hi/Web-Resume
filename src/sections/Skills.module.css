@@ -12,6 +12,7 @@
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   background: var(--surface);
+  box-shadow: var(--shadow);
 }
 .group:nth-child(n + 5) { grid-column: span 3; }
 
