@@ -8,6 +8,7 @@ import { useMotionPref } from '../../context/MotionContext'
 import { journey, journeySeo } from '../../data/journey'
 import Drive, { StopCard } from './Drive'
 import styles from './Journey.module.css'
+import MotionScope from '../../components/ui/MotionScope'
 
 // Reduced motion: the same stops as a plain pixel-styled list, plus a way to opt in.
 function StaticJourney() {
@@ -45,9 +46,11 @@ export default function JourneyPage() {
   }, [])
   useSeo(journeySeo)
   return (
+    <MotionScope>
     <div className={styles.page}>
       <h1 className="sr-only">Po&apos;s journey, 2011 to 2027</h1>
       {reduce ? <StaticJourney /> : <Drive />}
     </div>
+    </MotionScope>
   )
 }

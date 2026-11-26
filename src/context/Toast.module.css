@@ -22,3 +22,8 @@
 }
 
 .toast svg { color: var(--accent-text); }
+
+.toast { animation: toastIn 200ms cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.toast[data-leaving] { animation: toastOut 200ms cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+@keyframes toastIn { from { opacity: 0; transform: translateY(12px); } }
+@keyframes toastOut { to { opacity: 0; transform: translateY(12px); } }

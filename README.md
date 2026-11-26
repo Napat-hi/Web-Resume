@@ -6,7 +6,7 @@ Source for [napat-hi.github.io/Web-Resume](https://napat-hi.github.io/Web-Resume
 
 - React 19 + Vite 5
 - React Router (`BrowserRouter`, real paths like `/projects/hallutrace/`). `scripts/prerender.mjs` runs after `vite build` and writes one HTML file per route with its own title, description and Open Graph tags, plus `404.html` and `sitemap.xml`
-- Framer Motion for scroll reveals, layout animation and the case-study transition
+- Framer Motion only on the lazy pages (case-study transition, the pixel drive, the command palette). The home page animates with plain CSS and small hooks, so it loads without it
 - CSS Modules + design tokens in `src/styles/tokens.css`. The site uses no UI framework.
 - lucide-react icons, self-hosted fonts via Fontsource (Space Grotesk, Inter, JetBrains Mono)
 - Formspree for the contact form
@@ -75,8 +75,11 @@ One-time setup: **Settings → Pages → Source = GitHub Actions**.
 
 `vite.config.js` sets `base: '/Web-Resume/'`. Change it only if the repo name changes.
 
+Every Monday `.github/workflows/site-check.yml` checks the live site: each page and its link-preview image load, outside links still work, the About "Now" box is not stale, and Lighthouse scores stay above their floors. A failed run sends you an email. Run it by hand from the Actions tab, or locally with `node scripts/check-site.mjs --lighthouse`.
+
 ## Extras
 
 - **Ctrl/Cmd + K** opens the command palette: jump to a section, open a project, copy the email, switch theme, open the resume.
 - Printing the home page (Ctrl/Cmd + P) gives a two-page resume.
 - The theme follows the system setting until you pick one. The site remembers your choice.
+- Type **beep** anywhere (or tap the footer name five times) for a small surprise.

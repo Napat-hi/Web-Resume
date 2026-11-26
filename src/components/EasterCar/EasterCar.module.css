@@ -1,0 +1,46 @@
+/* Easter-egg car. Fixed illustration palette (same as the journey), so it reads in both themes. */
+.lane {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 950;
+  height: 130px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.car {
+  position: absolute;
+  left: 0;
+  bottom: 10px;
+  display: grid;
+  justify-items: start;
+  gap: 8px;
+  pointer-events: auto;
+  image-rendering: pixelated;
+  animation: drive 4.8s steps(96) forwards;
+}
+.car:hover { text-decoration: none; }
+.car svg { max-width: none; }
+
+.bubble {
+  margin-left: 40px;
+  padding: 6px 10px;
+  background: #ffffff;
+  color: #34405a;
+  font-family: 'Pixelify Sans', var(--font-mono);
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 0 0 3px #34405a, 3px 3px 0 3px rgba(52, 64, 90, 0.3);
+}
+
+@keyframes drive {
+  from { transform: translateX(-180px); }
+  to { transform: translateX(calc(100vw + 40px)); }
+}
+
+/* Reduced motion: park in the corner (a timer in EasterCar.jsx removes it). No CSS animation:
+   the global reduced-motion rule would end it at once. */
+.lane[data-still] .car { left: 16px; animation: none; }

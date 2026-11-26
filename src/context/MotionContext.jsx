@@ -1,5 +1,4 @@
 import { createContext, useCallback, useContext, useEffect, useState } from 'react'
-import { MotionConfig } from 'framer-motion'
 
 // Site-level animation preference.
 //   pref null  -> follow the system (prefers-reduced-motion)
@@ -45,7 +44,9 @@ export function MotionPrefProvider({ children }) {
 
   return (
     <MotionPrefContext.Provider value={{ reduce, setMotion, systemReduce: systemReduce() }}>
-      <MotionConfig reducedMotion={reduce ? 'always' : 'never'}>{children}</MotionConfig>
+      {/* framer-motion stays out of the home bundle; lazy routes wrap themselves in
+          components/ui/MotionScope.jsx, which passes this setting to framer. */}
+      {children}
     </MotionPrefContext.Provider>
   )
 }

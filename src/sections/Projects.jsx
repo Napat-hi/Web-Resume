@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { AnimatePresence, motion, useMotionValue, useSpring } from 'framer-motion'
+import { flushSync } from 'react-dom'
 import { ArrowUpRight, Award, ChevronDown, Lock } from 'lucide-react'
 import { categories, projects, statusLabel } from '../data/projects'
 import { homeScroll, prefersReducedMotion } from '../lib/scroll'
@@ -39,10 +39,7 @@ function ProjectCard({ project, variant = 'compact' }) {
   const navigate = useNavigate()
   const coverRef = useRef(null)
   const [canTilt, setCanTilt] = useState(false)
-  const rx = useMotionValue(0)
-  const ry = useMotionValue(0)
-  const rotateX = useSpring(rx, { stiffness: 220, damping: 22 })
-  const rotateY = useSpring(ry, { stiffness: 220, damping: 22 })
+  const cardRef = useRef(null)
   const isLead = variant === 'lead'
   const tilt = isLead ? MAX_TILT / 2 : MAX_TILT // large cards tilt less so edges stay calm
 
@@ -53,13 +50,14 @@ function ProjectCard({ project, variant = 'compact' }) {
   const onMove = (e) => {
     spotlightMove(e)
     if (!canTilt) return
+    // Tilt through CSS variables (no re-render); the card's CSS transition smooths it.
     const r = e.currentTarget.getBoundingClientRect()
-    ry.set(((e.clientX - r.left) / r.width - 0.5) * tilt * 2)
-    rx.set(-((e.clientY - r.top) / r.height - 0.5) * tilt * 2)
+    e.currentTarget.style.setProperty('--ry', `${((e.clientX - r.left) / r.width - 0.5) * tilt * 2}deg`)
+    e.currentTarget.style.setProperty('--rx', `${-((e.clientY - r.top) / r.height - 0.5) * tilt * 2}deg`)
   }
   const onLeave = () => {
-    rx.set(0)
-    ry.set(0)
+    cardRef.current?.style.setProperty('--rx', '0deg')
+    cardRef.current?.style.setProperty('--ry', '0deg')
   }
 
   const open = (e) => {
@@ -76,9 +74,10 @@ function ProjectCard({ project, variant = 'compact' }) {
   const coverClass = isLead ? styles.coverLead : variant === 'compact' ? styles.coverStrip : ''
 
   return (
-    <motion.div
+    <div
+      ref={cardRef}
       className={`${styles.card} ${styles[variant]} spotlight print-card`}
-      style={{ rotateX, rotateY, transformPerspective: 1000 }}
+      style={{ viewTransitionName: `project-${project.slug}` }}
       onPointerMove={onMove}
       onPointerLeave={onLeave}
       onPointerEnter={preloadCase}
@@ -120,16 +119,8 @@ function ProjectCard({ project, variant = 'compact' }) {
           </div>
         )}
       </div>
-    </motion.div>
+    </div>
   )
-}
-
-const itemMotion = {
-  layout: true,
-  initial: { opacity: 0, scale: 0.97 },
-  animate: { opacity: 1, scale: 1 },
-  exit: { opacity: 0, scale: 0.97 },
-  transition: { duration: 0.25, ease: [0.2, 0.7, 0.2, 1] },
 }
 
 export default function Projects() {
@@ -146,6 +137,19 @@ export default function Projects() {
 
   const filtered = filter === 'all' ? null : projects.filter((p) => p.categories.includes(filter))
   const hiddenCount = rest.length - INITIAL_MORE
+
+  // Cards morph to their new places with the View Transitions API (each card has its own
+  // view-transition-name). Browsers without it, or reduced motion, switch at once.
+  const changeFilter = (id) => {
+    if (id === filter) return
+    if (document.startViewTransition && !prefersReducedMotion()) {
+      document.startViewTransition(() => {
+        flushSync(() => setFilter(id))
+      })
+    } else {
+      setFilter(id)
+    }
+  }
 
   const toggleMore = () => {
     const next = !expanded
@@ -168,7 +172,7 @@ export default function Projects() {
               type="button"
               className={styles.chip}
               aria-pressed={filter === c.id}
-              onClick={() => setFilter(c.id)}
+              onClick={() => changeFilter(c.id)}
             >
               {c.label}
               <span className={styles.count}>{c.count}</span>
@@ -180,15 +184,13 @@ export default function Projects() {
         </p>
 
         {filtered ? (
-          <motion.ul layout className={styles.grid}>
-            <AnimatePresence mode="popLayout" initial={false}>
-              {filtered.map((p) => (
-                <motion.li key={p.slug} data-print={p.print === false ? 'hide' : undefined} {...itemMotion}>
-                  <ProjectCard project={p} />
-                </motion.li>
-              ))}
-            </AnimatePresence>
-          </motion.ul>
+          <ul className={styles.grid}>
+            {filtered.map((p) => (
+              <li key={p.slug} data-print={p.print === false ? 'hide' : undefined}>
+                <ProjectCard project={p} />
+              </li>
+            ))}
+          </ul>
         ) : (
           <>
             <h3 className={styles.groupTitle}>Featured</h3>

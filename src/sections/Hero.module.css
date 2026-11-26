@@ -100,11 +100,17 @@
   display: inline-block;
   position: relative;
   height: 1.4em;
-  overflow: hidden;
+  overflow: hidden; /* fallback */
+  overflow-x: visible; /* a longer outgoing word is not cut sideways */
+  overflow-y: clip;
   vertical-align: bottom;
 }
 
 .roleText { display: inline-block; line-height: 1.4; white-space: nowrap; }
+.roleOut { position: absolute; left: 0; top: 0; animation: roleOut 300ms cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.roleIn { animation: roleIn 300ms cubic-bezier(0.2, 0.7, 0.2, 1) 300ms both; }
+@keyframes roleOut { to { transform: translateY(-100%); opacity: 0; } }
+@keyframes roleIn { from { transform: translateY(100%); opacity: 0; } }
 
 .headline {
   margin-top: var(--s-2);

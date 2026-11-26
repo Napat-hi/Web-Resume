@@ -21,6 +21,8 @@
   height: 100%;
   background: var(--accent);
   transform-origin: top;
+  transform: scaleY(0);
+  transition: transform 150ms linear;
 }
 
 .list { display: grid; gap: var(--s-5); }

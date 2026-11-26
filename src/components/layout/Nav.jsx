@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { AnimatePresence, motion, useScroll, useSpring } from 'framer-motion'
 import { Command, Menu, Moon, Search, Sun, X } from 'lucide-react'
 import { sections } from '../../lib/sections'
 import { scrollToId, isMac } from '../../lib/scroll'
 import { useScrollSpy } from '../../hooks/useScrollSpy'
 import { useFocusTrap } from '../../hooks/useFocusTrap'
+import { usePresence } from '../../hooks/usePresence'
 import { useTheme } from '../../context/ThemeContext'
 import { usePalette } from '../../context/PaletteContext'
 import { profile } from '../../data/profile'
@@ -13,10 +13,31 @@ import styles from './Nav.module.css'
 
 const ids = sections.map((s) => s.id)
 
+// Page scroll progress. Writes the transform straight to the element once per frame
+// (no re-render); a short CSS transition smooths it.
 function ProgressBar() {
-  const { scrollYProgress } = useScroll()
-  const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 40, restDelta: 0.001 })
-  return <motion.div className={styles.progress} style={{ scaleX }} aria-hidden="true" />
+  const ref = useRef(null)
+  useEffect(() => {
+    let raf = 0
+    const update = () => {
+      raf = 0
+      const max = document.documentElement.scrollHeight - window.innerHeight
+      const p = max > 0 ? Math.min(1, window.scrollY / max) : 0
+      if (ref.current) ref.current.style.transform = `scaleX(${p})`
+    }
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update)
+    }
+    update()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+      cancelAnimationFrame(raf)
+    }
+  }, [])
+  return <div ref={ref} className={styles.progress} aria-hidden="true" />
 }
 
 function SectionLink({ id, label, active, onNavigate, className }) {
@@ -51,6 +72,7 @@ export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const sheetRef = useRef(null)
   const closeMenu = useCallback(() => setMenuOpen(false), [])
+  const sheet = usePresence(menuOpen, 280) // keeps the sheet mounted while it slides out
   useFocusTrap(sheetRef, menuOpen, closeMenu)
 
   useEffect(() => {
@@ -118,28 +140,17 @@ export default function Nav() {
         </div>
       </nav>
 
-      <AnimatePresence>
-        {menuOpen && (
+      {sheet.mounted && (
           <>
-            <motion.div
-              className={styles.scrim}
-              onClick={closeMenu}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-            />
-            <motion.div
+            <div className={styles.scrim} onClick={closeMenu} data-closing={sheet.closing || undefined} />
+            <div
               id="mobile-menu"
               ref={sheetRef}
               className={styles.sheet}
               role="dialog"
               aria-modal="true"
               aria-label="Menu"
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'tween', duration: 0.28, ease: [0.2, 0.7, 0.2, 1] }}
+              data-closing={sheet.closing || undefined}
             >
               <div className={styles.sheetHead}>
                 <span className="eyebrow">Menu</span>
@@ -164,10 +175,9 @@ export default function Nav() {
                   {isDark ? 'Light theme' : 'Dark theme'}
                 </button>
               </div>
-            </motion.div>
+            </div>
           </>
         )}
-      </AnimatePresence>
     </header>
   )
 }

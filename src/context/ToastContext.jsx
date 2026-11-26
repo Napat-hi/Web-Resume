@@ -1,39 +1,34 @@
 import { createContext, useCallback, useContext, useRef, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
 import { Check } from 'lucide-react'
 import styles from './Toast.module.css'
 
 const ToastContext = createContext(null)
+const SHOW_MS = 2400
+const EXIT_MS = 200
 
 export function ToastProvider({ children }) {
-  const [toast, setToast] = useState(null)
-  const timer = useRef(null)
+  const [toast, setToast] = useState(null) // { id, message, leaving }
+  const timers = useRef([])
 
   const showToast = useCallback((message) => {
-    clearTimeout(timer.current)
-    setToast({ id: Date.now(), message })
-    timer.current = setTimeout(() => setToast(null), 2400)
+    timers.current.forEach(clearTimeout)
+    setToast({ id: Date.now(), message, leaving: false })
+    timers.current = [
+      setTimeout(() => setToast((t) => t && { ...t, leaving: true }), SHOW_MS),
+      setTimeout(() => setToast(null), SHOW_MS + EXIT_MS),
+    ]
   }, [])
 
   return (
     <ToastContext.Provider value={showToast}>
       {children}
       <div className={styles.region} role="status" aria-live="polite">
-        <AnimatePresence>
-          {toast && (
-            <motion.div
-              key={toast.id}
-              className={styles.toast}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 12 }}
-              transition={{ duration: 0.2 }}
-            >
-              <Check size={16} aria-hidden="true" />
-              {toast.message}
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {toast && (
+          <div key={toast.id} className={styles.toast} data-leaving={toast.leaving || undefined}>
+            <Check size={16} aria-hidden="true" />
+            {toast.message}
+          </div>
+        )}
       </div>
     </ToastContext.Provider>
   )

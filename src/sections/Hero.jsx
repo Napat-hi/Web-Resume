@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowDown, Copy, FileText } from 'lucide-react'
 import { profile } from '../data/profile'
 import { internshipCount } from '../data/experience'
@@ -22,29 +21,26 @@ const stats = [
   { value: profile.languages.length, label: 'Languages' },
 ].filter(Boolean)
 
+// The old word slides up and out, then the new one slides up into the window (CSS keyframes).
 function RotatingRole() {
-  const [i, setI] = useState(0)
+  const [{ i, prev }, setRole] = useState({ i: 0, prev: null })
   useEffect(() => {
     if (prefersReducedMotion()) return undefined
-    const id = setInterval(() => setI((n) => (n + 1) % profile.roles.length), 2600)
+    const id = setInterval(() => setRole((s) => ({ prev: s.i, i: (s.i + 1) % profile.roles.length })), 2600)
     return () => clearInterval(id)
   }, [])
   return (
     <p className={styles.role}>
       <span className="sr-only">{profile.roles.join(', ')}</span>
       <span className={styles.roleWindow} aria-hidden="true">
-        <AnimatePresence mode="wait" initial={false}>
-          <motion.span
-            key={i}
-            className={styles.roleText}
-            initial={{ y: '100%', opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: '-100%', opacity: 0 }}
-            transition={{ duration: 0.3, ease: [0.2, 0.7, 0.2, 1] }}
-          >
-            {profile.roles[i]}
-          </motion.span>
-        </AnimatePresence>
+        {prev !== null && (
+          <span key={`out-${i}`} className={`${styles.roleText} ${styles.roleOut}`}>
+            {profile.roles[prev]}
+          </span>
+        )}
+        <span key={`in-${i}`} className={`${styles.roleText} ${prev !== null ? styles.roleIn : ''}`}>
+          {profile.roles[i]}
+        </span>
       </span>
     </p>
   )

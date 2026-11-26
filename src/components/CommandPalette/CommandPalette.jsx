@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
+import MotionScope from '../ui/MotionScope'
 import { ArrowRight, Copy, CornerDownLeft, FileText, FolderOpen, Hash, Moon, Pause, Play, Search, Sun } from 'lucide-react'
 import { useMotionPref } from '../../context/MotionContext'
 import { usePalette } from '../../context/PaletteContext'
@@ -150,6 +151,7 @@ export default function CommandPalette() {
   let lastGroup = null
 
   return (
+    <MotionScope>
     <AnimatePresence>
       {open && (
         <motion.div
@@ -236,5 +238,6 @@ export default function CommandPalette() {
         </motion.div>
       )}
     </AnimatePresence>
+    </MotionScope>
   )
 }

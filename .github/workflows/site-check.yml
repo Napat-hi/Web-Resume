@@ -1,0 +1,29 @@
+name: Weekly site check
+
+# Checks the live site every Monday: every page and preview image loads, outside links still
+# work, the About "Now" box is not stale, and Lighthouse scores stay above their floors.
+# A failed run makes GitHub email the account that owns this schedule; the run's summary page
+# lists what broke. Run it by hand from the Actions tab with "Run workflow".
+# Note: GitHub pauses scheduled workflows after 60 days without commits; re-enable it there.
+
+on:
+  schedule:
+    - cron: '0 2 * * 1' # Mondays 02:00 UTC = 09:00 in Bangkok
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # No npm ci: the script reads src/data with Node alone and fetches Lighthouse with npx.
+      - run: node scripts/check-site.mjs --lighthouse

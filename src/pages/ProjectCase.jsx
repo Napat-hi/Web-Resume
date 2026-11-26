@@ -11,6 +11,7 @@ import BrandIcon from '../components/ui/BrandIcon'
 import Todo from '../components/ui/Todo'
 import HalluChart from '../components/HalluChart/HalluChart'
 import NotFound from './NotFound'
+import MotionScope from '../components/ui/MotionScope'
 import styles from './ProjectCase.module.css'
 
 // Shared-element transition: the cover grows from the card's on-screen rect (passed in
@@ -90,6 +91,7 @@ export default function ProjectCase() {
   }
 
   return (
+    <MotionScope>
     <article className={styles.page}>
       <div className="container">
         <Link to="/" state={{ section: 'projects' }} onClick={backToProjects} className={styles.back}>
@@ -186,5 +188,6 @@ export default function ProjectCase() {
         </nav>
       </div>
     </article>
+    </MotionScope>
   )
 }

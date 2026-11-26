@@ -32,7 +32,8 @@ export default function Footer() {
     <footer className={styles.footer}>
       <div className={`container ${styles.inner}`}>
         <div>
-          <p className={styles.name}>{profile.name}</p>
+          {/* data-easter: tap five times for the easter-egg car (hooks/useEasterEgg.js) */}
+          <p className={styles.name} data-easter="">{profile.name}</p>
           <p className={styles.small}>
             © {new Date().getFullYear()} · Built with React and Vite · Press <kbd>{isMac() ? '⌘' : 'Ctrl'}</kbd> <kbd>K</kbd> to jump anywhere
           </p>

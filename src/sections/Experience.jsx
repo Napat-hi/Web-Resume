@@ -1,6 +1,5 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { motion, useScroll, useSpring } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
 import { sortedExperience, internshipCount } from '../data/experience'
 import { getProject } from '../data/projects'
@@ -78,8 +77,34 @@ function Entry({ job, open, onToggle }) {
 export default function Experience() {
   const listRef = useRef(null)
   const [open, setOpen] = useState(() => new Set([sortedExperience[0]?.id]))
-  const { scrollYProgress } = useScroll({ target: listRef, offset: ['start 75%', 'end 60%'] })
-  const scaleY = useSpring(scrollYProgress, { stiffness: 120, damping: 30, restDelta: 0.001 })
+  const fillRef = useRef(null)
+
+  // Timeline fill: 0 when the list top reaches 75% of the viewport, 1 when its bottom reaches 60%.
+  // Written straight to the element once per frame; CSS smooths it.
+  useEffect(() => {
+    let raf = 0
+    const update = () => {
+      raf = 0
+      const list = listRef.current
+      const fill = fillRef.current
+      if (!list || !fill) return
+      const r = list.getBoundingClientRect()
+      const vh = window.innerHeight
+      const p = Math.min(1, Math.max(0, (0.75 * vh - r.top) / (0.15 * vh + r.height)))
+      fill.style.transform = `scaleY(${p})`
+    }
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update)
+    }
+    update()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+      cancelAnimationFrame(raf)
+    }
+  }, [])
 
   const toggle = (id) =>
     setOpen((prev) => {
@@ -97,7 +122,7 @@ export default function Experience() {
         </SectionHead>
         <div className={styles.timeline}>
           <div className={styles.track} aria-hidden="true" data-print="hide">
-            <motion.div className={styles.fill} style={{ scaleY }} />
+            <div ref={fillRef} className={styles.fill} />
           </div>
           <ol ref={listRef} className={styles.list}>
             {sortedExperience.map((job) => (
