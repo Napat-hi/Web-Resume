@@ -3,7 +3,7 @@
 import { memo } from 'react'
 import face from '../../assets/driver-face.webp'
 
-export const INK = '#14213d'
+export const INK = '#34405a'
 
 export function PixelSvg({ w, h, px, className, style, children }) {
   return (
@@ -53,9 +53,9 @@ const spokes = [0, 1, 2, 3].map((f) => {
 export function Wheel({ x, y, frame }) {
   return (
     <g transform={`translate(${x} ${y})`}>
-      {tire.map(([px, py]) => <R key={`t${px}-${py}`} x={px} y={py} c="#1f2937" />)}
+      {tire.map(([px, py]) => <R key={`t${px}-${py}`} x={px} y={py} c="#3a4458" />)}
       {rim.map(([px, py]) => <R key={`r${px}-${py}`} x={px} y={py} c="#cbd5e1" />)}
-      {spokes[frame % 4].map(([px, py]) => <R key={`s${px}-${py}`} x={px} y={py} c="#64748b" />)}
+      {spokes[frame % 4].map(([px, py]) => <R key={`s${px}-${py}`} x={px} y={py} c="#7a8697" />)}
       <R x={WHEEL_R} y={WHEEL_R} c={INK} />
     </g>
   )
@@ -76,7 +76,7 @@ export const CarBody = memo(function CarBody() {
       px.push(<R key="roof" x={x0} y={0} w={x1 - x0 + 1} c={INK} />)
       continue
     }
-    px.push(<R key={`gl${r}`} x={x0 + 1} y={r} w={x1 - x0 - 1} c={r < 3 ? '#e0f2fe' : '#bae6fd'} />)
+    px.push(<R key={`gl${r}`} x={x0 + 1} y={r} w={x1 - x0 - 1} c={r < 3 ? '#eef4f9' : '#bae6fd'} />)
   }
   return (
     <g>
@@ -98,19 +98,19 @@ export const CarBody = memo(function CarBody() {
       <R x={23} y={1} h={8} c={INK} />
       {/* Body */}
       <R x={2} y={9} w={44} c={INK} />
-      <R x={1} y={10} w={46} h={6} c="#38bdf8" />
+      <R x={1} y={10} w={46} h={6} c="#7cc3e6" />
       <R x={4} y={11} w={38} c="#bae6fd" />
-      <R x={1} y={15} w={46} c="#0284c7" />
+      <R x={1} y={15} w={46} c="#5b9fc8" />
       <R x={1} y={10} h={6} c={INK} />
       <R x={46} y={10} h={6} c={INK} />
       <R x={2} y={16} w={44} c={INK} />
-      <R x={23} y={10} h={5} c="#0369a1" />
+      <R x={23} y={10} h={5} c="#4a86ab" />
       <R x={26} y={12} w={2} c="#e2e8f0" />
-      <R x={45} y={11} h={2} c="#fde047" />
-      <R x={2} y={11} h={2} c="#f43f5e" />
+      <R x={45} y={11} h={2} c="#f7e39a" />
+      <R x={2} y={11} h={2} c="#e58a98" />
       <R x={43} y={14} w={3} h={2} c="#e2e8f0" />
       <R x={2} y={14} w={3} h={2} c="#e2e8f0" />
-      <R x={0} y={14} w={2} c="#475569" />
+      <R x={0} y={14} w={2} c="#5d6a7e" />
     </g>
   )
 })
@@ -124,7 +124,7 @@ export function Cloud({ x, y }) {
       <rect x={2} y={2} width={14} height={2} />
       <rect x={0} y={4} width={22} height={3} />
       <rect x={14} y={1} width={6} height={3} />
-      <rect x={1} y={7} width={20} height={1} fill="#dbeafe" />
+      <rect x={1} y={7} width={20} height={1} fill="#e6eef6" />
     </g>
   )
 }
@@ -132,7 +132,7 @@ export function Cloud({ x, y }) {
 export function Building({ x, h, w, tone, lit }) {
   const wins = []
   for (let wy = 3; wy < h - 3; wy += 4) {
-    for (let wx = 2; wx < w - 2; wx += 4) wins.push(<rect key={`${wx}-${wy}`} x={wx} y={wy} width={2} height={2} fill={lit ? '#fde68a' : '#e0f2fe'} />)
+    for (let wx = 2; wx < w - 2; wx += 4) wins.push(<rect key={`${wx}-${wy}`} x={wx} y={wy} width={2} height={2} fill={lit ? '#f5e3a8' : '#eef4f9'} />)
   }
   return (
     <g transform={`translate(${x} ${-h})`}>
@@ -144,11 +144,11 @@ export function Building({ x, h, w, tone, lit }) {
 }
 
 export function Tree({ x, blossom }) {
-  const leaf = blossom ? '#f9a8d4' : '#22c55e'
-  const dark = blossom ? '#ec4899' : '#15803d'
+  const leaf = blossom ? '#f2c4d6' : '#93c9a2'
+  const dark = blossom ? '#dd9bb5' : '#6fa784'
   return (
     <g transform={`translate(${x} -16)`}>
-      <rect x={4} y={10} width={2} height={6} fill="#92400e" />
+      <rect x={4} y={10} width={2} height={6} fill="#a07e64" />
       <rect x={2} y={0} width={6} height={2} fill={leaf} />
       <rect x={0} y={2} width={10} height={6} fill={leaf} />
       <rect x={1} y={8} width={8} height={2} fill={dark} />
@@ -160,11 +160,11 @@ export function Tree({ x, blossom }) {
 export function Cane({ x }) {
   return (
     <g transform={`translate(${x} -14)`}>
-      <rect x={1} y={0} width={1} height={14} fill="#16a34a" />
-      <rect x={4} y={3} width={1} height={11} fill="#22c55e" />
-      <rect x={2} y={2} width={2} height={1} fill="#4ade80" />
-      <rect x={0} y={5} width={1} height={1} fill="#4ade80" />
-      <rect x={5} y={6} width={2} height={1} fill="#4ade80" />
+      <rect x={1} y={0} width={1} height={14} fill="#7fb08d" />
+      <rect x={4} y={3} width={1} height={11} fill="#93c9a2" />
+      <rect x={2} y={2} width={2} height={1} fill="#b3dbbd" />
+      <rect x={0} y={5} width={1} height={1} fill="#b3dbbd" />
+      <rect x={5} y={6} width={2} height={1} fill="#b3dbbd" />
     </g>
   )
 }
@@ -172,13 +172,13 @@ export function Cane({ x }) {
 export function Torii({ x }) {
   return (
     <g transform={`translate(${x} -22)`}>
-      <rect x={0} y={0} width={20} height={2} fill="#dc2626" />
-      <rect x={-1} y={0} width={1} height={1} fill="#dc2626" />
-      <rect x={20} y={0} width={1} height={1} fill="#dc2626" />
-      <rect x={2} y={5} width={16} height={1} fill="#b91c1c" />
-      <rect x={4} y={2} width={2} height={20} fill="#dc2626" />
-      <rect x={14} y={2} width={2} height={20} fill="#dc2626" />
-      <rect x={9} y={2} width={2} height={3} fill="#b91c1c" />
+      <rect x={0} y={0} width={20} height={2} fill="#d9776e" />
+      <rect x={-1} y={0} width={1} height={1} fill="#d9776e" />
+      <rect x={20} y={0} width={1} height={1} fill="#d9776e" />
+      <rect x={2} y={5} width={16} height={1} fill="#c0645c" />
+      <rect x={4} y={2} width={2} height={20} fill="#d9776e" />
+      <rect x={14} y={2} width={2} height={20} fill="#d9776e" />
+      <rect x={9} y={2} width={2} height={3} fill="#c0645c" />
     </g>
   )
 }
@@ -188,7 +188,7 @@ export function Fuji({ x }) {
   for (let r = 0; r < 34; r++) {
     const half = 6 + r * 1.6
     const snow = r < 9 || (r < 12 && r % 2 === 0)
-    rows.push(<rect key={r} x={Math.round(-half)} y={r} width={Math.round(half * 2)} height={1} fill={snow ? '#f8fafc' : r % 6 === 0 ? '#7c93b8' : '#8aa2c7'} />)
+    rows.push(<rect key={r} x={Math.round(-half)} y={r} width={Math.round(half * 2)} height={1} fill={snow ? '#f8fafc' : r % 6 === 0 ? '#a3b3cc' : '#b2c1d6'} />)
   }
   return <g transform={`translate(${x} -34)`}>{rows}</g>
 }
@@ -207,7 +207,7 @@ const moonPixels = disc(5)
 export function Sun() {
   return (
     <svg width="60" height="60" viewBox="0 0 15 15" shapeRendering="crispEdges" aria-hidden="true">
-      {sunPixels.map(([x, y]) => <rect key={`${x}-${y}`} x={x} y={y} width={1} height={1} fill={(x + y) % 5 === 0 ? '#fcd34d' : '#fde047'} />)}
+      {sunPixels.map(([x, y]) => <rect key={`${x}-${y}`} x={x} y={y} width={1} height={1} fill={(x + y) % 5 === 0 ? '#f5d98a' : '#f7e39a'} />)}
     </svg>
   )
 }
@@ -225,15 +225,15 @@ export function Trophy() {
   return (
     <svg width="44" height="44" viewBox="0 0 11 11" shapeRendering="crispEdges" aria-hidden="true">
       <rect x={2} y={0} width={7} height={1} fill={INK} />
-      <rect x={2} y={1} width={7} height={4} fill="#fbbf24" />
-      <rect x={3} y={1} width={1} height={3} fill="#fde68a" />
-      <rect x={0} y={1} width={2} height={1} fill="#fbbf24" />
-      <rect x={9} y={1} width={2} height={1} fill="#fbbf24" />
-      <rect x={0} y={2} width={1} height={2} fill="#fbbf24" />
-      <rect x={10} y={2} width={1} height={2} fill="#fbbf24" />
-      <rect x={3} y={5} width={5} height={1} fill="#f59e0b" />
-      <rect x={5} y={6} width={1} height={2} fill="#f59e0b" />
-      <rect x={3} y={8} width={5} height={1} fill="#b45309" />
+      <rect x={2} y={1} width={7} height={4} fill="#f2cf78" />
+      <rect x={3} y={1} width={1} height={3} fill="#f5e3a8" />
+      <rect x={0} y={1} width={2} height={1} fill="#f2cf78" />
+      <rect x={9} y={1} width={2} height={1} fill="#f2cf78" />
+      <rect x={0} y={2} width={1} height={2} fill="#f2cf78" />
+      <rect x={10} y={2} width={1} height={2} fill="#f2cf78" />
+      <rect x={3} y={5} width={5} height={1} fill="#e3b45e" />
+      <rect x={5} y={6} width={1} height={2} fill="#e3b45e" />
+      <rect x={3} y={8} width={5} height={1} fill="#b98a5c" />
       <rect x={2} y={9} width={7} height={2} fill={INK} />
     </svg>
   )
@@ -244,7 +244,7 @@ export function JapanFlag() {
     <svg width="60" height="40" viewBox="0 0 15 10" shapeRendering="crispEdges" aria-hidden="true">
       <rect width={15} height={10} fill="#ffffff" />
       <rect width={15} height={10} fill="none" stroke={INK} strokeWidth="1" />
-      {disc(2).map(([x, y]) => <rect key={`${x}-${y}`} x={x + 5} y={y + 3} width={1} height={1} fill="#dc2626" />)}
+      {disc(2).map(([x, y]) => <rect key={`${x}-${y}`} x={x + 5} y={y + 3} width={1} height={1} fill="#d9776e" />)}
     </svg>
   )
 }

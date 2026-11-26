@@ -11,9 +11,9 @@ export default function JourneyTeaserScene() {
         <Cloud x={8} y={4} />
         <Cloud x={92} y={9} />
         <g transform="translate(0 40)">
-          <Building x={44} w={12} h={22} tone="#8fb0d6" />
-          <Building x={57} w={10} h={30} tone="#7c9cc4" />
-          <Building x={68} w={14} h={18} tone="#8fb0d6" />
+          <Building x={44} w={12} h={22} tone="#bacbe0" />
+          <Building x={57} w={10} h={30} tone="#aabdd5" />
+          <Building x={68} w={14} h={18} tone="#bacbe0" />
           <Tree x={100} />
           <Tree x={114} blossom />
           <Tree x={6} />

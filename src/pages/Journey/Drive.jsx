@@ -11,33 +11,35 @@ import styles from './Journey.module.css'
 
 const SOUND_KEY = 'journey-sound'
 
-// Sky in hard bands (top, horizon): morning -> noon -> golden hour -> sunset -> night.
+// Sky in hard bands (top, horizon): morning -> noon -> golden hour -> sunset -> dusk.
+// Soft pastels (Po asked for an easy-on-the-eyes tone); dusk stays mid-dark, never black.
 const SKY = [
-  ['#bfe3ff', '#eaf6ff'],
-  ['#8fd3ff', '#d9f1ff'],
-  ['#6cc4ff', '#c8ecff'],
-  ['#7fb7f5', '#ffe7c4'],
-  ['#9a8fe0', '#ffc999'],
-  ['#6d5fb8', '#f59e8b'],
-  ['#3b3f8f', '#7d6bb0'],
-  ['#1e2a5e', '#3b3f8f'],
-  ['#141c45', '#25306b'],
+  ['#dcebf6', '#f1f7fb'],
+  ['#cfe4f3', '#ebf4fa'],
+  ['#c3ddef', '#e5f1f8'],
+  ['#c9d9ec', '#f6eadb'],
+  ['#d2cde6', '#f3dfd0'],
+  ['#b9b3d8', '#eccdc4'],
+  ['#8790b8', '#b4aed3'],
+  ['#6a7399', '#8790b8'],
+  ['#5a6389', '#737ca3'],
 ]
 
 /* ---------- Layout ---------- */
 
 export function computeLayout(w, h) {
   const narrow = w < 640
-  const px = narrow ? 3 : 4
-  const carPx = narrow ? 4 : 6 // the car is drawn larger than the world so the driver's face reads
+  const px = narrow ? 4 : 5
+  const carPx = narrow ? 5 : 7 // the car is drawn larger than the world so the driver's face reads
   const carW = CAR_W * carPx
-  const carX = narrow ? 10 : Math.round(w * 0.14)
+  const carX = narrow ? 8 : Math.round(w * 0.1)
   const front = carX + carW * 0.8
-  const spacing = narrow ? 300 : Math.min(560, Math.max(420, w * 0.42))
-  const firstX = carX + carW + (narrow ? 170 : 260)
+  // Billboards are 300px (phone) / 480px wide; keep a clear gap between neighbours.
+  const spacing = narrow ? 390 : Math.min(780, Math.max(620, w * 0.5))
+  const firstX = carX + carW + (narrow ? 140 : 220)
   const stopsX = journey.map((_, i) => firstX + i * spacing)
   const travel = stopsX[stopsX.length - 1] - front + 30
-  const roadH = 26 * px
+  const roadH = 22 * px
   return { w, h, narrow, px, carPx, carW, carX, front, spacing, stopsX, travel, trackW: travel + w + 300, roadH }
 }
 
@@ -79,11 +81,11 @@ function buildMid(L) {
     while (x < to) {
       if (stop.scene === 'city') {
         const w = 10 + Math.floor(r() * 9)
-        items.push(<Building key={`b${i}-${x}`} x={Math.round(x)} w={w} h={18 + Math.floor(r() * 30)} tone={r() > 0.5 ? '#7c9cc4' : '#8fb0d6'} lit={i >= 6} />)
+        items.push(<Building key={`b${i}-${x}`} x={Math.round(x)} w={w} h={18 + Math.floor(r() * 30)} tone={r() > 0.5 ? '#aabdd5' : '#bacbe0'} lit={i >= 6} />)
         x += w + 1 + Math.floor(r() * 3)
       } else if (stop.scene === 'campus') {
         if (r() > 0.55) {
-          items.push(<Building key={`h${i}-${x}`} x={Math.round(x)} w={22} h={16} tone="#e2b48c" lit={i >= 6} />)
+          items.push(<Building key={`h${i}-${x}`} x={Math.round(x)} w={22} h={16} tone="#e8cdb3" lit={i >= 6} />)
           x += 24
         } else {
           items.push(<Tree key={`t${i}-${x}`} x={Math.round(x)} />)
@@ -102,7 +104,7 @@ function buildMid(L) {
           x += 11
         } else {
           const w = 8 + Math.floor(r() * 6)
-          items.push(<Building key={`k${i}-${x}`} x={Math.round(x)} w={w} h={24 + Math.floor(r() * 26)} tone="#9aa7c7" lit />)
+          items.push(<Building key={`k${i}-${x}`} x={Math.round(x)} w={w} h={24 + Math.floor(r() * 26)} tone="#b8c1d8" lit />)
           x += w + 1
         }
       }
@@ -118,7 +120,7 @@ function buildFar(L) {
   const width = (L.trackW * speed + L.w) / L.px
   const items = []
   for (let x = 0; x < width; x += 40 + Math.floor(r() * 30)) {
-    items.push(<Hill key={`h${x}`} x={Math.round(x)} w={50 + Math.floor(r() * 30)} h={10 + Math.floor(r() * 10)} tone="#a9c4e6" />)
+    items.push(<Hill key={`h${x}`} x={Math.round(x)} w={50 + Math.floor(r() * 30)} h={10 + Math.floor(r() * 10)} tone="#cfdcec" />)
   }
   const ti = journey.findIndex((s) => s.scene === 'tokyo')
   if (ti >= 0) {
@@ -138,27 +140,27 @@ function buildClouds(L) {
 
 /* ---------- Stop card ---------- */
 
+// A billboard: photo panel (when the stop has one) beside the text panel. On the drive it
+// stands on two legs (rendered by the stop, see `styles.legs`); the static list shows it flat.
 export function StopCard({ stop, active, onCta }) {
   return (
-    <article className={styles.card} data-active={active || undefined}>
-      {stop.photo && (
-        <figure className={styles.polaroid}>
-          <img src={stop.photo} alt={stop.photoAlt} width="90" height="120" />
-        </figure>
-      )}
-      <div className={styles.cardTop}>
-        {stop.logo && <img className={styles.logo} src={stop.logo} alt={stop.logoAlt} />}
-        {stop.badge === 'trophy' && <Trophy />}
-        {stop.badge === 'japan' && <JapanFlag />}
-        {stop.year && <span className={styles.year}>{stop.year}</span>}
+    <article className={styles.card} data-active={active || undefined} data-photo={stop.photo ? '' : undefined}>
+      {stop.photo && <img className={styles.photo} src={stop.photo} alt={stop.photoAlt} width="360" height="480" />}
+      <div className={styles.cardBody}>
+        <div className={styles.cardTop}>
+          {stop.logo && <img className={styles.logo} src={stop.logo} alt={stop.logoAlt} />}
+          {stop.badge === 'trophy' && <Trophy />}
+          {stop.badge === 'japan' && <JapanFlag />}
+          {stop.year && <span className={styles.year}>{stop.year}</span>}
+        </div>
+        <h2 className={styles.cardTitle}>{stop.title}</h2>
+        <p className={styles.cardLine}>{stop.line}</p>
+        {stop.cta && (
+          <Link to="/" state={{ section: 'contact' }} className={styles.pixelBtn} onClick={onCta}>
+            Say hi
+          </Link>
+        )}
       </div>
-      <h2 className={styles.cardTitle}>{stop.title}</h2>
-      <p className={styles.cardLine}>{stop.line}</p>
-      {stop.cta && (
-        <Link to="/" state={{ section: 'contact' }} className={styles.pixelBtn} onClick={onCta}>
-          Say hi
-        </Link>
-      )}
     </article>
   )
 }
@@ -308,10 +310,8 @@ export default function Drive() {
           <ol className={styles.stops} aria-label="Journey milestones">
             {journey.map((stop, i) => (
               <li key={stop.id} className={styles.stop} style={{ left: L.stopsX[i] }}>
+                <span className={styles.legs} aria-hidden="true" />
                 <StopCard stop={stop} active={i <= active} />
-                <span className={styles.post} aria-hidden="true">
-                  <span className={styles.flag}>{stop.year ?? '★'}</span>
-                </span>
               </li>
             ))}
           </ol>
@@ -360,11 +360,8 @@ export default function Drive() {
         </div>
 
         <div className={styles.end} data-show={done || undefined}>
+          {/* Title only: Portfolio sits in the top bar and the last billboard has "Say hi". */}
           <p className={styles.endTitle}>THE END... FOR NOW</p>
-          <div className={styles.endActions}>
-            <Link to="/" className={styles.pixelBtn} tabIndex={done ? 0 : -1}>Portfolio</Link>
-            <Link to="/" state={{ section: 'contact' }} className={`${styles.pixelBtn} ${styles.pixelBtnAlt}`} tabIndex={done ? 0 : -1}>Contact</Link>
-          </div>
         </div>
 
         <header className={styles.topbar}>

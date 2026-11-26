@@ -2,7 +2,7 @@
    the same in light and dark theme. --px = css pixels per art pixel (3 on phones, 4 on desktop). */
 
 .page {
-  --ink: #14213d;
+  --ink: #34405a;
   --paper: #ffffff;
   --pixel-font: 'Pixelify Sans', var(--font-mono);
   font-family: var(--pixel-font);
@@ -62,7 +62,7 @@
   bottom: 0;
   height: var(--road-h);
   background:
-    linear-gradient(#94a3b8 0 calc(var(--px) * 2), #64748b calc(var(--px) * 2) calc(var(--px) * 3), #475569 calc(var(--px) * 3) calc(100% - var(--px) * 3), #334155 calc(100% - var(--px) * 3));
+    linear-gradient(#c3ccd8 0 calc(var(--px) * 2), #a3adbb calc(var(--px) * 2) calc(var(--px) * 3), #8a94a3 calc(var(--px) * 3) calc(100% - var(--px) * 3), #79838f calc(100% - var(--px) * 3));
 }
 .lane {
   position: absolute;
@@ -70,64 +70,99 @@
   right: 0;
   top: 50%;
   height: calc(var(--px) * 2);
-  background: repeating-linear-gradient(90deg, #fde047 0 calc(var(--px) * 8), transparent calc(var(--px) * 8) calc(var(--px) * 16));
+  background: repeating-linear-gradient(90deg, #f7e39a 0 calc(var(--px) * 8), transparent calc(var(--px) * 8) calc(var(--px) * 16));
 }
 
 .stops { position: absolute; inset: 0; list-style: none; }
 .stop { position: absolute; bottom: var(--road-h); width: 0; height: 100%; }
 
-/* Signpost */
-.post {
+/* Billboard: a framed board on two legs, with a row of bulbs on top and a catwalk below.
+   --board-w and --lift (gap between the car roof and the board) are set per breakpoint. */
+.stops { --board-w: 480px; --lift: 76px; }
+.legs {
   position: absolute;
-  left: calc(var(--px) * -1);
+  left: -40px;
   bottom: 0;
-  width: calc(var(--px) * 2);
-  height: calc(var(--car-h) + 56px);
-  background: #475569;
-  box-shadow: inset calc(var(--px) * -1) 0 0 #334155;
+  width: var(--board-w);
+  height: calc(var(--car-h) + var(--lift));
 }
-.flag {
+.legs::before,
+.legs::after {
+  content: '';
   position: absolute;
-  bottom: 40px;
-  left: calc(var(--px) * 2);
-  padding: 2px 8px;
-  background: #fde047;
-  color: var(--ink);
-  font-size: 13px;
-  font-weight: 600;
-  white-space: nowrap;
-  box-shadow: 0 0 0 var(--px) var(--ink), var(--px) var(--px) 0 var(--px) var(--ink);
+  bottom: 0;
+  width: calc(var(--px) * 3);
+  height: 100%;
+  background: #8a94a3;
+  box-shadow: inset calc(var(--px) * -1) 0 0 #79838f;
 }
+.legs::before { left: 18%; }
+.legs::after { right: 18%; }
 
-/* Billboard card */
 .card {
   position: absolute;
-  bottom: calc(var(--car-h) + 56px);
-  left: -20px;
-  width: 260px;
-  padding: 12px 14px 14px;
+  bottom: calc(var(--car-h) + var(--lift));
+  left: -40px;
+  width: var(--board-w);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  padding: 18px;
   background: var(--paper);
   color: var(--ink);
   box-shadow:
     0 0 0 var(--px) var(--ink),
-    calc(var(--px) * 2) calc(var(--px) * 2) 0 var(--px) var(--ink);
-  transform: scale(0.9);
+    0 0 0 calc(var(--px) * 3) #c3ccd8,
+    0 0 0 calc(var(--px) * 4) var(--ink),
+    calc(var(--px) * 3) calc(var(--px) * 3) 0 calc(var(--px) * 4) rgba(52, 64, 90, 0.18);
+  transform: scale(0.94);
   transform-origin: bottom left;
   transition: transform 300ms steps(4);
 }
+.card[data-photo] { grid-template-columns: 36% 1fr; }
 .card[data-active] { transform: scale(1); }
+/* Bulbs along the top edge */
+.card::before {
+  content: '';
+  position: absolute;
+  left: calc(var(--px) * 2);
+  right: calc(var(--px) * 2);
+  top: calc(var(--px) * -7);
+  height: calc(var(--px) * 2);
+  background: repeating-linear-gradient(90deg, #f7e39a 0 calc(var(--px) * 2), transparent calc(var(--px) * 2) calc(var(--px) * 6));
+}
+.card[data-active]::before { background: repeating-linear-gradient(90deg, #fbe9a6 0 calc(var(--px) * 2), transparent calc(var(--px) * 2) calc(var(--px) * 6)); filter: drop-shadow(0 0 4px rgba(247, 227, 154, 0.9)); }
+/* Catwalk under the board */
+.card::after {
+  content: '';
+  position: absolute;
+  left: calc(var(--px) * -6);
+  right: calc(var(--px) * -6);
+  bottom: calc(var(--px) * -7);
+  height: var(--px);
+  background: var(--ink);
+}
+.photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 190px;
+  object-fit: cover;
+  image-rendering: auto;
+  box-shadow: 0 0 0 3px var(--ink);
+}
+.cardBody { display: grid; align-content: start; gap: 8px; min-width: 0; }
 .cardTop {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
-  min-height: 44px;
-  margin-bottom: 6px;
+  gap: 10px;
+  min-height: 56px;
 }
 .logo {
-  height: 44px;
+  height: 56px;
   width: auto;
-  max-width: 150px;
+  max-width: 180px;
   object-fit: contain;
   object-position: left center;
   image-rendering: auto; /* logos stay sharp; only scenery and the car are pixel art */
@@ -136,28 +171,15 @@
 }
 .card[data-active] .logo { filter: none; opacity: 1; }
 .year {
-  padding: 2px 8px;
-  background: #bae6fd;
-  font-size: 13px;
+  padding: 4px 10px;
+  background: #d7ebf6;
+  font-size: 15px;
   font-weight: 600;
   white-space: nowrap;
   box-shadow: 0 0 0 2px var(--ink);
 }
-.cardTitle { font-family: var(--pixel-font); font-size: 18px; font-weight: 600; letter-spacing: 0; line-height: 1.2; color: var(--ink); }
-.cardLine { margin-top: 4px; font-size: 15px; line-height: 1.35; color: #334155; }
-
-.polaroid {
-  position: absolute;
-  top: -150px;
-  right: 14px;
-  width: 102px;
-  padding: 6px 6px 16px;
-  background: #fff;
-  box-shadow: 0 0 0 3px var(--ink), 6px 6px 0 0 rgba(20, 33, 61, 0.35);
-  transform: rotate(6deg);
-}
-.polaroid img { display: block; width: 90px; height: 120px; object-fit: cover; image-rendering: auto; }
-.card[data-active] .polaroid { transform: rotate(-3deg); }
+.cardTitle { font-family: var(--pixel-font); font-size: 24px; font-weight: 600; letter-spacing: 0; line-height: 1.15; color: var(--ink); }
+.cardLine { font-size: 17px; line-height: 1.4; color: #46526a; }
 
 /* Buttons */
 .pixelBtn {
@@ -166,7 +188,7 @@
   gap: 6px;
   min-height: 36px;
   padding: 0 12px;
-  background: #fde047;
+  background: #f7e39a;
   color: var(--ink);
   font-family: var(--pixel-font);
   font-size: 15px;
@@ -175,12 +197,12 @@
   box-shadow: 0 0 0 3px var(--ink), 3px 3px 0 3px var(--ink);
   transition: transform 80ms steps(1);
 }
-.pixelBtn:hover { text-decoration: none; background: #fef08a; }
+.pixelBtn:hover { text-decoration: none; background: #faebb5; }
 .pixelBtn:active { transform: translate(3px, 3px); box-shadow: 0 0 0 3px var(--ink); }
 .pixelBtn:focus-visible { outline: 3px solid #38bdf8; outline-offset: 6px; border-radius: 0; }
-.pixelBtnAlt { background: #7dd3fc; }
-.pixelBtnAlt:hover { background: #bae6fd; }
-.card .pixelBtn { margin-top: 10px; }
+.pixelBtnAlt { background: #b9dcef; }
+.pixelBtnAlt:hover { background: #d7ebf6; }
+.card .pixelBtn { justify-self: start; margin-top: 10px; }
 
 /* Car */
 .car { position: absolute; bottom: calc(var(--road-h) - var(--px) * 10); z-index: 4; }
@@ -219,14 +241,14 @@
   right: -6px;
   top: -14px;
   padding: 2px 6px;
-  background: #f43f5e;
+  background: #e58a98;
   color: #fff;
   font-family: var(--pixel-font);
   font-size: 12px;
   font-weight: 600;
   box-shadow: 0 0 0 2px var(--ink), 2px 2px 0 2px var(--ink);
 }
-.horn:hover { background: #fb7185; }
+.horn:hover { background: #eda3ae; }
 .horn:active { transform: translate(2px, 2px); }
 
 /* Exhaust: three square puffs drifting back while the car moves. */
@@ -284,7 +306,7 @@
 
 .end {
   position: absolute;
-  top: 18%;
+  top: 14px; /* in the top bar, between its buttons, clear of the last billboard */
   left: 0;
   right: 0;
   z-index: 6;
@@ -295,14 +317,13 @@
   pointer-events: none;
   transition: opacity 200ms steps(3);
 }
-.end[data-show] { opacity: 1; pointer-events: auto; }
+.end[data-show] { opacity: 1; } /* title only: never block the top-bar buttons */
 .endTitle {
   font-size: clamp(26px, 4.5vw, 46px);
   font-weight: 600;
   color: #fff;
   text-shadow: 3px 3px 0 var(--ink), -2px -2px 0 var(--ink), 2px -2px 0 var(--ink), -2px 2px 0 var(--ink);
 }
-.endActions { display: flex; gap: 18px; }
 
 .topbar {
   position: absolute;
@@ -330,17 +351,17 @@
   content: '';
   width: 10px;
   height: 10px;
-  background: #cbd5e1;
+  background: #d5dce5;
   box-shadow: 0 0 0 2px var(--ink);
 }
-.dot[data-on]::after { background: #fde047; }
-.dot[aria-current='step']::after { background: #f43f5e; transform: scale(1.3); }
+.dot[data-on]::after { background: #f7e39a; }
+.dot[aria-current='step']::after { background: #e58a98; transform: scale(1.3); }
 
 /* Reduced motion: plain list */
 .static {
   min-height: 100vh;
   padding: 24px 18px 80px;
-  background: linear-gradient(#8fd3ff 0 60%, #d9f1ff 60%);
+  background: linear-gradient(#c4e1f2 0 60%, #e6f3fa 60%);
 }
 .staticHead { display: grid; justify-items: start; gap: 20px; max-width: 1120px; margin: 0 auto 40px; }
 .staticNote {
@@ -361,21 +382,32 @@
   margin: 0 auto;
   list-style: none;
 }
-.staticList .card { position: relative; bottom: auto; left: auto; width: auto; height: 100%; transform: none; }
+.staticList .card { position: relative; bottom: auto; left: auto; width: auto; height: 100%; align-content: start; transform: none; margin-top: 24px; }
 /* No sky above the cards here, so the photo sits inside the card as a wide strip. */
-.staticList .card .polaroid { display: block; position: static; width: auto; margin: 0 0 12px; padding: 0; box-shadow: 0 0 0 2px var(--ink); transform: none; }
-.staticList .polaroid img { width: 100%; height: 220px; object-position: center 15%; }
+.staticList .card[data-photo] { grid-template-columns: 1fr; }
+.staticList .photo { display: block; height: 200px; min-height: 0; object-position: center 20%; }
 .staticList .logo { filter: none; opacity: 1; }
 
 @media (max-width: 639px) {
-  .card { width: 220px; left: -12px; }
-  .polaroid { top: -124px; right: 10px; width: 84px; padding: 5px 5px 12px; }
-  .polaroid img { width: 74px; height: 98px; }
+  .stops { --board-w: 300px; --lift: 84px; } /* clears a two-line speech bubble */
+  .end { top: 62px; }
+  .endTitle { font-size: 22px; }
+  /* The board starts over the car, so the whole board is on screen at its stop. */
+  .card { left: -170px; padding: 14px; gap: 12px; }
+  .legs { left: -170px; }
+  .card[data-photo] { grid-template-columns: 1fr; }
+  .photo { height: 120px; min-height: 0; object-position: center 25%; }
+  .cardTitle { font-size: 20px; }
+  .cardLine { font-size: 15px; }
+  .logo { height: 44px; max-width: 150px; }
+  .cardTop { min-height: 44px; }
   .bubble { left: 4%; max-width: 190px; font-size: 15px; }
   .topbar { padding-inline: 10px; }
   .topbar .pixelBtn { font-size: 13px; padding: 0 8px; }
 }
 @media (max-height: 700px) {
-  .polaroid { display: none; }
+  .photo { display: none; }
+  .card[data-photo] { grid-template-columns: 1fr; }
+  .stops { --lift: 56px; }
   .intro { top: 16%; }
 }
